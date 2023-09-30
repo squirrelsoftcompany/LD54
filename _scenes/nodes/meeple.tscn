@@ -3,10 +3,10 @@
 [ext_resource type="ArrayMesh" uid="uid://ihh1sbxebsgs" path="res://models/meeple.obj" id="1_h7qwa"]
 [ext_resource type="Script" path="res://scripts/meeple.gd" id="2_y32ho"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_27rnn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smt0j"]
 
 [node name="Meeple" type="MeshInstance3D"]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
 mesh = ExtResource("1_h7qwa")
-surface_material_override/0 = SubResource("StandardMaterial3D_27rnn")
+surface_material_override/0 = SubResource("StandardMaterial3D_smt0j")
 script = ExtResource("2_y32ho")

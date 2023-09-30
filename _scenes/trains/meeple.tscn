@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://c48lgdwex58eq"]
+[gd_scene load_steps=4 format=3 uid="uid://c48lgdwex58eq"]
 
+[ext_resource type="Shader" uid="uid://blotjlo82jk0n" path="res://resources/meepleSkin.tres" id="1_k154a"]
 [ext_resource type="ArrayMesh" uid="uid://ihh1sbxebsgs" path="res://models/meeple.obj" id="1_q1eaf"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yht2o"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjsta"]
+render_priority = 0
+shader = ExtResource("1_k154a")
 
 [node name="Meeple" type="MeshInstance3D"]
-material_override = SubResource("StandardMaterial3D_yht2o")
+material_override = SubResource("ShaderMaterial_qjsta")
 mesh = ExtResource("1_q1eaf")

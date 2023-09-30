@@ -8,6 +8,10 @@
 
 config_version=5
 
+[Game]
+
+countryArray=PackedColorArray(0, 0, 1, 1, 0, 1, 1, 1, 1, 0.0784314, 0.576471, 1, 1, 0.843137, 0, 1, 0.678431, 1, 0.184314, 1, 1, 0.647059, 0, 1, 0.4, 0.2, 0.6, 1, 1, 0, 0, 1)
+
 [application]
 
 config/name="LD54"

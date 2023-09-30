@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://wk6iv1ueioi3"]
+[gd_scene load_steps=6 format=3 uid="uid://wk6iv1ueioi3"]
 
 [ext_resource type="PackedScene" uid="uid://d35yr0djs5o4n" path="res://_scenes/nodes/main_camera.tscn" id="1_bf5bn"]
 [ext_resource type="Texture2D" uid="uid://q8xqv8iwqr6s" path="res://Test_zone.png" id="1_ng7ka"]
+[ext_resource type="PackedScene" uid="uid://dxou0nnb8bbd0" path="res://_scenes/nodes/spawner.tscn" id="3_k5rs7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mr05t"]
 shading_mode = 0
@@ -23,3 +24,5 @@ skeleton = NodePath("../..")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.532994, 0.846119, 0, -0.846119, 0.532994, 0, 1.89533, 0.732197)
+
+[node name="Spawner" parent="." instance=ExtResource("3_k5rs7")]

@@ -20,8 +20,10 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	#Debug : Test the takeMeeple() function -----------
+	@warning_ignore("integer_division")
 	if (Time.get_ticks_msec()/1000)%6 == 0:
 		triggerable = true
+	@warning_ignore("integer_division")
 	if (Time.get_ticks_msec()/1000)%6 == 5 and triggerable:
 		if meepleArray.size() > 2:
 			takeMeeple(meepleArray[2])
@@ -32,12 +34,14 @@ func _process(_delta: float) -> void:
 func spawnMeeple() -> void :
 	if meepleArray.size() < maxMeeple:
 		
-		var placeHolderMeeple = meepleClass.instantiate()
-		placeHolderMeeple.setCountry(Color(1.0,0.0,0.0,1.0))
-		placeHolderMeeple.transform.origin = transform.origin
+		var meeple = meepleClass.instantiate()
+		var countryArray = ProjectSettings.get_setting("Game/countryArray")
+		#Spawner currently use every colors, we should create a smarter function to randomly choose a color available for the current level
+		meeple.setCountry(countryArray[randi()%7+1])
+		meeple.transform.origin = transform.origin
 	
-		add_child(placeHolderMeeple)
-		meepleArray.push_back(placeHolderMeeple)
+		add_child(meeple)
+		meepleArray.push_back(meeple)
 		updateMeeplePosition()
 	else:
 		#TODO : send message to game controler to trigger game over
@@ -55,7 +59,9 @@ func takeMeeple(pMeeple:Node3D) -> Node3D :
 
 func updateMeeplePosition() -> void :
 	for i in range(0, meepleArray.size()):
+		@warning_ignore("integer_division")
 		meepleArray[i].position.x = (i%meepleByRow)*0.2
+		@warning_ignore("integer_division")
 		meepleArray[i].position.z = (i/meepleByRow)*0.2
 
 func _on_spawn_timer_timeout() -> void:
