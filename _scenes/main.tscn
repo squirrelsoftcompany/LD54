@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://u031l22bdaes"]
+[gd_scene load_steps=10 format=3 uid="uid://u031l22bdaes"]
 
 [ext_resource type="PackedScene" uid="uid://bo70n755f56k8" path="res://_scenes/nodes/train.tscn" id="1_4b0xy"]
+[ext_resource type="PackedScene" uid="uid://fmcwxwu4ql6q" path="res://_scenes/nodes/main_camera.tscn" id="1_71qib"]
 [ext_resource type="PackedScene" uid="uid://diyr61kdpr8fn" path="res://_scenes/nodes/wagon.tscn" id="2_l3b7c"]
+[ext_resource type="PackedScene" uid="uid://6jqwm3841tt1" path="res://_scenes/nodes/map_brut.tscn" id="2_thhpo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_odkk1"]
 sky_top_color = Color(1, 1, 1, 1)
@@ -16,10 +18,6 @@ sky_material = SubResource("ProceduralSkyMaterial_odkk1")
 background_mode = 2
 sky = SubResource("Sky_c5wym")
 sdfgi_enabled = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_4173x"]
-size = Vector2(300, 200)
-orientation = 1
 
 [sub_resource type="BoxMesh" id="BoxMesh_72xdt"]
 
@@ -39,12 +37,13 @@ directional_shadow_max_distance = 300.0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fspfq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("QuadMesh_4173x")
+[node name="MainCamera" parent="." instance=ExtResource("1_71qib")]
+transform = Transform3D(1, 0, 0, 0, 0.163759, 0.9865, 0, -0.9865, 0.163759, 0, 98.65, 26.3759)
+direction = Vector3(0, 1, 0.166)
+hotspot = Vector3(0, 0, 10)
+distance = 100.0
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.173648, 0.984808, 0, -0.984808, 0.173648, 0, 80, 30)
-current = true
+[node name="Map" parent="." instance=ExtResource("2_thhpo")]
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -100, 5, -40)
