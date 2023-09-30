@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://wk6iv1ueioi3"]
+
+[ext_resource type="PackedScene" uid="uid://d35yr0djs5o4n" path="res://_scenes/nodes/main_camera.tscn" id="1_bf5bn"]
+[ext_resource type="Texture2D" uid="uid://q8xqv8iwqr6s" path="res://Test_zone.png" id="1_ng7ka"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mr05t"]
+shading_mode = 0
+albedo_texture = ExtResource("1_ng7ka")
+albedo_texture_force_srgb = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_weh1u"]
+
+[node name="test_xavier" type="Node3D"]
+
+[node name="MainCamera" parent="." instance=ExtResource("1_bf5bn")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_mr05t")
+mesh = SubResource("QuadMesh_weh1u")
+skeleton = NodePath("../..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.532994, 0.846119, 0, -0.846119, 0.532994, 0, 1.89533, 0.732197)

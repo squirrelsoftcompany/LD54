@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://d35yr0djs5o4n"]
+
+[ext_resource type="Script" path="res://scripts/ColorPicking.gd" id="1_qkx12"]
+[ext_resource type="Texture2D" uid="uid://q8xqv8iwqr6s" path="res://Test_zone.png" id="2_h1nwb"]
+[ext_resource type="Script" path="res://scripts/SnapTransform.gd" id="3_fhjb0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mr05t"]
+shading_mode = 0
+albedo_texture = ExtResource("2_h1nwb")
+albedo_texture_force_srgb = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_weh1u"]
+
+[node name="MainCamera" type="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.866348, 0.499441, 0, -0.499441, 0.866348, 0, 0.851958, 1.42365)
+cull_mask = 1048543
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+visibility_layer = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+own_world_3d = true
+handle_input_locally = false
+canvas_cull_mask = 4293918720
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+script = ExtResource("1_qkx12")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+layers = 32
+material_override = SubResource("StandardMaterial3D_mr05t")
+mesh = SubResource("QuadMesh_weh1u")
+skeleton = NodePath("../../../..")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+cull_mask = 32
+script = ExtResource("3_fhjb0")
