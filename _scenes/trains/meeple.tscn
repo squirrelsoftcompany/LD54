@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c48lgdwex58eq"]
+
+[ext_resource type="ArrayMesh" uid="uid://ihh1sbxebsgs" path="res://models/meeple.obj" id="1_q1eaf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yht2o"]
+
+[node name="Meeple" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_yht2o")
+mesh = ExtResource("1_q1eaf")

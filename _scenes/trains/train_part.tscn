@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck5q72058p7hv"]
+
+[ext_resource type="Material" uid="uid://b6igwrv2m204s" path="res://models/trains/Palette_material.tres" id="1_antbj"]
+
+[node name="TrainPart" type="Node3D"]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_antbj")

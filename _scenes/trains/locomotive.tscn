@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://sqn3liqmbahg"]
+
+[ext_resource type="PackedScene" uid="uid://ck5q72058p7hv" path="res://_scenes/trains/train_part.tscn" id="1_cu03b"]
+[ext_resource type="ArrayMesh" uid="uid://b871s1phlwwuk" path="res://models/trains/locomotive.obj" id="2_62jcs"]
+[ext_resource type="PackedScene" uid="uid://c48lgdwex58eq" path="res://_scenes/trains/meeple.tscn" id="3_g7h7a"]
+[ext_resource type="PackedScene" uid="uid://dwlporic7r0uw" path="res://_scenes/trains/hat.tscn" id="4_5wt68"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1hci3"]
+albedo_color = Color(0.196078, 0.196078, 0.196078, 1)
+
+[node name="Locomotive" instance=ExtResource("1_cu03b")]
+
+[node name="Mesh" parent="." index="0"]
+mesh = ExtResource("2_62jcs")
+
+[node name="Meeple" parent="." index="1" instance=ExtResource("3_g7h7a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.86334)
+material_override = SubResource("StandardMaterial3D_1hci3")
+
+[node name="Hat" parent="Meeple" index="0" instance=ExtResource("4_5wt68")]

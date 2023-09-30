@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwlporic7r0uw"]
+
+[ext_resource type="PackedScene" uid="uid://ck5q72058p7hv" path="res://_scenes/trains/train_part.tscn" id="1_ex43c"]
+[ext_resource type="ArrayMesh" uid="uid://c17c7k0208uus" path="res://models/trains/hat.obj" id="2_ij873"]
+
+[node name="Hat" instance=ExtResource("1_ex43c")]
+
+[node name="Mesh" parent="." index="0"]
+mesh = ExtResource("2_ij873")

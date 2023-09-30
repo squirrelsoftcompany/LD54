@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp754d65pl8um"]
+
+[ext_resource type="PackedScene" uid="uid://ck5q72058p7hv" path="res://_scenes/trains/train_part.tscn" id="1_n0ds7"]
+[ext_resource type="ArrayMesh" uid="uid://vgocrkm36ixb" path="res://models/trains/roof.obj" id="2_ggq70"]
+
+[node name="Roof" instance=ExtResource("1_n0ds7")]
+
+[node name="Mesh" parent="." index="0"]
+mesh = ExtResource("2_ggq70")
