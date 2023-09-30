@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxou0nnb8bbd0"]
+
+[ext_resource type="Script" path="res://scripts/Spawn.gd" id="1_eh46l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xefuh"]
+albedo_color = Color(0.0509804, 0.0509804, 0.0509804, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_h5ufv"]
+material = SubResource("StandardMaterial3D_xefuh")
+size = Vector2(0.9, 0.3)
+center_offset = Vector3(0.4, -0.1, 0)
+
+[node name="Spawner" type="Node3D"]
+script = ExtResource("1_eh46l")
+maxMeeple = 10
+
+[node name="SpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="SpawnerSpace" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+visible = false
+mesh = SubResource("QuadMesh_h5ufv")
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
