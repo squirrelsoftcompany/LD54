@@ -63,7 +63,6 @@ func manage_end_point(delta) -> void:
 	
 	if current_pause - delta <= 0:
 		if ping_pong:
-			print(name, \" changed its direction for PING_PONG algorithm.\")
 			if backward:
 				backward = false
 				h_offset = forward_h_offset
@@ -73,7 +72,6 @@ func manage_end_point(delta) -> void:
 				h_offset = -forward_h_offset
 				progress_ratio = 1 # 100%
 		else:
-			print(name, \" changed looped for LOOP algorithm.\")
 			progress = very_close_threshold if not backward else path_distance - very_close_threshold
 		current_pause = 0
 		update_speed(delta)
