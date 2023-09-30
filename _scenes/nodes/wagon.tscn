@@ -6,23 +6,28 @@
 script/source = "extends PathFollow3D
 
 
-@export var pathFollowAhead: PathFollow3D
+@export var train : PathFollow3D
 @export var offset : float = 12 # m
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	loop = train.is_loop_mode()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	progress = pathFollowAhead.progress - offset
+	progress = train.follower_position(offset)
+	h_offset = train.follower_h_offset(offset)
+	visible = train.visible
 "
 
 [sub_resource type="BoxMesh" id="BoxMesh_72xdt"]
 
 [node name="Wagon" type="PathFollow3D"]
+rotation_mode = 1
+tilt_enabled = false
 script = SubResource("GDScript_ar4bg")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="."]

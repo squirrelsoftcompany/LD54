@@ -5,24 +5,127 @@
 [sub_resource type="GDScript" id="GDScript_khru8"]
 script/source = "extends PathFollow3D
 
+enum Mode {
+	PING_PONG,
+	LOOP
+}
+
 
 @export var speed : float = 50 # m/s
+@export var zero_to_max_time : float = 1 # s
+@export var mode : Mode = Mode.LOOP
+@export var pause_at_end : float = 2 # s
+@export var backward : bool = false
+
+
+var current_speed : float = 0
+@onready var zero_to_max_distance : float = speed if (zero_to_max_time == 0) else speed / 2 * zero_to_max_time
+@onready var path_distance = $\"..\".curve.get_baked_length()
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	if (backward):
+		h_offset = 6
+	else:
+		h_offset = -6
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	progress += delta * speed;
+	if (paused()):
+		manage_end_point(delta)
+	else:
+		update_speed(delta)
+		progress += delta * current_speed * (-1 if backward else 1)
+		if acceleration <= 0 and (very_close_to_end() or very_close_to_start()):
+			current_pause = pause_at_end
+
+
+var acceleration : float = 0
+func update_speed(delta : float) -> void:
+	var lerp_result : float = speed * (delta / zero_to_max_time)
+
+	# slow down
+	if (not backward and close_to_end()) or (backward and close_to_start()):
+		acceleration = -lerp_result
+		current_speed += acceleration
+		current_speed = max(current_speed, 0.0)
+	# speed up
+	elif (backward and close_to_end()) or (not backward and close_to_start()):
+		acceleration = +lerp_result
+		current_speed += acceleration
+		current_speed = min(current_speed, speed)
+	else:
+		current_speed = speed
+
+
+var current_pause = 0
+func manage_end_point(delta) -> void:
+	if not paused():
+		return
+	
+	if current_pause - delta <= 0:
+		if mode == Mode.PING_PONG:
+			print(name, \" changed its direction for PING_PONG algorithm.\")
+			if backward:
+				backward = false
+				h_offset = -6
+				progress_ratio = 0
+			else:
+				backward = true
+				h_offset = 6
+				progress_ratio = 1
+		else:
+			print(name, \" changed looped for LOOP algorithm.\")
+			progress = 1 if not backward else path_distance - 1
+		current_pause = 0
+		update_speed(delta)
+	else:
+		current_pause -= delta
+
+
+func follower_position(offset) -> float:
+	if mode != Mode.LOOP and backward and progress + offset > path_distance:
+		var _offset = (progress + offset) - path_distance
+		return path_distance - _offset
+	elif mode != Mode.LOOP and not backward and progress - offset < 0:
+		return abs(progress - offset)
+	else:
+		if (backward):
+			return progress + offset
+		else:
+			return progress - offset
+
+
+func follower_h_offset(offset) -> float:
+	if mode != Mode.LOOP and backward and progress + offset > path_distance:
+		return -h_offset
+	elif mode != Mode.LOOP and not backward and progress - offset < 0:
+		return -h_offset
+	else:
+		return h_offset
+
+
+func close_to_end() -> bool:
+	return path_distance - progress < zero_to_max_distance
+func close_to_start() -> bool:
+	return progress < zero_to_max_distance
+func very_close_to_end() -> bool:
+	return path_distance - progress <= 1
+func very_close_to_start() -> bool:
+	return progress <= 1
+func paused() -> bool:
+	return current_pause > 0
+func is_loop_mode() -> bool:
+	return mode == Mode.LOOP
 "
 
 [sub_resource type="BoxMesh" id="BoxMesh_72xdt"]
 
 [node name="Train" type="PathFollow3D"]
 rotation_mode = 1
+tilt_enabled = false
 script = SubResource("GDScript_khru8")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
