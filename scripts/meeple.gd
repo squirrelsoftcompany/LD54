@@ -46,4 +46,4 @@ func setCountry(pCountry : Color) -> void:
 	else:
 		material = redMat.duplicate()
 	
-	set_surface_override_material(0,material)
+	set_material_override(material)
