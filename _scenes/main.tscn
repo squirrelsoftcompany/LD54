@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://u031l22bdaes"]
 
-[ext_resource type="PackedScene" uid="uid://bo70n755f56k8" path="res://_scenes/nodes/train.tscn" id="1_4b0xy"]
+[ext_resource type="PackedScene" uid="uid://bo70n755f56k8" path="res://_scenes/nodes/train_followpath.tscn" id="1_4b0xy"]
 [ext_resource type="PackedScene" uid="uid://fmcwxwu4ql6q" path="res://_scenes/nodes/main_camera.tscn" id="1_71qib"]
-[ext_resource type="PackedScene" uid="uid://diyr61kdpr8fn" path="res://_scenes/nodes/wagon.tscn" id="2_l3b7c"]
+[ext_resource type="PackedScene" uid="uid://diyr61kdpr8fn" path="res://_scenes/nodes/wagon_followpath.tscn" id="2_l3b7c"]
 [ext_resource type="PackedScene" uid="uid://6jqwm3841tt1" path="res://_scenes/nodes/map_brut.tscn" id="2_thhpo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_odkk1"]
