@@ -11,4 +11,6 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	transform = get_tree().get_first_node_in_group(group_to_snap_to).transform
+	var snap_to = get_tree().get_first_node_in_group(group_to_snap_to)
+	if snap_to:
+		transform = snap_to.transform
