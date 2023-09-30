@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6t7p547cbiln"]
+
+[ext_resource type="ArrayMesh" uid="uid://ihh1sbxebsgs" path="res://models/meeple.obj" id="1_cawgq"]
+[ext_resource type="PackedScene" uid="uid://dwlporic7r0uw" path="res://_scenes/trains/hat.tscn" id="2_tol7r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dxvk1"]
+albedo_color = Color(0.0745098, 0.0745098, 0.0745098, 1)
+
+[node name="DriverMeeple" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_dxvk1")
+mesh = ExtResource("1_cawgq")
+
+[node name="Hat" parent="." instance=ExtResource("2_tol7r")]
