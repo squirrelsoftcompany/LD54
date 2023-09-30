@@ -16,6 +16,7 @@ sdfgi_enabled = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_4173x"]
 size = Vector2(300, 200)
+orientation = 1
 
 [sub_resource type="BoxMesh" id="BoxMesh_72xdt"]
 
@@ -50,7 +51,6 @@ directional_shadow_max_distance = 300.0
 environment = SubResource("Environment_fspfq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("QuadMesh_4173x")
 
 [node name="Camera3D" type="Camera3D" parent="."]
