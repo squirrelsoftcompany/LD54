@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b871s1phlwwuk"
+path="res://.godot/imported/locomotive.obj-dbfa9a5773c9a77c397d5ecb4ddc1e6f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/locomotive.obj-dbfa9a5773c9a77c397d5ecb4ddc1e6f.mesh"]
+
+source_file="res://models/trains/locomotive.obj"
+dest_files=["res://.godot/imported/locomotive.obj-dbfa9a5773c9a77c397d5ecb4ddc1e6f.mesh", "res://.godot/imported/locomotive.obj-dbfa9a5773c9a77c397d5ecb4ddc1e6f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

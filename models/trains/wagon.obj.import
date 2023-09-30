@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://vaif0mtrp0ke"
+path="res://.godot/imported/wagon.obj-e7fb2547e5d0415ef604f919179ea84a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wagon.obj-e7fb2547e5d0415ef604f919179ea84a.mesh"]
+
+source_file="res://models/trains/wagon.obj"
+dest_files=["res://.godot/imported/wagon.obj-e7fb2547e5d0415ef604f919179ea84a.mesh", "res://.godot/imported/wagon.obj-e7fb2547e5d0415ef604f919179ea84a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

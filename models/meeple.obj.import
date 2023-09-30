@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ihh1sbxebsgs"
+path="res://.godot/imported/meeple.obj-cf61fc4f91a206c9775c3f09148553d8.mesh"
+
+[deps]
+
+files=["res://.godot/imported/meeple.obj-cf61fc4f91a206c9775c3f09148553d8.mesh"]
+
+source_file="res://models/meeple.obj"
+dest_files=["res://.godot/imported/meeple.obj-cf61fc4f91a206c9775c3f09148553d8.mesh", "res://.godot/imported/meeple.obj-cf61fc4f91a206c9775c3f09148553d8.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
