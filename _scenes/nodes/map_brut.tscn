@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://csvtl1ocdglw8"]
+[gd_scene load_steps=4 format=3 uid="uid://6jqwm3841tt1"]
 
 [ext_resource type="Texture2D" uid="uid://dd21vx7leo47i" path="res://models/map.png" id="1_kg54j"]
 
@@ -8,9 +8,9 @@ texture_filter = 0
 texture_repeat = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_mg0is"]
-size = Vector2(1.9, 1)
 orientation = 1
 
-[node name="Map" type="MeshInstance3D"]
+[node name="Map" type="MeshInstance3D" groups=["MainMap"]]
+transform = Transform3D(190, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_sw845")
 mesh = SubResource("QuadMesh_mg0is")
