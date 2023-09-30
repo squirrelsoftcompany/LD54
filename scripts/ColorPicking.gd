@@ -9,6 +9,8 @@ func _ready() -> void:
 	
 func _physics_process(_delta):
 	var cursor = mainCamera.get_viewport().get_mouse_position()
-	var image = get_viewport().get_texture().get_image()
-	var color = image.get_pixelv(cursor)
-	#print(color) # Print for debug
+	var viewportSize = mainCamera.get_viewport().get_visible_rect().size
+	if cursor.x >= 0 and cursor.x < viewportSize.x and cursor.y >= 0 and cursor.y < viewportSize.y:
+		var image = get_viewport().get_texture().get_image()
+		var color = image.get_pixelv(cursor)
+		#print(color) # Print for debug
