@@ -15,14 +15,16 @@ script/source = "extends PathFollow3D
 var current_speed : float = 0
 @onready var zero_to_max_distance : float = 0 if (zero_to_max_time == 0) else speed / 2 * zero_to_max_time
 @onready var path_distance = $\"..\".curve.get_baked_length()
+const forward_h_offset : float = 6
+const very_close_threshold : float = 1
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if (backward):
-		h_offset = 6
+		h_offset = -forward_h_offset
 	else:
-		h_offset = -6
+		h_offset = +forward_h_offset
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -64,38 +66,38 @@ func manage_end_point(delta) -> void:
 			print(name, \" changed its direction for PING_PONG algorithm.\")
 			if backward:
 				backward = false
-				h_offset = -6
-				progress_ratio = 0
+				h_offset = forward_h_offset
+				progress_ratio = 0 # 0%
 			else:
 				backward = true
-				h_offset = 6
-				progress_ratio = 1
+				h_offset = -forward_h_offset
+				progress_ratio = 1 # 100%
 		else:
 			print(name, \" changed looped for LOOP algorithm.\")
-			progress = 1 if not backward else path_distance - 1
+			progress = very_close_threshold if not backward else path_distance - very_close_threshold
 		current_pause = 0
 		update_speed(delta)
 	else:
 		current_pause -= delta
 
 
-func follower_position(offset) -> float:
-	if ping_pong and backward and progress + offset > path_distance:
-		var _offset = (progress + offset) - path_distance
+func follower_position(follower_offset) -> float:
+	if ping_pong and backward and progress + follower_offset > path_distance:
+		var _offset = (progress + follower_offset) - path_distance
 		return path_distance - _offset
-	elif ping_pong and not backward and progress - offset < 0:
-		return abs(progress - offset)
+	elif ping_pong and not backward and progress - follower_offset < 0:
+		return abs(progress - follower_offset)
 	else:
 		if (backward):
-			return progress + offset
+			return progress + follower_offset
 		else:
-			return progress - offset
+			return progress - follower_offset
 
 
-func follower_h_offset(offset) -> float:
-	if ping_pong and backward and progress + offset > path_distance:
+func follower_h_offset(follower_offset) -> float:
+	if ping_pong and backward and progress + follower_offset > path_distance:
 		return -h_offset
-	elif ping_pong and not backward and progress - offset < 0:
+	elif ping_pong and not backward and progress - follower_offset < 0:
 		return -h_offset
 	else:
 		return h_offset
@@ -106,9 +108,9 @@ func close_to_end() -> bool:
 func close_to_start() -> bool:
 	return progress < zero_to_max_distance
 func very_close_to_end() -> bool:
-	return path_distance - progress <= 1
+	return path_distance - progress <= very_close_threshold
 func very_close_to_start() -> bool:
-	return progress <= 1
+	return progress <= very_close_threshold
 func paused() -> bool:
 	return current_pause > 0
 "
