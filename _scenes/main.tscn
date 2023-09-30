@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://u031l22bdaes"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_odkk1"]
+sky_top_color = Color(1, 1, 1, 1)
+sky_horizon_color = Color(1, 1, 1, 1)
+ground_bottom_color = Color(1, 1, 1, 1)
+ground_horizon_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Sky" id="Sky_c5wym"]
+sky_material = SubResource("ProceduralSkyMaterial_odkk1")
+
+[sub_resource type="Environment" id="Environment_fspfq"]
+background_mode = 2
+sky = SubResource("Sky_c5wym")
+sdfgi_enabled = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_4173x"]
+size = Vector2(300, 200)
+
+[sub_resource type="BoxMesh" id="BoxMesh_72xdt"]
+
+[sub_resource type="Curve3D" id="Curve3D_fn3ir"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -100, 0, -40, 0, 0, 0, 0, 0, 0, 100, 0, -40, 0, 0, 0, 0, 0, 0, 80, 0, 60, 0, 0, 0, 0, 0, 0, -80, 0, 60, 0, 0, 0, 0, 0, 0, -100, 0, -40),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="GDScript" id="GDScript_khru8"]
+script/source = "extends PathFollow3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+@export var speed : float = 10 # m/s
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	progress += delta * speed;
+"
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+directional_shadow_max_distance = 300.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fspfq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_4173x")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.173648, 0.984808, 0, -0.984808, 0.173648, 0, 80, 30)
+current = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -100, 5, -40)
+mesh = SubResource("BoxMesh_72xdt")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -80, 5, 60)
+mesh = SubResource("BoxMesh_72xdt")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 80, 5, 60)
+mesh = SubResource("BoxMesh_72xdt")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 100, 5, -40)
+mesh = SubResource("BoxMesh_72xdt")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_fn3ir")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -100, 0, -40)
+rotation_mode = 1
+script = SubResource("GDScript_khru8")
+speed = 50.0
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Path3D/PathFollow3D"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 5, 0)
+mesh = SubResource("BoxMesh_72xdt")
