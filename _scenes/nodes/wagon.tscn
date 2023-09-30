@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://diyr61kdpr8fn"]
+
+[ext_resource type="Material" uid="uid://dygbfjjiqumo3" path="res://models/green.tres" id="1_t7vjm"]
+
+[sub_resource type="GDScript" id="GDScript_ar4bg"]
+script/source = "extends PathFollow3D
+
+
+@export var pathFollowAhead: PathFollow3D
+@export var offset : float = 12 # m
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	progress = pathFollowAhead.progress - offset
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_72xdt"]
+
+[node name="Wagon" type="PathFollow3D"]
+script = SubResource("GDScript_ar4bg")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 5, 0)
+mesh = SubResource("BoxMesh_72xdt")
+surface_material_override/0 = ExtResource("1_t7vjm")

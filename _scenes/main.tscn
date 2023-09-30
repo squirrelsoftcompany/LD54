@@ -1,4 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://u031l22bdaes"]
+[gd_scene load_steps=9 format=3 uid="uid://u031l22bdaes"]
+
+[ext_resource type="PackedScene" uid="uid://bo70n755f56k8" path="res://_scenes/nodes/train.tscn" id="1_4b0xy"]
+[ext_resource type="PackedScene" uid="uid://diyr61kdpr8fn" path="res://_scenes/nodes/wagon.tscn" id="2_l3b7c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_odkk1"]
 sky_top_color = Color(1, 1, 1, 1)
@@ -26,20 +29,6 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
-
-[sub_resource type="GDScript" id="GDScript_khru8"]
-script/source = "extends PathFollow3D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-@export var speed : float = 10 # m/s
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	progress += delta * speed;
-"
 
 [node name="Node3D" type="Node3D"]
 
@@ -76,12 +65,13 @@ mesh = SubResource("BoxMesh_72xdt")
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_fn3ir")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+[node name="Train" parent="Path3D" instance=ExtResource("1_4b0xy")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -100, 0, -40)
-rotation_mode = 1
-script = SubResource("GDScript_khru8")
-speed = 50.0
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Path3D/PathFollow3D"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 5, 0)
-mesh = SubResource("BoxMesh_72xdt")
+[node name="Wagon" parent="Path3D" node_paths=PackedStringArray("pathFollowAhead") instance=ExtResource("2_l3b7c")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -100, 0, -40)
+pathFollowAhead = NodePath("../Train")
+
+[node name="Wagon2" parent="Path3D" node_paths=PackedStringArray("pathFollowAhead") instance=ExtResource("2_l3b7c")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -100, 0, -40)
+pathFollowAhead = NodePath("../Wagon")

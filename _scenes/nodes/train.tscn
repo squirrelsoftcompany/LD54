@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo70n755f56k8"]
+
+[ext_resource type="Material" uid="uid://bmvxgs0acpoba" path="res://models/red.tres" id="1_o3xro"]
+
+[sub_resource type="GDScript" id="GDScript_khru8"]
+script/source = "extends PathFollow3D
+
+
+@export var speed : float = 50 # m/s
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	progress += delta * speed;
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_72xdt"]
+
+[node name="Train" type="PathFollow3D"]
+rotation_mode = 1
+script = SubResource("GDScript_khru8")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 5, 0)
+mesh = SubResource("BoxMesh_72xdt")
+surface_material_override/0 = ExtResource("1_o3xro")
