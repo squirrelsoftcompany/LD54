@@ -67,8 +67,7 @@ curve = SubResource("Curve3D_fn3ir")
 
 [node name="Train" parent="Path3D" instance=ExtResource("1_4b0xy")]
 transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
-visible = false
-mode = 0
+ping_pong = true
 
 [node name="Wagon" parent="Path3D" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
 transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
@@ -80,8 +79,9 @@ train = NodePath("../Train")
 offset = 24.0
 
 [node name="Train2" parent="Path3D" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(-0.0867921, 0, -0.996226, 0, 1, 0, 0.996226, 0, -0.0867921, 85.5284, 0, -42.3882)
+transform = Transform3D(-0.0867926, 0, -0.996226, 0, 1, 0, 0.996226, 0, -0.0867926, 85.5285, 0, -42.3882)
 progress = 186.107
+ping_pong = true
 backward = true
 
 [node name="Wagon3" parent="Path3D" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
@@ -94,17 +94,32 @@ train = NodePath("../Train2")
 offset = 24.0
 
 [node name="Train3" parent="Path3D" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(-0.0108473, 0, 0.999941, 0, 1, 0, -0.999941, 0, -0.0108473, 12.3341, 0, 64.8823)
-visible = false
+transform = Transform3D(-0.010847, 0, 0.999941, 0, 1, 0, -0.999941, 0, -0.010847, 12.3339, 0, 64.8823)
 progress = 372.214
-mode = 3
+speed = 25.0
 
 [node name="Wagon5" parent="Path3D" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
-transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -93.8689, 0, -32.1)
-h_offset = 10.0
+transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
 train = NodePath("../Train3")
 
 [node name="Wagon6" parent="Path3D" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
 transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
 train = NodePath("../Train3")
+offset = 24.0
+
+[node name="Train4" parent="Path3D" instance=ExtResource("1_4b0xy")]
+transform = Transform3D(-0.010847, 0, 0.999941, 0, 1, 0, -0.999941, 0, -0.010847, 12.3339, 0, 64.8823)
+progress = 372.214
+speed = 100.0
+zero_to_max_time = 0.0
+pause_at_end = 0.0
+backward = true
+
+[node name="Wagon7" parent="Path3D" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
+transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
+train = NodePath("../Train4")
+
+[node name="Wagon8" parent="Path3D" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
+transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
+train = NodePath("../Train4")
 offset = 24.0
