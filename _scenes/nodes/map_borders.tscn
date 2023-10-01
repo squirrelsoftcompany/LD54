@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2w0pddm280kk"]
+
+[ext_resource type="Shader" uid="uid://bhewrs5mmfurm" path="res://models/borders.tres" id="1_4dsf4"]
+[ext_resource type="Texture2D" uid="uid://dd21vx7leo47i" path="res://models/map.png" id="2_mjufe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_30i4w"]
+render_priority = 0
+shader = ExtResource("1_4dsf4")
+shader_parameter/day_night = true
+shader_parameter/border = 56.104
+shader_parameter/quality = 7
+shader_parameter/map = ExtResource("2_mjufe")
+
+[sub_resource type="QuadMesh" id="QuadMesh_dqw76"]
+size = Vector2(1.9, 1)
+orientation = 1
+
+[node name="Map_borders" type="MeshInstance3D"]
+material_override = SubResource("ShaderMaterial_30i4w")
+mesh = SubResource("QuadMesh_dqw76")
