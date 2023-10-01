@@ -1,20 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddkgdl7efyd1l"]
+[gd_scene load_steps=4 format=3 uid="uid://ddkgdl7efyd1l"]
 
 [ext_resource type="PackedScene" uid="uid://ck5q72058p7hv" path="res://_scenes/trains/train_part.tscn" id="1_qfwqs"]
 [ext_resource type="ArrayMesh" uid="uid://dgnrr2q2iddg" path="res://models/trains/TGV.obj" id="2_hk6qo"]
-[ext_resource type="PackedScene" uid="uid://c48lgdwex58eq" path="res://_scenes/trains/meeple.tscn" id="3_wbtbw"]
-[ext_resource type="PackedScene" uid="uid://dwlporic7r0uw" path="res://_scenes/trains/hat.tscn" id="4_sgxwo"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c6md2"]
-albedo_color = Color(0.196078, 0.196078, 0.196078, 1)
+[ext_resource type="PackedScene" uid="uid://b6t7p547cbiln" path="res://_scenes/trains/driver_meeple.tscn" id="3_3vyef"]
 
 [node name="Tgv" instance=ExtResource("1_qfwqs")]
 
 [node name="Mesh" parent="." index="0"]
 mesh = ExtResource("2_hk6qo")
 
-[node name="Meeple" parent="." index="1" instance=ExtResource("3_wbtbw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.86334)
-material_override = SubResource("StandardMaterial3D_c6md2")
-
-[node name="Hat" parent="Meeple" index="0" instance=ExtResource("4_sgxwo")]
+[node name="DriverMeeple" parent="." index="1" instance=ExtResource("3_3vyef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.80075)
