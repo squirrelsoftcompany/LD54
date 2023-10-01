@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bo70n755f56k8" path="res://_scenes/nodes/train_followpath.tscn" id="1_4b0xy"]
 [ext_resource type="PackedScene" uid="uid://fmcwxwu4ql6q" path="res://_scenes/nodes/main_camera.tscn" id="1_71qib"]
-[ext_resource type="PackedScene" uid="uid://6jqwm3841tt1" path="res://_scenes/nodes/map_brut.tscn" id="2_thhpo"]
+[ext_resource type="PackedScene" uid="uid://x60lnba3ki7c" path="res://_scenes/nodes/map_borders.tscn" id="3_10svt"]
 [ext_resource type="PackedScene" uid="uid://bjlt2nukdye2a" path="res://_scenes/railways/railway.tscn" id="6_4sskq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_odkk1"]
@@ -19,7 +19,7 @@ background_mode = 2
 sky = SubResource("Sky_c5wym")
 sdfgi_enabled = true
 
-[sub_resource type="Curve3D" id="Curve3D_jxp5d"]
+[sub_resource type="Curve3D" id="Curve3D_b3tdu"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector3Array(-35.5695, 0, 10.9988, 35.5695, 0, -10.9988, -100.089, 0, -41.8023, -1.76565, 0, -21.1282, 1.76565, 0, 21.1282, -11.6503, 0, 7.98209, 34.7381, 0, -7.5825, -34.7381, 0, 7.5825, -40.837, 0, 68.0587, 10.5703, 0, 22.5458, -10.5703, 0, -22.5458, -109.437, 0, 31.1261, -23.0052, 0, 9.0089, 23.0052, 0, -9.0089, -100.063, 0, -41.6868),
@@ -27,7 +27,7 @@ _data = {
 }
 point_count = 5
 
-[sub_resource type="Curve3D" id="Curve3D_m0oih"]
+[sub_resource type="Curve3D" id="Curve3D_khi4t"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector3Array(-6.75703, 0, 6.85496, 6.75703, 0, -6.85496, -108.904, 0, -50.5885, -27.6809, 0, -1.35723, 27.6809, 0, 1.35723, -7.33251, 0, -64.0767, -14.8928, 0, -16.0456, 14.8928, 0, 16.0456, 68.4846, 0, -43.8429, 12.7895, 0, -18.3001, -12.7895, 0, 18.3001, 59.5556, 0, 32.3778, 16.4024, 0, -2.57542, -16.4024, 0, 2.57542, -17.7616, 0, 82.9524),
@@ -50,11 +50,10 @@ direction = Vector3(0, 1, 0.166)
 hotspot = Vector3(0, 0, 10)
 distance = 170.0
 
-[node name="Map" parent="." instance=ExtResource("2_thhpo")]
-transform = Transform3D(380, 0, 0, 0, 1, 0, 0, 0, 200, 0, 0, 0)
+[node name="Map_borders" parent="." instance=ExtResource("3_10svt")]
 
 [node name="railway" parent="." instance=ExtResource("6_4sskq")]
-curve = SubResource("Curve3D_jxp5d")
+curve = SubResource("Curve3D_b3tdu")
 
 [node name="Train" parent="railway" instance=ExtResource("1_4b0xy")]
 transform = Transform3D(0.295419, 0, -0.955368, 0, 1, 0, 0.955368, 0, 0.295419, -100.089, 0, -41.8023)
@@ -71,7 +70,7 @@ transform = Transform3D(-0.405707, 0, 0.914003, 0, 1, 0, -0.914003, 0, -0.405707
 progress = 175.173
 
 [node name="railway2" parent="." instance=ExtResource("6_4sskq")]
-curve = SubResource("Curve3D_m0oih")
+curve = SubResource("Curve3D_khi4t")
 
 [node name="Train" parent="railway2" instance=ExtResource("1_4b0xy")]
 transform = Transform3D(-0.490319, 0, -0.871543, 0, 1, 0, 0.871543, 0, -0.490319, 58.7826, 0, -51.3004)
