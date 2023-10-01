@@ -6,8 +6,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_30i4w"]
 render_priority = 0
 shader = ExtResource("1_4dsf4")
-shader_parameter/day_night = true
-shader_parameter/border = 56.104
+shader_parameter/day_night = false
+shader_parameter/border = 100.0
 shader_parameter/quality = 7
 shader_parameter/map = ExtResource("2_mjufe")
 
