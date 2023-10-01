@@ -16,7 +16,7 @@ texture_repeat = false
 orientation = 1
 
 [node name="MainCamera" type="Camera3D" groups=["MainCam"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.274721, 0.961524, 0, -0.961524, 0.274721, 0, 9.61524, 2.74721)
 cull_mask = 1048543
 current = true
 script = ExtResource("1_i50c4")
@@ -44,5 +44,6 @@ script = ExtResource("3_fhjb0")
 group_to_snap_to = "MainMap"
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.274721, 0.961524, 0, -0.961524, 0.274721, 0, 9.61524, 2.74721)
 cull_mask = 32
 script = ExtResource("3_fhjb0")
