@@ -3,7 +3,7 @@ extends Path3D
 
 @export var reset_y := true
 @export var reset_tilt := true
-@export var visual_elements_interval := 1.0
+var visual_elements_interval : float = ProjectSettings.get_setting("specific/rail/visual_elements_interval", 1)
 var visual_rail = Node3D
 var visual_elements = MultiMesh
 var start_visual = Node3D

@@ -46,3 +46,4 @@ meeple/spawn_time=5.0
 dragger/dragged/offset=Vector3(0, 10, -10)
 dragger/dragged/draggable_flags=1
 dragger/dragged/droppable_flags=2
+rail/visual_elements_interval=60.0
