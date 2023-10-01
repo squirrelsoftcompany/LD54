@@ -61,9 +61,17 @@ func drag_begin(_droppable):
 func drag_finished(_droppable):
 	if ghost: ghost.queue_free()
 	ghost = null
+	
+	# when inside wagon, there isn't any takeMeeple function
 	var _spawner := get_parent()
-	assert(_spawner.has_method("takeMeeple"))
-	_spawner.takeMeeple(self)
+	if (_spawner.has_method("takeMeeple")):
+		_spawner.takeMeeple(self)
+
+
+func can_drop(droppable) -> bool:
+	var country_droppable := CountryPicker.country_under_unprojected_3d_position(droppable.global_position)
+	var country_draggable := CountryPicker.country_under_unprojected_3d_position(self.global_position)
+	return (country_draggable == country_droppable and country_droppable != -1)
 
 
 func drag_cancelled(_droppable):
