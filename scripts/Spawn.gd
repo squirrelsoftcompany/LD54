@@ -1,16 +1,19 @@
 extends Node3D
 
-var meepleClass = preload("res://_scenes/nodes/meeple.tscn")
 
-var meepleByRow = 5 
-var meepleArray : Array[Node3D] = []
+@export var maxMeeple : int = 10
+@export var meepleByRow = 5
+
 
 @onready var spawnTimer = get_node("SpawnTimer")
-@export var maxMeeple : int
 
+
+var meepleClass = preload("res://_scenes/nodes/meeple.tscn")
+var meepleArray : Array[Node3D] = []
 #Debug var ------------------
 var triggerable = true
 #----------------------------
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,6 +34,7 @@ func _process(_delta: float) -> void:
 	# -----------------------------------------------
 	pass
 
+
 func spawnMeeple() -> void :
 	if meepleArray.size() < maxMeeple:
 		
@@ -48,6 +52,7 @@ func spawnMeeple() -> void :
 		print("Max meeple capacity reached") #Debug print
 		spawnTimer.stop()
 
+
 func takeMeeple(pMeeple:Node3D) -> Node3D :
 	var searchedMeepleIndex
 	for i in range(0, meepleArray.size()):
@@ -57,12 +62,14 @@ func takeMeeple(pMeeple:Node3D) -> Node3D :
 	updateMeeplePosition()
 	return 
 
+
 func updateMeeplePosition() -> void :
 	for i in range(0, meepleArray.size()):
 		@warning_ignore("integer_division")
 		meepleArray[i].position.x = (i%meepleByRow)*0.2
 		@warning_ignore("integer_division")
 		meepleArray[i].position.z = (i/meepleByRow)*0.2
+
 
 func _on_spawn_timer_timeout() -> void:
 	spawnMeeple()
