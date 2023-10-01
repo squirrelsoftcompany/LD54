@@ -47,3 +47,21 @@ func setCountry(pCountry : Color) -> void:
 		material = redMat.duplicate()
 	
 	set_material_override(material)
+
+
+var ghost : Node3D = null
+func drag_begin(_droppable):
+	if not ghost:
+		ghost = self.duplicate(0)
+		get_tree().root.add_child(ghost)
+	return ghost
+
+
+func drag_finished(_droppable):
+	if ghost: ghost.queue_free()
+	ghost = null
+
+
+func drag_cancelled(_droppable):
+	if ghost: ghost.queue_free()
+	ghost = null

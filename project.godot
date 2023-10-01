@@ -19,6 +19,15 @@ run/main_scene="res://_scenes/main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+_Dragger="*res://scripts/Dragger.gd"
+
+[layer_names]
+
+3d_physics/layer_1="Passenger"
+3d_physics/layer_2="Wagon"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
@@ -34,3 +43,6 @@ train/forward_h_offset=4.0
 wagon/offset=8.0
 meeple/offset=6.0
 meeple/spawn_time=5.0
+dragger/dragged/offset=Vector3(0, 10, -10)
+dragger/dragged/draggable_flags=1
+dragger/dragged/droppable_flags=2
