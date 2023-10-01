@@ -32,3 +32,5 @@ train/zero_to_max_time=1.0
 train/very_close_threshold=1.0
 train/forward_h_offset=4.0
 wagon/offset=8.0
+meeple/offset=6.0
+meeple/spawn_time=5.0

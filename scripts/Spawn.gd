@@ -1,11 +1,15 @@
 extends Node3D
 
 
+@onready var ps_meeple_offset : float = ProjectSettings.get_setting("specific/meeple/offset", 1) # m
+@onready var ps_meeple_spawn_time : float = ProjectSettings.get_setting("specific/meeple/spawn_time", 1) # s
+
+
 @export var maxMeeple : int = 10
 @export var meepleByRow = 5
 
 
-@onready var spawnTimer = get_node("SpawnTimer")
+@onready var spawnTimer : Timer = get_node("SpawnTimer")
 
 
 var meepleClass = preload("res://_scenes/nodes/meeple.tscn")
@@ -17,6 +21,7 @@ var triggerable = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	spawnTimer.wait_time = ps_meeple_spawn_time
 	pass # Replace with function body.
 
 
@@ -44,7 +49,7 @@ func spawnMeeple() -> void :
 		meeple.setCountry(countryArray[randi()%7+1])
 		meeple.transform.origin = transform.origin
 	
-		add_child(meeple)
+		add_child(meeple, true, Node.INTERNAL_MODE_BACK)
 		meepleArray.push_back(meeple)
 		updateMeeplePosition()
 	else:
@@ -66,9 +71,9 @@ func takeMeeple(pMeeple:Node3D) -> Node3D :
 func updateMeeplePosition() -> void :
 	for i in range(0, meepleArray.size()):
 		@warning_ignore("integer_division")
-		meepleArray[i].position.x = (i%meepleByRow)*0.2
+		meepleArray[i].position.x = (i%meepleByRow) * ps_meeple_offset
 		@warning_ignore("integer_division")
-		meepleArray[i].position.z = (i/meepleByRow)*0.2
+		meepleArray[i].position.z = (i/meepleByRow) * ps_meeple_offset
 
 
 func _on_spawn_timer_timeout() -> void:
