@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bo70n755f56k8" path="res://_scenes/nodes/train_followpath.tscn" id="1_4b0xy"]
 [ext_resource type="PackedScene" uid="uid://fmcwxwu4ql6q" path="res://_scenes/nodes/main_camera.tscn" id="1_71qib"]
-[ext_resource type="PackedScene" uid="uid://diyr61kdpr8fn" path="res://_scenes/nodes/wagon_followpath.tscn" id="2_l3b7c"]
 [ext_resource type="PackedScene" uid="uid://6jqwm3841tt1" path="res://_scenes/nodes/map_brut.tscn" id="2_thhpo"]
+[ext_resource type="PackedScene" uid="uid://bjlt2nukdye2a" path="res://_scenes/railways/railway.tscn" id="6_4sskq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_odkk1"]
 sky_top_color = Color(1, 1, 1, 1)
@@ -19,16 +19,18 @@ background_mode = 2
 sky = SubResource("Sky_c5wym")
 sdfgi_enabled = true
 
-[sub_resource type="Curve3D" id="Curve3D_fn3ir"]
+[sub_resource type="Curve3D" id="Curve3D_jxp5d"]
+resource_local_to_scene = true
 _data = {
-"points": PackedVector3Array(-11.7367, -2.45457, 9.10918, 11.737, 0, -9.109, -100, 0, -40, -0.367, 0, -7.787, 0.367, 0, 7.787, -9.952, 0, 4.11, 14.933, 0, -0.054, -14.933, 0, 0.054, -24.589, 0, 73.06, 3.865, 0, 9.486, -3.865, 0, -9.486, -107.09, 0, 40.259, -0.08, 0, 0.495, 0.0800018, 0.136276, -0.494934, -100, 0, -40),
+"points": PackedVector3Array(-35.5695, 0, 10.9988, 35.5695, 0, -10.9988, -100.089, 0, -41.8023, -1.76565, 0, -21.1282, 1.76565, 0, 21.1282, -11.6503, 0, 7.98209, 34.7381, 0, -7.5825, -34.7381, 0, 7.5825, -40.837, 0, 68.0587, 10.5703, 0, 22.5458, -10.5703, 0, -22.5458, -109.437, 0, 31.1261, -23.0052, 0, 9.0089, 23.0052, 0, -9.0089, -100.063, 0, -41.6868),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
 
-[sub_resource type="Curve3D" id="Curve3D_hpey0"]
+[sub_resource type="Curve3D" id="Curve3D_m0oih"]
+resource_local_to_scene = true
 _data = {
-"points": PackedVector3Array(-14.2494, -0.299683, 12.4061, 14.249, 0, -12.406, -108.508, 0, -51.89, -23.237, 0, -3.04, 23.237, 0, 3.04, -5.015, 0, -64.178, -5.419, 0, -12.97, 5.419, 0, 12.97, 70.05, 0, -23.286, 7.206, 0, -9.499, -7.206, 0, 9.499, 55.552, 0, 34.786, 17.037, 0, 3.407, -17.0371, 0.615982, -3.40698, -13.156, 0, 86.928),
+"points": PackedVector3Array(-6.75703, 0, 6.85496, 6.75703, 0, -6.85496, -108.904, 0, -50.5885, -27.6809, 0, -1.35723, 27.6809, 0, 1.35723, -7.33251, 0, -64.0767, -14.8928, 0, -16.0456, 14.8928, 0, 16.0456, 68.4846, 0, -43.8429, 12.7895, 0, -18.3001, -12.7895, 0, 18.3001, 59.5556, 0, 32.3778, 16.4024, 0, -2.57542, -16.4024, 0, 2.57542, -17.7616, 0, 82.9524),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
@@ -51,87 +53,28 @@ distance = 170.0
 [node name="Map" parent="." instance=ExtResource("2_thhpo")]
 transform = Transform3D(380, 0, 0, 0, 1, 0, 0, 0, 200, 0, 0, 0)
 
-[node name="Ralways1" type="Path3D" parent="."]
-curve = SubResource("Curve3D_fn3ir")
+[node name="railway" parent="." instance=ExtResource("6_4sskq")]
+curve = SubResource("Curve3D_jxp5d")
 
-[node name="Train" parent="Ralways1" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
+[node name="Train" parent="railway" instance=ExtResource("1_4b0xy")]
+transform = Transform3D(0.295419, 0, -0.955368, 0, 1, 0, 0.955368, 0, 0.295419, -100.089, 0, -41.8023)
 ping_pong = true
 
-[node name="Wagon" parent="Ralways1" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
-transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
-train = NodePath("../Train")
-
-[node name="Wagon2" parent="Ralways1" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
-transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
-train = NodePath("../Train")
-offset = 24.0
-
-[node name="Train2" parent="Ralways1" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(-0.573465, 0, -0.81923, 0, 1, 0, 0.81923, 0, -0.573465, -21.6976, 0, -6.77194)
-progress = 86.8448
+[node name="Train2" parent="railway" instance=ExtResource("1_4b0xy")]
+transform = Transform3D(-0.745822, 0, -0.666145, 0, 1, 0, 0.666145, 0, -0.745822, -22.1787, 0, -11.3608)
+progress = 87.5867
 ping_pong = true
 backward = true
 
-[node name="Wagon3" parent="Ralways1" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
-transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
-train = NodePath("../Train2")
+[node name="Train3" parent="railway" instance=ExtResource("1_4b0xy")]
+transform = Transform3D(-0.405707, 0, 0.914003, 0, 1, 0, -0.914003, 0, -0.405707, -31.3229, 0, 65.0128)
+progress = 175.173
 
-[node name="Wagon4" parent="Ralways1" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
-transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
-train = NodePath("../Train2")
-offset = 24.0
+[node name="railway2" parent="." instance=ExtResource("6_4sskq")]
+curve = SubResource("Curve3D_m0oih")
 
-[node name="Train3" parent="Ralways1" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(-0.512923, 0, 0.858435, 0, 1, 0, -0.858435, 0, -0.512923, -21.7673, 0, 72.2518)
-progress = 173.69
-
-[node name="Wagon5" parent="Ralways1" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
-transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
-train = NodePath("../Train3")
-
-[node name="Wagon6" parent="Ralways1" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
-transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
-train = NodePath("../Train3")
-offset = 24.0
-
-[node name="Train4" parent="Ralways1" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(0.581327, 0, 0.81367, 0, 1, 0, -0.81367, 0, 0.581327, -102.898, 0, 44.5016)
-visible = false
-progress = 260.534
-speed = 40.0
-zero_to_max_time = 0.0
-pause_at_end = 0.0
-backward = true
-
-[node name="Wagon7" parent="Ralways1" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
-transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
-train = NodePath("../Train4")
-
-[node name="Wagon8" parent="Ralways1" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
-transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
-train = NodePath("../Train4")
-offset = 24.0
-
-[node name="Ralways2" type="Path3D" parent="."]
-curve = SubResource("Curve3D_hpey0")
-
-[node name="Train" parent="Ralways2" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(-0.565823, 0, -0.824527, 0, 1, 0, 0.824527, 0, -0.565823, 54.5763, 0, -38.1411)
+[node name="Train" parent="railway2" instance=ExtResource("1_4b0xy")]
+transform = Transform3D(-0.490319, 0, -0.871543, 0, 1, 0, 0.871543, 0, -0.490319, 58.7826, 0, -51.3004)
 progress = 171.023
 speed = 50.0
 ping_pong = true
-
-[node name="Wagon" parent="Ralways2" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
-transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
-train = NodePath("../Train")
-
-[node name="Wagon2" parent="Ralways2" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
-transform = Transform3D(0.613111, 0, -0.789997, 0, 1, 0, 0.789997, 0, 0.613111, -100, 0, -40)
-train = NodePath("../Train")
-offset = 24.0
-
-[node name="Wagon3" parent="Ralways2" node_paths=PackedStringArray("train") instance=ExtResource("2_l3b7c")]
-transform = Transform3D(0.656648, 0, -0.754198, 0, 1, 0, 0.754198, 0, 0.656648, -108.508, 0, -51.89)
-train = NodePath("../Train")
-offset = 36.0
