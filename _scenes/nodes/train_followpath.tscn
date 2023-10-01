@@ -6,7 +6,7 @@
 [sub_resource type="GDScript" id="GDScript_khru8"]
 script/source = "extends PathFollow3D
 
-@export var speed : float = 50 # m/s
+@export var speed : float = 25 # m/s
 @export var zero_to_max_time : float = 1 # s
 @export var ping_pong : bool = false
 @export var pause_at_end : float = 2 # s
