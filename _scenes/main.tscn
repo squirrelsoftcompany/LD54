@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://u031l22bdaes"]
+[gd_scene load_steps=11 format=3 uid="uid://u031l22bdaes"]
 
 [ext_resource type="PackedScene" uid="uid://bo70n755f56k8" path="res://_scenes/nodes/train_followpath.tscn" id="1_4b0xy"]
 [ext_resource type="PackedScene" uid="uid://fmcwxwu4ql6q" path="res://_scenes/nodes/main_camera.tscn" id="1_71qib"]
@@ -23,7 +23,7 @@ sdfgi_enabled = true
 [sub_resource type="Curve3D" id="Curve3D_a6mkv"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector3Array(-46.1183, 0, 22.0385, 46.1183, 0, -22.0385, -185.123, 0, -69.6389, -13.3897, 0, -37.3961, 13.3897, 0, 37.3961, -12.5456, 0, 6.90884, 65.4937, 0, -11.9922, -65.4937, 0, 11.9922, -51.941, 0, 148.936, 29.8818, 0, 40.8147, -29.8818, 0, -40.8147, -190.489, 0, 61.1959, -38.445, 0, 18.8285, 38.445, 0, -18.8285, -185.123, 0, -69.6389),
+"points": PackedVector3Array(-46.8836, 0, 13.4744, 46.8836, 0, -13.4744, -124.228, 0, -44.128, -13.3897, 0, -37.3961, 13.3897, 0, 37.3961, -19.1038, 0, 12.2609, 34.5609, 0, -22.7438, -34.5609, 0, 22.7438, -57.9419, 0, 108.143, 16.4455, 0, 42.0606, -16.4455, 0, -42.0606, -148.306, 0, 45.2838, -38.6278, 0, 11.3097, 38.6278, 0, -11.3097, -124.759, 0, -44.1913),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
@@ -31,7 +31,7 @@ point_count = 5
 [sub_resource type="Curve3D" id="Curve3D_4yp3a"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector3Array(-6.75703, 0, 6.85496, 6.75703, 0, -6.85496, -171.013, 0, -94.6794, -61.5863, 0, 0.132401, 61.5863, 0, -0.132401, -15.9362, 0, -126.407, -18.3406, 0, -42.1751, 18.3406, 0, 42.1751, 145.671, 0, -62.0532, 21.9505, 0, -26.3062, -21.9505, 0, 26.3062, 122.033, 0, 71.8242, 31.9774, 0, 5.28497, -31.9774, 0, -5.28497, -30.8919, 0, 163.989),
+"points": PackedVector3Array(-12.63, 0, 2.88178, 12.63, 0, -2.88178, -161.757, 0, -72.525, -39.3706, 0, -1.68193, 39.3706, 0, 1.68193, -14.813, 0, -92.1289, -19.7191, 0, -28.0504, 19.7191, 0, 28.0504, 109.034, 0, -53.8048, 21.3904, 0, -29.125, -21.3904, 0, 29.125, 87.4573, 0, 56.1522, 8.28725, 0, -3.06255, -8.28725, 0, 3.06255, -27.9504, 0, 117.819),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
@@ -50,10 +50,10 @@ environment = SubResource("Environment_fspfq")
 transform = Transform3D(1, 0, 0, 0, 0.125011, 0.992155, 0, -0.992155, 0.125011, 0, 257.96, 52.503)
 direction = Vector3(0, 1, 0.126)
 hotspot = Vector3(0, 0, 20)
-distance = 260.0
+distance = 200.0
 
 [node name="Map_borders" parent="." instance=ExtResource("3_10svt")]
-transform = Transform3D(760, 0, 0, 0, 1, 0, 0, 0, 400, 0, 0, 0)
+transform = Transform3D(570, 0, 0, 0, 1, 0, 0, 0, 300, 0, 0, 0)
 
 [node name="railway" parent="." instance=ExtResource("6_4sskq")]
 curve = SubResource("Curve3D_a6mkv")
@@ -63,46 +63,47 @@ transform = Transform3D(0.431168, 0, -0.902272, 0, 1, 0, 0.902272, 0, 0.431168, 
 ping_pong = true
 
 [node name="Train2" parent="railway" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(-0.689841, 0, -0.723961, 0, 1, 0, 0.723961, 0, -0.689841, -29.2318, 0, -15.6833)
-progress = 171.631
+transform = Transform3D(-0.999995, 0, 0.00313845, 0, 1, 0, -0.00313845, 0, -0.999995, -14.6211, 0, 37.5977)
+progress = 156.647
 ping_pong = true
 backward = true
 
 [node name="Train3" parent="railway" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(-0.553828, 0, 0.832631, 0, 1, 0, -0.832631, 0, -0.553828, -30.0342, 0, 140.363)
-progress = 343.262
+transform = Transform3D(0.900436, 0, 0.434988, 0, 1, 0, -0.434988, 0, 0.900436, -143.548, 0, 56.1761)
+progress = 356.017
 
 [node name="railway2" parent="." instance=ExtResource("6_4sskq")]
 curve = SubResource("Curve3D_4yp3a")
 
 [node name="Train4" parent="railway2" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(-0.67724, 0, 0.735762, 0, 1, 0, -0.735762, 0, -0.67724, 111.039, 0, 83.0336)
-progress = 497.789
+transform = Transform3D(-0.809631, 0, 0.586939, 0, 1, 0, -0.586939, 0, -0.809631, 87.9326, 0, 55.5008)
+progress = 398.778
 is_tgv = true
 wagon_count = 4
 ping_pong = true
 pause_at_end = 0.0
 
 [node name="Spawner" parent="." instance=ExtResource("5_r03u6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -260.638, 0, 74.0677)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -207.76, 0, 58.0784)
 
 [node name="Spawner2" parent="." instance=ExtResource("5_r03u6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -229.118, 0, -105.455)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -182.003, 0, -92.9093)
 
 [node name="Spawner3" parent="." instance=ExtResource("5_r03u6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.2631, 0, -156.967)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.902, 0, -122.588)
 
 [node name="Spawner4" parent="." instance=ExtResource("5_r03u6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 159.108, 0, -92.8343)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 125.927, -1.52588e-05, -69.6212)
 
 [node name="Spawner5" parent="." instance=ExtResource("5_r03u6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 284.85, 0, 80.533)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 203.553, 0, 65.6021)
 
 [node name="Spawner6" parent="." instance=ExtResource("5_r03u6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76.0375, 0, 115.267)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -86.1227, 0, 76.4743)
 
 [node name="Spawner7" parent="." instance=ExtResource("5_r03u6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.8065, 3.05176e-05, 26.8659)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.2302, 4.57764e-05, -7.89676)
+meepleByRow = 2
 
 [node name="Spawner8" parent="." instance=ExtResource("5_r03u6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.6775, 4.57764e-05, 25.4924)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.0249, 6.10352e-05, 4.41247)
