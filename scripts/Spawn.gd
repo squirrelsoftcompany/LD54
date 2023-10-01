@@ -21,10 +21,10 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	#Debug : Test the takeMeeple() function -----------
 	@warning_ignore("integer_division")
-	if (Time.get_ticks_msec()/1000)%6 == 0:
+	var modul_time = Time.get_ticks_msec()/1000
+	if modul_time == 0:
 		triggerable = true
-	@warning_ignore("integer_division")
-	if (Time.get_ticks_msec()/1000)%6 == 5 and triggerable:
+	elif modul_time == 5 and triggerable:
 		if meepleArray.size() > 2:
 			takeMeeple(meepleArray[2])
 		triggerable = false
