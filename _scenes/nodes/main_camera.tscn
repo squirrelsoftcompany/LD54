@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://fmcwxwu4ql6q"]
+[gd_scene load_steps=11 format=3 uid="uid://fmcwxwu4ql6q"]
 
 [ext_resource type="Script" path="res://_scenes/nodes/main_camera.gd" id="1_i50c4"]
 [ext_resource type="Script" path="res://scripts/ColorPicking.gd" id="1_qkx12"]
 [ext_resource type="Script" path="res://scripts/SnapTransform.gd" id="3_fhjb0"]
 [ext_resource type="Texture2D" uid="uid://dd21vx7leo47i" path="res://models/map.png" id="3_m3l8v"]
+[ext_resource type="AudioStream" uid="uid://dg4vyyahahrbw" path="res://resources/Musics/LD54.mp3" id="5_jg86j"]
+[ext_resource type="AudioStream" uid="uid://cpx4j2qci8xth" path="res://resources/Musics/LD54_2.mp3" id="6_a8tox"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mr05t"]
 shading_mode = 0
@@ -14,6 +16,63 @@ texture_repeat = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_weh1u"]
 orientation = 1
+
+[sub_resource type="Animation" id="Animation_ovwdv"]
+resource_name = "MusicMix"
+length = 294.03
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Music1:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 30, 245, 295.1),
+"transitions": PackedFloat32Array(1, 1.03526, 1, 1, 1),
+"update": 0,
+"values": [-30.0, 0.0, -5.0, -5.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Music2:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 29.6, 32.3, 249.3, 254.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-30.0, -30.0, 0.0, 0.0, -30.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Music1:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 98, 196.02),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, true, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Music2:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(30),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ca5gi"]
+_data = {
+"MusicMix": SubResource("Animation_ovwdv")
+}
 
 [node name="MainCamera" type="Camera3D" groups=["MainCam"]]
 transform = Transform3D(1, 0, 0, 0, 0.274721, 0.961524, 0, -0.961524, 0.274721, 0, 9.61524, 2.74721)
@@ -47,3 +106,22 @@ group_to_snap_to = "MainMap"
 transform = Transform3D(1, 0, 0, 0, 0.274721, 0.961524, 0, -0.961524, 0.274721, 0, 9.61524, 2.74721)
 cull_mask = 32
 script = ExtResource("3_fhjb0")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+current = true
+
+[node name="Music1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_jg86j")
+volume_db = -4.60785
+bus = &"Music"
+
+[node name="Music2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_a8tox")
+volume_db = -30.0
+bus = &"Music"
+
+[node name="AudioMix" type="AnimationPlayer" parent="."]
+autoplay = "MusicMix"
+libraries = {
+"": SubResource("AnimationLibrary_ca5gi")
+}
