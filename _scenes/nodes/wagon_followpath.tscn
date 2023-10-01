@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://diyr61kdpr8fn"]
+[gd_scene load_steps=4 format=3 uid="uid://diyr61kdpr8fn"]
 
 [ext_resource type="PackedScene" uid="uid://dkdoprjo5e7pl" path="res://_scenes/trains/wagon.tscn" id="2_64oam"]
 
@@ -11,6 +11,7 @@ script/source = "extends PathFollow3D
 
 
 @onready var model: Node3D = $Wagon
+@onready var meeple_hotspot: Node3D = $Wagon/MeepleHotspot
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,7 +25,22 @@ func _process(_delta: float) -> void:
 	h_offset = train.follower_h_offset(offset)
 	model.rotation_degrees = Vector3(0, train.follower_rotation_y(offset), 0)
 	visible = train.visible
+
+
+var _passenger : Node3D = null
+func drag_finished(draggable : Node3D):
+	_passenger = draggable.get_parent()
+	_passenger.reparent(meeple_hotspot)
+	_passenger.position = Vector3.ZERO
+	_passenger.quaternion = Quaternion.IDENTITY
+
+
+func can_drop(_draggable : Node3D):
+	return _passenger == null
 "
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t3jr5"]
+size = Vector3(8, 8, 8)
 
 [node name="Wagon" type="PathFollow3D"]
 rotation_mode = 1
@@ -32,3 +48,13 @@ tilt_enabled = false
 script = SubResource("GDScript_ar4bg")
 
 [node name="Wagon" parent="." instance=ExtResource("2_64oam")]
+
+[node name="MeepleHotspot" type="Node3D" parent="Wagon"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+shape = SubResource("BoxShape3D_t3jr5")

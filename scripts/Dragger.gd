@@ -70,20 +70,20 @@ func update_under_mouse():
 		var droppable = result_drop.get("collider", null)
 		if droppable and can_drop(_dragged_object, droppable): _droppable_under_mouse = droppable
 		# ground
-		var distance = -_from.y/_dir.y
-		_dragging_3d_position = _from + _dir * distance
+		var distance = (ps_offset_dragged_object.y - _from.y)/_dir.y
+		_dragging_3d_position = _from + _dir * distance + Vector3(ps_offset_dragged_object.x, 0, ps_offset_dragged_object.z)
 		# drag
 		_draggable_under_mouse = null
 
 
 func move_dragged_object():
-	if _dragged_object_ghost and _dragging_3d_position.is_finite() and ps_offset_dragged_object.is_finite():
-		_dragged_object_ghost.global_position = _dragging_3d_position + ps_offset_dragged_object
+	if _dragged_object_ghost and _dragging_3d_position.is_finite():
+		_dragged_object_ghost.global_position = _dragging_3d_position
 
 
 #utils
 func can_drop(draggable : Node3D, droppable : Node3D) -> bool:
-	return _generic_drop("can_drop", draggable, droppable, false)
+	return _generic_drop("can_drop", draggable, droppable, true) and _generic_drop("can_drop", droppable, draggable, true)
 func drag_finished(draggable : Node3D, droppable : Node3D) -> void:
 	_generic_drop("drag_finished", draggable, droppable, null)
 	_generic_drop("drag_finished", droppable, draggable, null)

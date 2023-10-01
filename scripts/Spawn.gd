@@ -42,16 +42,13 @@ func _process(_delta: float) -> void:
 
 func spawnMeeple() -> void :
 	if meepleArray.size() < maxMeeple:
-		
 		var meeple = meepleClass.instantiate()
 		var countryArray = ProjectSettings.get_setting("Game/countryArray")
 		#Spawner currently use every colors, we should create a smarter function to randomly choose a color available for the current level
 		meeple.setCountry(countryArray[randi()%7+1])
 		meeple.transform.origin = transform.origin
-	
-		add_child(meeple, true, Node.INTERNAL_MODE_BACK)
-		meepleArray.push_back(meeple)
-		updateMeeplePosition()
+
+		pushMeeple(meeple)
 	else:
 		#TODO : send message to game controler to trigger game over
 		print("Max meeple capacity reached") #Debug print
@@ -66,6 +63,12 @@ func takeMeeple(pMeeple:Node3D) -> Node3D :
 	meepleArray.remove_at(searchedMeepleIndex)
 	updateMeeplePosition()
 	return 
+
+
+func pushMeeple(pMeeple:Node3D) -> void:
+	add_child(pMeeple, true, Node.INTERNAL_MODE_BACK)
+	meepleArray.push_back(pMeeple)
+	updateMeeplePosition()
 
 
 func updateMeeplePosition() -> void :

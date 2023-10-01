@@ -1,5 +1,6 @@
 extends MeshInstance3D
 
+
 var blueMat = preload("res://resources/CountryMaterial/blue.tres")
 var cyanMat = preload("res://resources/CountryMaterial/cyan.tres")
 var deeppinkMat = preload("res://resources/CountryMaterial/deeppink.tres")
@@ -9,8 +10,8 @@ var orangeMat = preload("res://resources/CountryMaterial/orange.tres")
 var rebeccapurpleMat = preload("res://resources/CountryMaterial/rebeccapurple.tres")
 var redMat = preload("res://resources/CountryMaterial/red.tres")
 
-@export var country: Color
 
+@export var country: Color
 
 
 # Called when the node enters the scene tree for the first time.
@@ -60,6 +61,9 @@ func drag_begin(_droppable):
 func drag_finished(_droppable):
 	if ghost: ghost.queue_free()
 	ghost = null
+	var _spawner := get_parent()
+	assert(_spawner.has_method("takeMeeple"))
+	_spawner.takeMeeple(self)
 
 
 func drag_cancelled(_droppable):
