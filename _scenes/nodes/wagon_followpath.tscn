@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://diyr61kdpr8fn"]
+[gd_scene load_steps=3 format=3 uid="uid://diyr61kdpr8fn"]
 
-[ext_resource type="Material" uid="uid://dygbfjjiqumo3" path="res://models/green.tres" id="1_t7vjm"]
 [ext_resource type="PackedScene" uid="uid://dkdoprjo5e7pl" path="res://_scenes/trains/wagon.tscn" id="2_64oam"]
 
 [sub_resource type="GDScript" id="GDScript_ar4bg"]
@@ -23,17 +22,9 @@ func _process(_delta: float) -> void:
 	visible = train.visible
 "
 
-[sub_resource type="BoxMesh" id="BoxMesh_72xdt"]
-
 [node name="Wagon" type="PathFollow3D"]
 rotation_mode = 1
 tilt_enabled = false
 script = SubResource("GDScript_ar4bg")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 5, 0)
-visible = false
-mesh = SubResource("BoxMesh_72xdt")
-surface_material_override/0 = ExtResource("1_t7vjm")
 
 [node name="Wagon" parent="." instance=ExtResource("2_64oam")]

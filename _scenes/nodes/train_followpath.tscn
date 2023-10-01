@@ -1,21 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://bo70n755f56k8"]
+[gd_scene load_steps=3 format=3 uid="uid://bo70n755f56k8"]
 
-[ext_resource type="Material" uid="uid://bmvxgs0acpoba" path="res://models/red.tres" id="1_o3xro"]
 [ext_resource type="PackedScene" uid="uid://sqn3liqmbahg" path="res://_scenes/trains/locomotive.tscn" id="2_v6wj6"]
 
 [sub_resource type="GDScript" id="GDScript_khru8"]
 script/source = "extends PathFollow3D
 
+@export_category(\"Train\")
 @export var speed : float = 25 # m/s
-@export var zero_to_max_time : float = 1 # s
+@export_subgroup(\"Wagon\")
+@export_range(1, 10) var wagon_count := 3
+@export_range(5, 30) var wagon_offset := 10.0
+@export_subgroup(\"train mode\")
 @export var ping_pong : bool = false
-@export var pause_at_end : float = 2 # s
 @export var backward : bool = false
+@export_subgroup(\"train pause\")
+@export var zero_to_max_time : float = 1 # s
+@export var pause_at_end : float = 2 # s
 
 
 var current_speed : float = 0
 @onready var zero_to_max_distance : float = 0.0 if (zero_to_max_time == 0) else speed / 2 * zero_to_max_time
-@onready var path_distance = $\"..\".curve.get_baked_length()
+@onready var path_distance : float = $\"..\".curve.get_baked_length()
+@onready var wagon_followpath := preload(\"res://_scenes/nodes/wagon_followpath.tscn\")
 const forward_h_offset : float = 6
 const very_close_threshold : float = 1
 
@@ -26,6 +32,11 @@ func _ready() -> void:
 		h_offset = -forward_h_offset
 	else:
 		h_offset = +forward_h_offset
+	for i in wagon_count:
+		var wagon = wagon_followpath.instantiate()
+		get_parent().add_child.call_deferred(wagon, true, Node.INTERNAL_MODE_BACK)
+		wagon.train = self
+		wagon.offset = wagon_offset * (i+1)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -114,17 +125,9 @@ func paused() -> bool:
 	return current_pause > 0
 "
 
-[sub_resource type="BoxMesh" id="BoxMesh_72xdt"]
-
 [node name="Train" type="PathFollow3D"]
 rotation_mode = 1
 tilt_enabled = false
 script = SubResource("GDScript_khru8")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 5, 0)
-visible = false
-mesh = SubResource("BoxMesh_72xdt")
-surface_material_override/0 = ExtResource("1_o3xro")
 
 [node name="Locomotive" parent="." instance=ExtResource("2_v6wj6")]
