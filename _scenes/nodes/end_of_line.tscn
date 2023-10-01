@@ -1,9 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://ija2tya6eanq"]
 
-[ext_resource type="Material" uid="uid://d1oplnes2dpb8" path="res://resources/CountryMaterial/deeppink.tres" id="1_c2tl3"]
 [ext_resource type="ArrayMesh" uid="uid://cin5iu3htnk27" path="res://models/hangar.obj" id="2_ewtpq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dsmgn"]
+albedo_color = Color(0.788235, 0.788235, 0.788235, 1)
 
 [node name="EndOfLine" type="MeshInstance3D"]
 visible = false
-material_override = ExtResource("1_c2tl3")
+material_override = SubResource("StandardMaterial3D_dsmgn")
 mesh = ExtResource("2_ewtpq")
