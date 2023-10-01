@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://wk6iv1ueioi3"]
 
-[ext_resource type="PackedScene" uid="uid://d35yr0djs5o4n" path="res://_scenes/nodes/main_camera.tscn" id="1_bf5bn"]
+[ext_resource type="PackedScene" uid="uid://fmcwxwu4ql6q" path="res://_scenes/nodes/main_camera.tscn" id="1_bf5bn"]
 [ext_resource type="Texture2D" uid="uid://q8xqv8iwqr6s" path="res://Test_zone.png" id="1_ng7ka"]
 [ext_resource type="PackedScene" uid="uid://dxou0nnb8bbd0" path="res://_scenes/nodes/spawner.tscn" id="3_k5rs7"]
 
@@ -14,6 +14,7 @@ albedo_texture_force_srgb = true
 [node name="test_xavier" type="Node3D"]
 
 [node name="MainCamera" parent="." instance=ExtResource("1_bf5bn")]
+transform = Transform3D(1, 0, 0, 0, 0.274721, 0.961524, 0, -0.961524, 0.274721, 0, 9.61524, 2.74721)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)

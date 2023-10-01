@@ -1,0 +1,244 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2kf23u1bayud"]
+
+[ext_resource type="Script" path="res://_scenes/ui/TutoPanel.gd" id="1_8yowa"]
+
+[node name="InGameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+
+[node name="GoodMeepleScore" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GoodMeepleScore"]
+layout_mode = 2
+text = "X/X"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/GoodMeepleScore"]
+visibility_layer = 0
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/GoodMeepleScore"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+visibility_layer = 0
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BadMeepleScore" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/BadMeepleScore"]
+layout_mode = 2
+text = "X/X"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/BadMeepleScore"]
+visibility_layer = 0
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/BadMeepleScore"]
+layout_mode = 2
+
+[node name="TutoPanel" type="Panel" parent="." node_paths=PackedStringArray("previousButton", "nextButton", "quitButton", "tutoPage_0", "tutoPage_1", "tutoPage_2")]
+visible = false
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8yowa")
+previousButton = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/Previous")
+nextButton = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/Next")
+quitButton = NodePath("MarginContainer2/ExitTuto")
+tutoPage_0 = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/PanelContainer/TutoPage0")
+tutoPage_1 = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/PanelContainer/TutoPage1")
+tutoPage_2 = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/PanelContainer/TutoPage2")
+
+[node name="MarginContainer2" type="MarginContainer" parent="TutoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TutoPanel/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TutoPanel/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Tutorial"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="TutoPanel/MarginContainer2/VBoxContainer"]
+visibility_layer = 0
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TutoPanel/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Previous" type="Button" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "<"
+
+[node name="PanelContainer" type="PanelContainer" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TutoPage0" type="TextureRect" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TutoPage1" type="TextureRect" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TutoPage2" type="TextureRect" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Next" type="Button" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = ">"
+
+[node name="ExitTuto" type="Button" parent="TutoPanel/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "X"
+
+[node name="LevelSummary" type="Panel" parent="."]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="LevelSummary"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSummary/MarginContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LevelSummary/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Well Played !"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="LevelSummary/MarginContainer2/VBoxContainer"]
+visibility_layer = 0
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="LevelSummary/MarginContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="GoodMeepleScore" type="HBoxContainer" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/GoodMeepleScore"]
+layout_mode = 2
+text = "X/X"
+
+[node name="VSeparator" type="VSeparator" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/GoodMeepleScore"]
+visibility_layer = 0
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/GoodMeepleScore"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2"]
+visibility_layer = 0
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BadMeepleScore" type="HBoxContainer" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/BadMeepleScore"]
+layout_mode = 2
+text = "X/X"
+
+[node name="VSeparator" type="VSeparator" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/BadMeepleScore"]
+visibility_layer = 0
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/BadMeepleScore"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="LevelSummary/MarginContainer2/VBoxContainer"]
+visibility_layer = 0
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSummary/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Continue" type="Button" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "XXXXX"
+
+[connection signal="pressed" from="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer/Previous" to="TutoPanel" method="_on_previous_pressed"]
+[connection signal="pressed" from="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer/Next" to="TutoPanel" method="_on_next_pressed"]
+[connection signal="pressed" from="TutoPanel/MarginContainer2/ExitTuto" to="TutoPanel" method="_on_exit_tuto_pressed"]
