@@ -10,3 +10,4 @@
 mesh = ExtResource("2_y7ptt")
 
 [node name="Roof" parent="." index="1" instance=ExtResource("3_fibof")]
+visible = false

@@ -1,19 +1,15 @@
-[gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://b1h5011f8xsfx"]
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://b1h5011f8xsfx"]
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_xsw2e"]
 parameter_name = "gravel"
 
-[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_h47nn"]
-input_name = "normal"
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_edc4b"]
+parameter_name = "metalness"
+hint = 1
 
-[sub_resource type="VisualShaderNodeVectorDistance" id="VisualShaderNodeVectorDistance_4745n"]
-default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(0, -1, 0)]
-
-[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_t5qnr"]
-function = 31
-
-[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_yuuku"]
-operator = 2
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_mflnl"]
+parameter_name = "roughness"
+hint = 1
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_2tthq"]
 expanded_output_ports = [0]
@@ -39,6 +35,8 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_s
 
 uniform vec4 rail : source_color;
 uniform vec4 gravel : source_color;
+uniform float metalness : hint_range(0, 1);
+uniform float roughness : hint_range(0, 1);
 
 
 
@@ -58,23 +56,6 @@ void fragment() {
 	vec4 n_out6p0 = rail;
 
 
-// Input:14
-	vec3 n_out14p0 = NORMAL;
-
-
-// Distance:15
-	vec3 n_in15p1 = vec3(0.00000, -1.00000, 0.00000);
-	float n_out15p0 = distance(n_out14p0, n_in15p1);
-
-
-// FloatFunc:16
-	float n_out16p0 = 1.0 - n_out15p0;
-
-
-// VectorOp:17
-	vec3 n_out17p0 = vec3(n_out6p0.xyz) * vec3(n_out16p0);
-
-
 // ColorParameter:11
 	vec4 n_out11p0 = gravel;
 
@@ -90,15 +71,26 @@ void fragment() {
 
 
 // Mix:4
-	vec3 n_out4p0 = mix(n_out17p0, vec3(n_out11p0.xyz), vec3(n_out3p0 ? 1.0 : 0.0));
+	vec3 n_out4p0 = mix(vec3(n_out6p0.xyz), vec3(n_out11p0.xyz), vec3(n_out3p0 ? 1.0 : 0.0));
+
+
+// FloatParameter:18
+	float n_out18p0 = metalness;
+
+
+// FloatParameter:19
+	float n_out19p0 = roughness;
 
 
 // Output:0
 	ALBEDO = n_out4p0;
+	METALLIC = n_out18p0;
+	ROUGHNESS = n_out19p0;
 
 
 }
 "
+graph_offset = Vector2(-429.879, -125.667)
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_vxxss")
 nodes/vertex/2/position = Vector2(-380, 400)
 nodes/vertex/connections = PackedInt32Array(2, 0, 0, 6)
@@ -112,12 +104,8 @@ nodes/fragment/6/node = SubResource("VisualShaderNodeColorParameter_u2dpi")
 nodes/fragment/6/position = Vector2(-800, -300)
 nodes/fragment/11/node = SubResource("VisualShaderNodeColorParameter_xsw2e")
 nodes/fragment/11/position = Vector2(-860, -20)
-nodes/fragment/14/node = SubResource("VisualShaderNodeInput_h47nn")
-nodes/fragment/14/position = Vector2(-1000, 460)
-nodes/fragment/15/node = SubResource("VisualShaderNodeVectorDistance_4745n")
-nodes/fragment/15/position = Vector2(-680, 480)
-nodes/fragment/16/node = SubResource("VisualShaderNodeFloatFunc_t5qnr")
-nodes/fragment/16/position = Vector2(-492.803, 488.458)
-nodes/fragment/17/node = SubResource("VisualShaderNodeVectorOp_yuuku")
-nodes/fragment/17/position = Vector2(-191.513, -83.8958)
-nodes/fragment/connections = PackedInt32Array(2, 2, 3, 0, 4, 0, 0, 0, 3, 0, 4, 2, 11, 0, 4, 1, 14, 0, 15, 0, 15, 0, 16, 0, 6, 0, 17, 0, 17, 0, 4, 0, 16, 0, 17, 1)
+nodes/fragment/18/node = SubResource("VisualShaderNodeFloatParameter_edc4b")
+nodes/fragment/18/position = Vector2(-20, 240)
+nodes/fragment/19/node = SubResource("VisualShaderNodeFloatParameter_mflnl")
+nodes/fragment/19/position = Vector2(-20, 460)
+nodes/fragment/connections = PackedInt32Array(2, 2, 3, 0, 4, 0, 0, 0, 3, 0, 4, 2, 11, 0, 4, 1, 18, 0, 0, 2, 19, 0, 0, 3, 6, 0, 4, 0)
