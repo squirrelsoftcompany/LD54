@@ -1,4 +1,4 @@
-extends PopupPanel
+extends Panel
 
 @export var previousButton : Button
 @export var nextButton : Button
@@ -6,7 +6,7 @@ extends PopupPanel
 @export var tutoPage_0 : TextureRect
 @export var tutoPage_1 : TextureRect
 @export var tutoPage_2 : TextureRect
-
+@export var clickSound : AudioStreamPlayer
 
 var currentPage = 0
 var maxPages = 2
@@ -41,14 +41,17 @@ func updatePage() -> void:
 
 
 func _on_next_pressed() -> void:
+	clickSound.play()
 	currentPage = currentPage+1
 	previousButton.disabled = false
 	if currentPage == maxPages:
 		nextButton.disabled = true
 	updatePage()
+	
 
 
 func _on_previous_pressed() -> void:
+	clickSound.play()
 	currentPage = currentPage-1
 	nextButton.disabled = false
 	if currentPage == 0:

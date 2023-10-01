@@ -1,12 +1,18 @@
-[gd_scene format=3 uid="uid://dftrdep2hkpte"]
+[gd_scene load_steps=3 format=3 uid="uid://dftrdep2hkpte"]
 
-[node name="MainMenu" type="Control"]
+[ext_resource type="Script" path="res://scripts/MainMenuUI.gd" id="1_d57s6"]
+[ext_resource type="AudioStream" uid="uid://cqks73xmvndr6" path="res://resources/SoundEffects/bip.mp3" id="2_1g5pk"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("bipSound", "quitButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_d57s6")
+bipSound = NodePath("AudioStreamPlayer")
+quitButton = NodePath("VBoxContainer/QuitButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(100, 80)
@@ -64,3 +70,11 @@ theme_override_font_sizes/font_size = 30
 text = "INSERT TITLE HERE OR AN IMAGE"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_1g5pk")
+volume_db = -10.0
+bus = &"UI FX"
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

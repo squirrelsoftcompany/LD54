@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2kf23u1bayud"]
+[gd_scene load_steps=5 format=3 uid="uid://d2kf23u1bayud"]
 
-[ext_resource type="Script" path="res://_scenes/ui/TutoPanel.gd" id="1_8yowa"]
+[ext_resource type="Script" path="res://scripts/TutoPanel.gd" id="1_yvkub"]
+[ext_resource type="Script" path="res://scripts/LevelSummary.gd" id="2_nq8yg"]
+[ext_resource type="AudioStream" uid="uid://cqks73xmvndr6" path="res://resources/SoundEffects/bip.mp3" id="3_d80sy"]
+[ext_resource type="AudioStream" uid="uid://be2wftvlet4op" path="res://resources/SoundEffects/click.mp3" id="4_6uoe2"]
 
 [node name="InGameUI" type="Control"]
 layout_mode = 3
@@ -62,7 +65,7 @@ size_flags_horizontal = 3
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/BadMeepleScore"]
 layout_mode = 2
 
-[node name="TutoPanel" type="Panel" parent="." node_paths=PackedStringArray("previousButton", "nextButton", "quitButton", "tutoPage_0", "tutoPage_1", "tutoPage_2")]
+[node name="TutoPanel" type="Panel" parent="." node_paths=PackedStringArray("previousButton", "nextButton", "quitButton", "tutoPage_0", "tutoPage_1", "tutoPage_2", "clickSound")]
 visible = false
 custom_minimum_size = Vector2(400, 300)
 layout_mode = 1
@@ -77,13 +80,14 @@ offset_right = 200.0
 offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_8yowa")
+script = ExtResource("1_yvkub")
 previousButton = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/Previous")
 nextButton = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/Next")
 quitButton = NodePath("MarginContainer2/ExitTuto")
 tutoPage_0 = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/PanelContainer/TutoPage0")
 tutoPage_1 = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/PanelContainer/TutoPage1")
 tutoPage_2 = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/PanelContainer/TutoPage2")
+clickSound = NodePath("../Click")
 
 [node name="MarginContainer2" type="MarginContainer" parent="TutoPanel"]
 layout_mode = 1
@@ -143,7 +147,8 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "X"
 
-[node name="LevelSummary" type="Panel" parent="."]
+[node name="LevelSummary" type="Panel" parent="." node_paths=PackedStringArray("bip_sound")]
+visible = false
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 1
 anchors_preset = 8
@@ -157,6 +162,8 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_nq8yg")
+bip_sound = NodePath("../Bip")
 
 [node name="MarginContainer2" type="MarginContainer" parent="LevelSummary"]
 layout_mode = 1
@@ -239,6 +246,17 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "XXXXX"
 
+[node name="Bip" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_d80sy")
+volume_db = -10.0
+bus = &"UI FX"
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6uoe2")
+volume_db = -10.0
+bus = &"UI FX"
+
 [connection signal="pressed" from="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer/Previous" to="TutoPanel" method="_on_previous_pressed"]
 [connection signal="pressed" from="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer/Next" to="TutoPanel" method="_on_next_pressed"]
 [connection signal="pressed" from="TutoPanel/MarginContainer2/ExitTuto" to="TutoPanel" method="_on_exit_tuto_pressed"]
+[connection signal="pressed" from="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer/Continue" to="LevelSummary" method="_on_continue_pressed"]
