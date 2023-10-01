@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjlt2nukdye2a"]
+
+[ext_resource type="Script" path="res://_scenes/railways/railway.gd" id="1_wrlmh"]
+
+[sub_resource type="Curve3D" id="Curve3D_vebey"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 134.237, 0, 34.5046, 0, 0, 0, 0, 0, 0, 88.1163, 0, -15.8111, 0, 0, 0, 0, 0, 0, 80.4008, 0, 42.5773, 0, 0, 0, 0, 0, 0, 113.44, 0, 74.6671, 0, 0, 0, 0, 0, 0, 134.14, 0, 34.9565),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="railway" type="Path3D"]
+curve = SubResource("Curve3D_vebey")
+script = ExtResource("1_wrlmh")
