@@ -33,6 +33,17 @@ _Dragger="*res://scripts/Dragger.gd"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 
+[shader_globals]
+
+highlighted_color={
+"type": "color",
+"value": Color(0, 0, 0, 1)
+}
+day_night={
+"type": "bool",
+"value": true
+}
+
 [specific]
 
 train/locomotive_speed=15.0
