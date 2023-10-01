@@ -129,11 +129,11 @@ void fragment() {
 
 // Output:0
 	ALBEDO = n_out9p0;
+	EMISSION = n_out9p0;
 
 
 }
 "
-graph_offset = Vector2(-855.81, 197.083)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_7wses")
 nodes/fragment/2/position = Vector2(-1420, 0)
 nodes/fragment/4/node = SubResource("VisualShaderNodeExpression_hy8oc")
@@ -178,4 +178,4 @@ nodes/fragment/9/node = SubResource("VisualShaderNodeMix_heoy5")
 nodes/fragment/9/position = Vector2(120, 180)
 nodes/fragment/10/node = SubResource("VisualShaderNodeBooleanParameter_myxar")
 nodes/fragment/10/position = Vector2(-455.359, 76.4837)
-nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 5, 0, 4, 1, 6, 0, 4, 2, 6, 0, 7, 1, 4, 1, 7, 0, 9, 0, 0, 0, 4, 0, 9, 1, 10, 0, 9, 0, 8, 0, 9, 2, 7, 0, 8, 0)
+nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 5, 0, 4, 1, 6, 0, 4, 2, 6, 0, 7, 1, 4, 1, 7, 0, 4, 0, 9, 1, 8, 0, 9, 2, 7, 0, 8, 0, 9, 0, 0, 5, 10, 0, 9, 0, 9, 0, 0, 0)

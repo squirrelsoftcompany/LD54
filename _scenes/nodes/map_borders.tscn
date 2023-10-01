@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://x60lnba3ki7c"]
 
-[ext_resource type="Shader" uid="uid://cdq3mt7bgkwts" path="res://models/borders.tres" id="1_4dsf4"]
+[ext_resource type="Shader" uid="uid://bhewrs5mmfurm" path="res://models/borders.tres" id="1_4dsf4"]
 [ext_resource type="Texture2D" uid="uid://dd21vx7leo47i" path="res://models/map.png" id="2_mjufe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_30i4w"]
