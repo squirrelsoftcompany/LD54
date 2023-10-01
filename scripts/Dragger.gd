@@ -98,5 +98,6 @@ func _generic_drop(method_name : String, draggable : Node3D, droppable : Node3D,
 	elif draggable and draggable.get_parent() and draggable.get_parent().has_method(method_name) :
 		prints(method_name, "on", draggable.get_parent().name)
 		return draggable.get_parent().call(method_name, droppable)
+	@warning_ignore("incompatible_ternary")
 	prints(method_name, "on", draggable.name if draggable else null)
 	return default_value
