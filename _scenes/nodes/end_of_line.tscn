@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ija2tya6eanq"]
+
+[ext_resource type="Material" uid="uid://d1oplnes2dpb8" path="res://resources/CountryMaterial/deeppink.tres" id="1_c2tl3"]
+[ext_resource type="ArrayMesh" uid="uid://cin5iu3htnk27" path="res://models/hangar.obj" id="2_ewtpq"]
+
+[node name="EndOfLine" type="MeshInstance3D"]
+visible = false
+material_override = ExtResource("1_c2tl3")
+mesh = ExtResource("2_ewtpq")

@@ -1,15 +1,66 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjlt2nukdye2a"]
+[gd_scene load_steps=10 format=3 uid="uid://bjlt2nukdye2a"]
 
 [ext_resource type="Script" path="res://_scenes/railways/railway.gd" id="1_wrlmh"]
+[ext_resource type="Shader" uid="uid://b1h5011f8xsfx" path="res://_scenes/railways/railway.tres" id="2_jdbdf"]
+[ext_resource type="Shader" uid="uid://dmyndsbquyj6a" path="res://_scenes/railways/lamp.tres" id="3_v3bw5"]
+[ext_resource type="ArrayMesh" uid="uid://dfp3aulbk7etm" path="res://models/Lamp.obj" id="3_vjhk6"]
+[ext_resource type="PackedScene" uid="uid://ija2tya6eanq" path="res://_scenes/nodes/end_of_line.tscn" id="5_b1hjo"]
 
 [sub_resource type="Curve3D" id="Curve3D_vebey"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 134.237, 0, 34.5046, 0, 0, 0, 0, 0, 0, 88.1163, 0, -15.8111, 0, 0, 0, 0, 0, 0, 80.4008, 0, 42.5773, 0, 0, 0, 0, 0, 0, 113.44, 0, 74.6671, 0, 0, 0, 0, 0, 0, 134.14, 0, 34.9565),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 132.548, 0, 3.40829, 0, 0, 0, 0, 0, 0, 88.6877, 0, -2.3206, 0, 0, 0, 0, 0, 0, 67.0968, 0, 48.5974, 0, 0, 0, 0, 0, 0, 113.44, 0, 74.6671, 0, 0, 0, 0, 0, 0, 134.541, 0, 31.5398),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nog6x"]
+render_priority = 0
+shader = ExtResource("2_jdbdf")
+shader_parameter/rail = Color(0.376471, 0.376471, 0.376471, 1)
+shader_parameter/gravel = Color(0.788235, 0.788235, 0.788235, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2dogx"]
+render_priority = 0
+shader = ExtResource("3_v3bw5")
+shader_parameter/structure = Color(0.788235, 0.788235, 0.788235, 1)
+shader_parameter/light = Color(0.552941, 0.34902, 0.054902, 1)
+
+[sub_resource type="MultiMesh" id="MultiMesh_8vy63"]
+resource_local_to_scene = true
+transform_format = 1
+instance_count = 3
+mesh = ExtResource("3_vjhk6")
+buffer = PackedFloat32Array(1, 0, 0, 102.801, 0, 1, 0, 0, 0, 0, 1, -0.477209, 1, 0, 0, 70.8208, 0, 1, 0, 0, 0, 0, 1, 39.815, 1, 0, 0, 111.076, 0, 1, 0, 0, 0, 0, 1, 73.3375)
+
 [node name="railway" type="Path3D"]
 curve = SubResource("Curve3D_vebey")
 script = ExtResource("1_wrlmh")
+visual_elements_interval = 60.0
+
+[node name="Rail" type="CSGPolygon3D" parent="."]
+material_override = SubResource("ShaderMaterial_nog6x")
+snap = 1e-06
+polygon = PackedVector2Array(6.5, 0.15, 7.5, -0.3, -7.5, -0.3, -6.5, 0.15, -6, 0.15, -6, 0.5, -5, 0.5, -5, 0.2, -3, 0.2, -3, 0.5, -2, 0.5, -2, 0.15, -1.5, -0.2, 1.5, -0.2, 2, 0.15, 2, 0.5, 3, 0.5, 3, 0.2, 5, 0.2, 5, 0.5, 6, 0.5, 6, 0.15)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 2.9
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="RailDecoration" type="MultiMeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_2dogx")
+multimesh = SubResource("MultiMesh_8vy63")
+
+[node name="EndOfLine" parent="." instance=ExtResource("5_b1hjo")]
+transform = Transform3D(0.129494, 0, 0.991457, 0, 0.999936, 0, -0.991462, 0, 0.129494, 132.548, 0, 3.40829)
+visible = true
+
+[node name="EndOfLine2" parent="." instance=ExtResource("5_b1hjo")]
+transform = Transform3D(-0.898234, 0, 0.439518, 0, 1, 0, -0.439518, 0, -0.898234, 134.541, 0, 31.5398)
+visible = true

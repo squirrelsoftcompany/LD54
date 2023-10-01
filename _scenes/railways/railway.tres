@@ -1,0 +1,123 @@
+[gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://b1h5011f8xsfx"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_xsw2e"]
+parameter_name = "gravel"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_h47nn"]
+input_name = "normal"
+
+[sub_resource type="VisualShaderNodeVectorDistance" id="VisualShaderNodeVectorDistance_4745n"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(0, -1, 0)]
+
+[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_t5qnr"]
+function = 31
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_yuuku"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_2tthq"]
+expanded_output_ports = [0]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_kr6fe"]
+default_input_values = [0, 0.0, 1, 0.21, 2, 1e-05]
+function = 4
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_08dam"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_u2dpi"]
+parameter_name = "rail"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_vxxss"]
+input_name = "vertex"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform vec4 rail : source_color;
+uniform vec4 gravel : source_color;
+
+
+
+void vertex() {
+// Input:2
+	vec3 n_out2p0 = VERTEX;
+
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+
+
+}
+
+void fragment() {
+// ColorParameter:6
+	vec4 n_out6p0 = rail;
+
+
+// Input:14
+	vec3 n_out14p0 = NORMAL;
+
+
+// Distance:15
+	vec3 n_in15p1 = vec3(0.00000, -1.00000, 0.00000);
+	float n_out15p0 = distance(n_out14p0, n_in15p1);
+
+
+// FloatFunc:16
+	float n_out16p0 = 1.0 - n_out15p0;
+
+
+// VectorOp:17
+	vec3 n_out17p0 = vec3(n_out6p0.xyz) * vec3(n_out16p0);
+
+
+// ColorParameter:11
+	vec4 n_out11p0 = gravel;
+
+
+// Input:2
+	vec4 n_out2p0 = COLOR;
+	float n_out2p2 = n_out2p0.g;
+
+
+// Compare:3
+	float n_in3p1 = 0.21000;
+	bool n_out3p0 = n_out2p2 < n_in3p1;
+
+
+// Mix:4
+	vec3 n_out4p0 = mix(n_out17p0, vec3(n_out11p0.xyz), vec3(n_out3p0 ? 1.0 : 0.0));
+
+
+// Output:0
+	ALBEDO = n_out4p0;
+
+
+}
+"
+nodes/vertex/2/node = SubResource("VisualShaderNodeInput_vxxss")
+nodes/vertex/2/position = Vector2(-380, 400)
+nodes/vertex/connections = PackedInt32Array(2, 0, 0, 6)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_2tthq")
+nodes/fragment/2/position = Vector2(-1040, 220)
+nodes/fragment/3/node = SubResource("VisualShaderNodeCompare_kr6fe")
+nodes/fragment/3/position = Vector2(-560, 240)
+nodes/fragment/4/node = SubResource("VisualShaderNodeMix_08dam")
+nodes/fragment/4/position = Vector2(100, 80)
+nodes/fragment/6/node = SubResource("VisualShaderNodeColorParameter_u2dpi")
+nodes/fragment/6/position = Vector2(-800, -300)
+nodes/fragment/11/node = SubResource("VisualShaderNodeColorParameter_xsw2e")
+nodes/fragment/11/position = Vector2(-860, -20)
+nodes/fragment/14/node = SubResource("VisualShaderNodeInput_h47nn")
+nodes/fragment/14/position = Vector2(-1000, 460)
+nodes/fragment/15/node = SubResource("VisualShaderNodeVectorDistance_4745n")
+nodes/fragment/15/position = Vector2(-680, 480)
+nodes/fragment/16/node = SubResource("VisualShaderNodeFloatFunc_t5qnr")
+nodes/fragment/16/position = Vector2(-492.803, 488.458)
+nodes/fragment/17/node = SubResource("VisualShaderNodeVectorOp_yuuku")
+nodes/fragment/17/position = Vector2(-191.513, -83.8958)
+nodes/fragment/connections = PackedInt32Array(2, 2, 3, 0, 4, 0, 0, 0, 3, 0, 4, 2, 11, 0, 4, 1, 14, 0, 15, 0, 15, 0, 16, 0, 6, 0, 17, 0, 17, 0, 4, 0, 16, 0, 17, 1)
