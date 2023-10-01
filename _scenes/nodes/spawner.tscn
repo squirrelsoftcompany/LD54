@@ -1,14 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxou0nnb8bbd0"]
+[gd_scene load_steps=6 format=3 uid="uid://dxou0nnb8bbd0"]
 
 [ext_resource type="Script" path="res://scripts/Spawn.gd" id="1_eh46l"]
+
+[sub_resource type="GDScript" id="GDScript_ssqc8"]
+script/source = "extends StaticBody3D
+
+
+@onready var spawner: Node3D = $\"..\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	setup_scale.call_deferred()
+
+
+func setup_scale():
+	var spawner_size : Vector2 = spawner.get_size()
+	print(spawner_size)
+	scale.x = spawner_size.x
+	scale.z = spawner_size.y
+	position.x += spawner_size.x/2 - spawner.ps_meeple_offset/2
+	position.z += spawner_size.y/2 - spawner.ps_meeple_offset/2
+
+
+
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p3glc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xefuh"]
 albedo_color = Color(0.0509804, 0.0509804, 0.0509804, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_h5ufv"]
 material = SubResource("StandardMaterial3D_xefuh")
-size = Vector2(0.9, 0.3)
-center_offset = Vector3(0.4, -0.1, 0)
+orientation = 1
 
 [node name="Spawner" type="Node3D"]
 script = ExtResource("1_eh46l")
@@ -16,9 +41,17 @@ script = ExtResource("1_eh46l")
 [node name="SpawnTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="SpawnerSpace" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-visible = false
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+collision_layer = 4
+collision_mask = 0
+script = SubResource("GDScript_ssqc8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_p3glc")
+
+[node name="SpawnerSpace" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("QuadMesh_h5ufv")
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
