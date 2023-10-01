@@ -9,10 +9,11 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mr05t"]
 shading_mode = 0
+disable_ambient_light = true
 albedo_texture = ExtResource("3_m3l8v")
-albedo_texture_force_srgb = true
 texture_filter = 0
 texture_repeat = false
+disable_receive_shadows = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_weh1u"]
 orientation = 1
