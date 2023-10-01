@@ -82,3 +82,8 @@ func updateMeeplePosition() -> void :
 func _on_spawn_timer_timeout() -> void:
 	spawnMeeple()
 	pass # Replace with function body.
+
+
+func get_size() -> Vector2:
+	@warning_ignore("integer_division")
+	return Vector2(meepleByRow, maxMeeple/meepleByRow) * ps_meeple_offset
