@@ -8,6 +8,7 @@ var mainCamera : Camera3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	mainCamera = get_tree().root.get_camera_3d()
+	mainCamera.get_viewport().connect("size_changed", on_main_viewport_size_changed)
 	pass # Replace with function body.
 
 
@@ -19,3 +20,7 @@ func _physics_process(_delta):
 		color_under_mouse = image.get_pixelv(cursor)
 	else:
 		color_under_mouse = Color.BLACK
+
+
+func on_main_viewport_size_changed():
+	get_viewport().get_parent().size = mainCamera.get_viewport().size
