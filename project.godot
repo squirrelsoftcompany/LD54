@@ -23,3 +23,12 @@ config/icon="res://icon.svg"
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+
+[specific]
+
+train/locomotive_speed=20.0
+train/tgv_speed=40.0
+train/zero_to_max_time=1.0
+train/very_close_threshold=1.0
+train/forward_h_offset=5.0
+wagon/offset=8.0
