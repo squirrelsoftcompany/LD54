@@ -10,6 +10,9 @@ script/source = "extends PathFollow3D
 @export var offset : float = 12 # m
 
 
+@onready var model: Node3D = $Wagon
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -19,6 +22,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	progress = train.follower_position(offset)
 	h_offset = train.follower_h_offset(offset)
+	model.rotation_degrees = Vector3(0, train.follower_rotation_y(offset), 0)
 	visible = train.visible
 "
 
