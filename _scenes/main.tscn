@@ -19,18 +19,18 @@ background_mode = 2
 sky = SubResource("Sky_c5wym")
 sdfgi_enabled = true
 
-[sub_resource type="Curve3D" id="Curve3D_b3tdu"]
+[sub_resource type="Curve3D" id="Curve3D_yxkdv"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector3Array(-35.5695, 0, 10.9988, 35.5695, 0, -10.9988, -100.089, 0, -41.8023, -1.76565, 0, -21.1282, 1.76565, 0, 21.1282, -11.6503, 0, 7.98209, 34.7381, 0, -7.5825, -34.7381, 0, 7.5825, -40.837, 0, 68.0587, 10.5703, 0, 22.5458, -10.5703, 0, -22.5458, -109.437, 0, 31.1261, -23.0052, 0, 9.0089, 23.0052, 0, -9.0089, -100.063, 0, -41.6868),
+"points": PackedVector3Array(-46.1183, 0, 22.0385, 46.1183, 0, -22.0385, -185.123, 0, -69.6389, -13.3897, 0, -37.3961, 13.3897, 0, 37.3961, -12.5456, 0, 6.90884, 65.4937, 0, -11.9922, -65.4937, 0, 11.9922, -51.941, 0, 148.936, 29.8818, 0, 40.8147, -29.8818, 0, -40.8147, -190.489, 0, 61.1959, -38.445, 0, 18.8285, 38.445, 0, -18.8285, -185.123, 0, -69.6389),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
 
-[sub_resource type="Curve3D" id="Curve3D_khi4t"]
+[sub_resource type="Curve3D" id="Curve3D_w86g6"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector3Array(-6.75703, 0, 6.85496, 6.75703, 0, -6.85496, -108.904, 0, -50.5885, -27.6809, 0, -1.35723, 27.6809, 0, 1.35723, -7.33251, 0, -64.0767, -14.8928, 0, -16.0456, 14.8928, 0, 16.0456, 68.4846, 0, -43.8429, 12.7895, 0, -18.3001, -12.7895, 0, 18.3001, 59.5556, 0, 32.3778, 16.4024, 0, -2.57542, -16.4024, 0, 2.57542, -17.7616, 0, 82.9524),
+"points": PackedVector3Array(-6.75703, 0, 6.85496, 6.75703, 0, -6.85496, -171.013, 0, -94.6794, -61.5863, 0, 0.132401, 61.5863, 0, -0.132401, -15.9362, 0, -126.407, -18.3406, 0, -42.1751, 18.3406, 0, 42.1751, 145.671, 0, -62.0532, 21.9505, 0, -26.3062, -21.9505, 0, 26.3062, 122.033, 0, 71.8242, 31.9774, 0, 5.28497, -31.9774, 0, -5.28497, -30.8919, 0, 163.989),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0)
 }
 point_count = 5
@@ -45,35 +45,38 @@ directional_shadow_max_distance = 300.0
 environment = SubResource("Environment_fspfq")
 
 [node name="MainCamera" parent="." instance=ExtResource("1_71qib")]
-transform = Transform3D(1, 0, 0, 0, 0.163758, 0.986501, 0, -0.986501, 0.163758, 0, 167.705, 37.839)
-direction = Vector3(0, 1, 0.166)
-hotspot = Vector3(0, 0, 10)
-distance = 170.0
+transform = Transform3D(1, 0, 0, 0, 0.125011, 0.992155, 0, -0.992155, 0.125011, 0, 257.96, 52.503)
+direction = Vector3(0, 1, 0.126)
+hotspot = Vector3(0, 0, 20)
+distance = 260.0
 
 [node name="Map_borders" parent="." instance=ExtResource("3_10svt")]
+transform = Transform3D(760, 0, 0, 0, 1, 0, 0, 0, 400, 0, 0, 0)
 
 [node name="railway" parent="." instance=ExtResource("6_4sskq")]
-curve = SubResource("Curve3D_b3tdu")
+curve = SubResource("Curve3D_yxkdv")
 
 [node name="Train" parent="railway" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(0.295419, 0, -0.955368, 0, 1, 0, 0.955368, 0, 0.295419, -100.089, 0, -41.8023)
+transform = Transform3D(0.431168, 0, -0.902272, 0, 1, 0, 0.902272, 0, 0.431168, -185.123, 0, -69.6389)
 ping_pong = true
 
 [node name="Train2" parent="railway" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(-0.745822, 0, -0.666145, 0, 1, 0, 0.666145, 0, -0.745822, -22.1787, 0, -11.3608)
-progress = 87.5867
+transform = Transform3D(-0.689841, 0, -0.723961, 0, 1, 0, 0.723961, 0, -0.689841, -29.2318, 0, -15.6833)
+progress = 171.631
 ping_pong = true
 backward = true
 
 [node name="Train3" parent="railway" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(-0.405707, 0, 0.914003, 0, 1, 0, -0.914003, 0, -0.405707, -31.3229, 0, 65.0128)
-progress = 175.173
+transform = Transform3D(-0.553828, 0, 0.832631, 0, 1, 0, -0.832631, 0, -0.553828, -30.0342, 0, 140.363)
+progress = 343.262
 
 [node name="railway2" parent="." instance=ExtResource("6_4sskq")]
-curve = SubResource("Curve3D_khi4t")
+curve = SubResource("Curve3D_w86g6")
 
-[node name="Train" parent="railway2" instance=ExtResource("1_4b0xy")]
-transform = Transform3D(-0.490319, 0, -0.871543, 0, 1, 0, 0.871543, 0, -0.490319, 58.7826, 0, -51.3004)
-progress = 171.023
-speed = 50.0
+[node name="Train4" parent="railway2" instance=ExtResource("1_4b0xy")]
+transform = Transform3D(-0.67724, 0, 0.735762, 0, 1, 0, -0.735762, 0, -0.67724, 111.039, 0, 83.0336)
+progress = 497.789
+is_tgv = true
+wagon_count = 4
 ping_pong = true
+pause_at_end = 0.0
