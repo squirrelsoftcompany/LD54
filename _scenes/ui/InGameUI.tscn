@@ -319,4 +319,4 @@ bus = &"UI FX"
 [connection signal="pressed" from="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer/Previous" to="TutoPanel" method="_on_previous_pressed"]
 [connection signal="pressed" from="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer/Next" to="TutoPanel" method="_on_next_pressed"]
 [connection signal="pressed" from="TutoPanel/MarginContainer2/ExitTuto" to="TutoPanel" method="_on_exit_tuto_pressed"]
-[connection signal="pressed" from="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer/Continue" to="LevelSummary" method="_on_continue_pressed"]
+[connection signal="pressed" from="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
