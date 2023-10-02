@@ -1,4 +1,4 @@
-extends Node
+extends SubViewport
 class_name CountryPicker
 
 
@@ -21,9 +21,16 @@ func _ready() -> void:
 	mainCamera.get_viewport().connect("size_changed", on_main_viewport_size_changed)
 
 
+func _process(_delta: float) -> void:
+	if _image_updating and _frames_drawn < Engine.get_frames_drawn():
+		_image_updating = false
+		render_target_update_mode = SubViewport.UPDATE_DISABLED
+		# retrieve last image
+		last_image = get_texture().get_image()
+	pass
+
+
 func _physics_process(_delta):
-	# retrieve last image
-	last_image = get_viewport().get_texture().get_image()
 	# get color/country under mouse
 	var cursor = mainCamera.get_viewport().get_mouse_position()
 	_color_under_mouse = CountryPicker.color_under_position(cursor)
@@ -34,14 +41,23 @@ func _physics_process(_delta):
 
 static func color_under_position(position : Vector2):
 	var rect := mainCamera.get_viewport().get_visible_rect()
-	if rect.has_point(position):
+	if rect.has_point(position) and last_image and last_image.get_used_rect().has_point(position):
 		return last_image.get_pixelv(position)
 	else:
 		return Color.BLACK
 
 
 func on_main_viewport_size_changed():
-	get_viewport().get_parent().size = mainCamera.get_viewport().size
+	get_parent().size = mainCamera.get_viewport().size
+	ask_for_update()
+
+
+var _image_updating := true
+var _frames_drawn := 0
+func ask_for_update():
+	render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	_image_updating = true
+	_frames_drawn = Engine.get_frames_drawn()
 
 
 #utils
