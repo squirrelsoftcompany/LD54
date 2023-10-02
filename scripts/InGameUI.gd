@@ -5,6 +5,7 @@ extends Control
 @export var summaryTitle : Label
 @export var summaryButton : Button
 @export var levelSummary : Panel
+@export var tutoPanel : Panel
 @export var bip_sound : AudioStreamPlayer
 
 var currentArrivedMeeple
@@ -20,13 +21,22 @@ func _ready() -> void:
 	_Global.connect("level_complet",_on_level_complet)
 	_Global.connect("game_over",_on_game_over)
 	_Global.call_update_ui()
+	
+	# Hide/show tutorial
+	var index = ProjectSettings.get_setting("specific/level/current")
+	if index == 0:
+		tutoPanel.visible = true
+		_Global.pause()
+	else:
+		tutoPanel.visible = false
 	gameOver = false
-	pass
+#	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+	
 	
 func _on_update_ui() -> void:
 	currentArrivedMeeple = ProjectSettings.get_setting("specific/level/meeple_arrived")
@@ -36,19 +46,19 @@ func _on_update_ui() -> void:
 	arrivedMeepleScore.text = str(currentArrivedMeeple) + "/" + str(currentArrivedMeepleMax)
 	goneMeepleScore.text = str(currentGoneMeeple) + "/" + str(currentGoneMeepleMax)
 
+
 func _on_game_over() -> void:
 	summaryTitle.text = "GAME OVER"
 	summaryButton.text = "Retry"
 	levelSummary.visible = true
 	gameOver = true
-	pass
+	
 
 func _on_level_complet() -> void:
 	summaryTitle.text = "Well Played"
 	summaryButton.text = "Next"
 	levelSummary.visible = true
-	pass
-
+	
 
 func _on_continue_pressed() -> void:
 	bip_sound.play()

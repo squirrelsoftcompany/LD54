@@ -62,3 +62,10 @@ func _on_previous_pressed() -> void:
 func _on_exit_tuto_pressed() -> void:
 	self.visible = false
 	currentPage = 0
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		_Global.pause()
+	else:
+		_Global.resume()

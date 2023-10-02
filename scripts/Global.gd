@@ -2,6 +2,7 @@ extends Node
 
 signal update_ui
 signal level_complet
+signal level_loaded
 signal game_over
 
 var _current_scene = null
@@ -19,32 +20,29 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	pass
 
+
 func call_update_ui() -> void:
 	emit_signal("update_ui")
 
 
 func pause() -> void:
 	Engine.set_time_scale(0)
-	pass
 
 
 func resume() -> void:
 	Engine.set_time_scale(1)
-	pass
 	
 	
 func trigger_game_over() -> void:
 	emit_signal("game_over")
-	pass
+	
 	
 func trigger_level_complet() -> void:
 	emit_signal("level_complet")
-	pass
 
 
 func show_menu() -> void:
 	_goto_scene(_main_menu)
-	pass
 	
 	
 func goto_next_level():

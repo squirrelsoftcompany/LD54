@@ -16,6 +16,10 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("3_fq77u")
 region = Rect2(0, 32, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5w66"]
+atlas = ExtResource("3_fq77u")
+region = Rect2(96, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ntkxg"]
 atlas = ExtResource("3_fq77u")
 region = Rect2(96, 32, 32, 32)
@@ -23,10 +27,6 @@ region = Rect2(96, 32, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_aru18"]
 atlas = ExtResource("3_fq77u")
 region = Rect2(64, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p5w66"]
-atlas = ExtResource("3_fq77u")
-region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cmkyc"]
 atlas = ExtResource("3_fq77u")
@@ -40,7 +40,7 @@ region = Rect2(0, 32, 32, 32)
 atlas = ExtResource("3_fq77u")
 region = Rect2(64, 32, 32, 32)
 
-[node name="InGameUI" type="Control" node_paths=PackedStringArray("arrivedMeepleScore", "goneMeepleScore", "summaryTitle", "summaryButton", "levelSummary", "bip_sound")]
+[node name="InGameUI" type="Control" node_paths=PackedStringArray("arrivedMeepleScore", "goneMeepleScore", "summaryTitle", "summaryButton", "levelSummary", "tutoPanel", "bip_sound")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -55,6 +55,7 @@ goneMeepleScore = NodePath("MarginContainer/VBoxContainer/GoneMeepleScore/Label"
 summaryTitle = NodePath("LevelSummary/MarginContainer2/VBoxContainer/Label")
 summaryButton = NodePath("LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer/Continue")
 levelSummary = NodePath("LevelSummary")
+tutoPanel = NodePath("TutoPanel")
 bip_sound = NodePath("Bip")
 
 [node name="GeneralControls" parent="." instance=ExtResource("2_kmyoa")]
@@ -136,7 +137,7 @@ grow_vertical = 2
 script = ExtResource("1_yvkub")
 previousButton = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/Previous")
 nextButton = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/Next")
-quitButton = NodePath("MarginContainer2/ExitTuto")
+quitButton = NodePath("MarginContainer2/VBoxContainer/HBoxContainer2/ExitTuto")
 tutoPage_0 = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/PanelContainer/TutoPage0")
 tutoPage_1 = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/PanelContainer/TutoPage1")
 tutoPage_2 = NodePath("MarginContainer2/VBoxContainer/HBoxContainer/PanelContainer/TutoPage2")
@@ -157,10 +158,26 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="TutoPanel/MarginContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TutoPanel/MarginContainer2/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="TutoPanel/MarginContainer2/VBoxContainer"]
 layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer2"]
+light_mask = 0
+visibility_layer = 0
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Tutorial"
 horizontal_alignment = 1
+
+[node name="ExitTuto" type="Button" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = SubResource("AtlasTexture_p5w66")
 
 [node name="HSeparator" type="HSeparator" parent="TutoPanel/MarginContainer2/VBoxContainer"]
 visibility_layer = 0
@@ -172,7 +189,6 @@ size_flags_vertical = 3
 
 [node name="Previous" type="Button" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "<"
 icon = SubResource("AtlasTexture_ntkxg")
 
 [node name="PanelContainer" type="PanelContainer" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer"]
@@ -193,15 +209,7 @@ layout_mode = 2
 
 [node name="Next" type="Button" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = ">"
 icon = SubResource("AtlasTexture_aru18")
-
-[node name="ExitTuto" type="Button" parent="TutoPanel/MarginContainer2"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "X"
-icon = SubResource("AtlasTexture_p5w66")
 
 [node name="LevelSummary" type="Panel" parent="."]
 visible = false
@@ -219,8 +227,6 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_nq8yg")
-bip_sound = Object(AudioStreamPlayer,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","stream":ExtResource("3_d80sy"),"volume_db":-10.0,"pitch_scale":1.0,"autoplay":false,"stream_paused":false,"mix_target":0,"max_polyphony":1,"bus":&"UI FX","script":null)
-
 
 [node name="MarginContainer2" type="MarginContainer" parent="LevelSummary"]
 layout_mode = 1
@@ -316,7 +322,8 @@ stream = ExtResource("4_6uoe2")
 volume_db = -10.0
 bus = &"UI FX"
 
+[connection signal="visibility_changed" from="TutoPanel" to="TutoPanel" method="_on_visibility_changed"]
+[connection signal="pressed" from="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer2/ExitTuto" to="TutoPanel" method="_on_exit_tuto_pressed"]
 [connection signal="pressed" from="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer/Previous" to="TutoPanel" method="_on_previous_pressed"]
 [connection signal="pressed" from="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer/Next" to="TutoPanel" method="_on_next_pressed"]
-[connection signal="pressed" from="TutoPanel/MarginContainer2/ExitTuto" to="TutoPanel" method="_on_exit_tuto_pressed"]
 [connection signal="pressed" from="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
