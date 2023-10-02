@@ -11,7 +11,7 @@ var _main_menu := preload("res://_scenes/menu.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_current_scene = get_tree().get_root().get_child(2)
+	_current_scene = get_tree().get_root().get_child(get_tree().get_root().get_child_count()-1)
 	_current_scene_res = _main_menu
 	pass # Replace with function body.
 

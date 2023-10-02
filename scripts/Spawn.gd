@@ -1,5 +1,4 @@
 extends Node3D
-class_name Spawner
 
 
 @onready var ps_meeple_offset : float = ProjectSettings.get_setting("specific/meeple/offset", 1) # m
@@ -20,13 +19,12 @@ class_name Spawner
 var meepleClass = preload("res://_scenes/nodes/meeple.tscn")
 var meepleArray : Array[Node3D] = []
 var country_color : Color
-static var _country_spawner : Dictionary = {}
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spawnTimer.wait_time = ps_meeple_spawn_time
-	register_spawner()
+	_SpawnerManager.register_spawner(self)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,7 +36,7 @@ func spawnMeeple() -> void :
 	if meepleArray.size() < maxMeeple:
 		var meeple = meepleClass.instantiate()
 		#Spawner currently use every colors, we should create a smarter function to randomly choose a color available for the current level
-		var countriesAvailable : Array = Spawner._country_spawner.keys()
+		var countriesAvailable : Array = _SpawnerManager._country_spawner.keys()
 		countriesAvailable.erase(country_id)
 		meeple.setCountry(countriesAvailable[randi_range(0, countriesAvailable.size()-1)])
 		meeple.transform.origin = transform.origin
@@ -102,9 +100,3 @@ func dragged_out(meeple:Node3D):
 
 func dropped_in(meeple:Node3D):
 	pushMeeple(meeple)
-
-
-func register_spawner():
-	assert(country_id != -1)
-	country_color = CountryPicker.country_to_color(country_id)
-	_country_spawner[country_id] = self

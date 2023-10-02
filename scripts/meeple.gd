@@ -56,7 +56,7 @@ func _process(delta: float) -> void:
 			elif _country_under_meeple == country_id:
 				assert(_current_drop_slot.is_in_group("Wagon"))
 				_current_drop_slot.dragged_out(self)
-				Spawner._country_spawner[_country_under_meeple].pushMeeple(self)
+				_SpawnerManager._country_spawner[_country_under_meeple].pushMeeple(self)
 				is_in_train = false
 		State.HAPPY_TO_BE_ONBOARD:
 			wait = max(0,floor(wait-delta/1000))
@@ -149,7 +149,7 @@ func drag_finished_in_void(picked_position : Vector3):
 	var country_under_mouse := CountryPicker.country_under_unprojected_3d_position(picked_position)
 	assert(country_under_mouse != -1)
 	_current_drop_slot.dragged_out(self)
-	drag_finished(Spawner._country_spawner[country_under_mouse])
+	drag_finished(_SpawnerManager._country_spawner[country_under_mouse])
 	_current_drop_slot.dropped_in(self)
 
 

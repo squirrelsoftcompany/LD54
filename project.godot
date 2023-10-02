@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 _Global="*res://scripts/Global.gd"
 _Dragger="*res://scripts/Dragger.gd"
+_SpawnerManager="*res://scripts/SpawnerManager.gd"
 
 [editor]
 
