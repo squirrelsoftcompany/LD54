@@ -9,6 +9,8 @@ static var color_under_mouse : Color
 static var country_under_mouse : int
 static var mainCamera : Camera3D
 static var last_image : Image
+static var last_image_rect : Rect2i
+static var viewport_rect : Rect2i
 
 
 @export var _color_under_mouse : Color
@@ -27,6 +29,10 @@ func _process(_delta: float) -> void:
 		render_target_update_mode = SubViewport.UPDATE_DISABLED
 		# retrieve last image
 		last_image = get_texture().get_image()
+		if last_image:
+			last_image_rect = Rect2i(Vector2i.ZERO, last_image.get_size())
+		else:
+			last_image_rect = Rect2i()
 	pass
 
 
@@ -40,14 +46,14 @@ func _physics_process(_delta):
 
 
 static func color_under_position(position : Vector2):
-	var rect := mainCamera.get_viewport().get_visible_rect()
-	if rect.has_point(position) and last_image and last_image.get_used_rect().has_point(position):
+	if viewport_rect.has_point(position) and last_image and last_image_rect.has_point(position):
 		return last_image.get_pixelv(position)
 	else:
 		return Color.BLACK
 
 
 func on_main_viewport_size_changed():
+	viewport_rect = mainCamera.get_viewport().get_visible_rect()
 	get_parent().size = mainCamera.get_viewport().size
 	ask_for_update()
 
