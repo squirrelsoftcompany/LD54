@@ -108,10 +108,8 @@ func _process(delta: float) -> void:
 					_Dragger._dragged_object_ghost = null
 					_Dragger._dragged_object = null
 					if ghost: ghost.queue_free()
-				var currentGoneMeeple = ProjectSettings.get_setting("specific/level/meeple_gone")
-				ProjectSettings.set_setting("specific/level/meeple_gone", currentGoneMeeple+1)
-				if (currentGoneMeeple+1 == ProjectSettings.get_setting("specific/level/meeple_gone_max")):
-					_Global.trigger_game_over()
+				if _state == State.VANISHING : _Global.add_meeple_gone()
+				else : _Global.add_meeple_arrived()
 				queue_free.call_deferred()
 
 	update_speech()

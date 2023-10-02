@@ -1,7 +1,7 @@
 extends Node
 
 signal update_ui
-signal level_complet
+signal level_complete
 signal level_loaded
 signal game_over
 
@@ -31,20 +31,34 @@ func pause() -> void:
 
 func resume() -> void:
 	Engine.set_time_scale(1)
-	
-	
+
+
+func add_meeple_gone():
+	var meepleCount = ProjectSettings.get_setting("specific/level/meeple_gone")
+	ProjectSettings.set_setting("specific/level/meeple_gone", meepleCount+1)
+	if (meepleCount >= ProjectSettings.get_setting("specific/level/meeple_gone_max")):
+		_Global.trigger_game_over()
+
+
+func add_meeple_arrived():
+	var meepleCount = ProjectSettings.get_setting("specific/level/meeple_arrived")
+	ProjectSettings.set_setting("specific/level/meeple_arrived", meepleCount+1)
+	if (meepleCount >= ProjectSettings.get_setting("specific/level/meeple_arrived_max")):
+		_Global.trigger_level_complete()
+
+
 func trigger_game_over() -> void:
 	emit_signal("game_over")
-	
-	
-func trigger_level_complet() -> void:
-	emit_signal("level_complet")
+
+
+func trigger_level_complete() -> void:
+	emit_signal("level_complete")
 
 
 func show_menu() -> void:
 	_goto_scene(_main_menu)
-	
-	
+
+
 func goto_next_level():
 	goto_level(ProjectSettings.get_setting("specific/level/current") + 1)
 

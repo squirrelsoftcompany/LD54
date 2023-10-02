@@ -20,7 +20,7 @@ var gameOver : bool
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_Global.connect("update_ui",_on_update_ui)
-	_Global.connect("level_complet",_on_level_complet)
+	_Global.connect("level_complete",_on_level_complete)
 	_Global.connect("game_over",_on_game_over)
 	_Global.call_update_ui()
 	
@@ -59,7 +59,7 @@ func _on_game_over() -> void:
 	gameOver = true
 	
 
-func _on_level_complet() -> void:
+func _on_level_complete() -> void:
 	_on_update_ui()
 	summaryTitle.text = "Well Played"
 	summaryButton.text = "Next"
