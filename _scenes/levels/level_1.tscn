@@ -31,9 +31,12 @@ pause_at_end = 0.0
 
 [node name="SpawnerCyan" parent="." index="5" instance=ExtResource("4_782y5")]
 transform = Transform3D(0.64395, 0, 0.765068, 0, 1, 0, -0.765068, 0, 0.64395, -217.291, 0, 20.2253)
+country_id = 1
 
 [node name="SpawnerRebeccapurple" parent="." index="6" instance=ExtResource("4_782y5")]
 transform = Transform3D(0.798457, 0, 0.602052, 0, 1, 0, -0.602052, 0, 0.798457, -197.53, 0, -75.6479)
+country_id = 6
 
 [node name="SpawnerRed" parent="." index="7" instance=ExtResource("4_782y5")]
 transform = Transform3D(-0.112717, 0, -0.993627, 0, 1, 0, 0.993627, 0, -0.112717, -8.81591, 1.91854, -1.58975)
+country_id = 7
