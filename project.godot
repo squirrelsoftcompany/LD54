@@ -43,6 +43,10 @@ day_night={
 "type": "bool",
 "value": true
 }
+destination_color={
+"type": "color",
+"value": Color(0, 0, 0, 1)
+}
 
 [specific]
 
