@@ -1,10 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2kf23u1bayud"]
+[gd_scene load_steps=16 format=3 uid="uid://d2kf23u1bayud"]
 
 [ext_resource type="Script" path="res://scripts/InGameUI.gd" id="1_u7f4a"]
 [ext_resource type="Script" path="res://scripts/TutoPanel.gd" id="1_yvkub"]
+[ext_resource type="PackedScene" uid="uid://khk0epal4mdb" path="res://_scenes/ui/general_controls.tscn" id="2_kmyoa"]
 [ext_resource type="Script" path="res://scripts/LevelSummary.gd" id="2_nq8yg"]
 [ext_resource type="AudioStream" uid="uid://cqks73xmvndr6" path="res://resources/SoundEffects/bip.mp3" id="3_d80sy"]
+[ext_resource type="Texture2D" uid="uid://dvqxlryjq8y1g" path="res://models/ui_icons.png" id="3_fq77u"]
 [ext_resource type="AudioStream" uid="uid://be2wftvlet4op" path="res://resources/SoundEffects/click.mp3" id="4_6uoe2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f00s4"]
+atlas = ExtResource("3_fq77u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcu5s"]
+atlas = ExtResource("3_fq77u")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntkxg"]
+atlas = ExtResource("3_fq77u")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aru18"]
+atlas = ExtResource("3_fq77u")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5w66"]
+atlas = ExtResource("3_fq77u")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmkyc"]
+atlas = ExtResource("3_fq77u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lvxu"]
+atlas = ExtResource("3_fq77u")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p06c"]
+atlas = ExtResource("3_fq77u")
+region = Rect2(64, 32, 32, 32)
 
 [node name="InGameUI" type="Control" node_paths=PackedStringArray("arrivedMeepleScore", "goneMeepleScore")]
 process_mode = 3
@@ -18,6 +52,11 @@ mouse_filter = 1
 script = ExtResource("1_u7f4a")
 arrivedMeepleScore = NodePath("MarginContainer/VBoxContainer/ArrivedMeepleScore/Label")
 goneMeepleScore = NodePath("MarginContainer/VBoxContainer/GoneMeepleScore/Label")
+
+[node name="GeneralControls" parent="." instance=ExtResource("2_kmyoa")]
+layout_mode = 0
+offset_left = 0.0
+offset_right = 110.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -50,6 +89,7 @@ size_flags_horizontal = 3
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/ArrivedMeepleScore"]
 layout_mode = 2
+texture = SubResource("AtlasTexture_f00s4")
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 visibility_layer = 0
@@ -72,6 +112,7 @@ size_flags_horizontal = 3
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/GoneMeepleScore"]
 layout_mode = 2
+texture = SubResource("AtlasTexture_wcu5s")
 
 [node name="TutoPanel" type="Panel" parent="." node_paths=PackedStringArray("previousButton", "nextButton", "quitButton", "tutoPage_0", "tutoPage_1", "tutoPage_2", "clickSound")]
 visible = false
@@ -128,6 +169,7 @@ size_flags_vertical = 3
 [node name="Previous" type="Button" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "<"
+icon = SubResource("AtlasTexture_ntkxg")
 
 [node name="PanelContainer" type="PanelContainer" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -148,12 +190,14 @@ layout_mode = 2
 [node name="Next" type="Button" parent="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = ">"
+icon = SubResource("AtlasTexture_aru18")
 
 [node name="ExitTuto" type="Button" parent="TutoPanel/MarginContainer2"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "X"
+icon = SubResource("AtlasTexture_p5w66")
 
 [node name="LevelSummary" type="Panel" parent="." node_paths=PackedStringArray("bip_sound")]
 visible = false
@@ -218,6 +262,7 @@ size_flags_horizontal = 3
 
 [node name="TextureRect" type="TextureRect" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/GoodMeepleScore"]
 layout_mode = 2
+texture = SubResource("AtlasTexture_cmkyc")
 
 [node name="HSeparator" type="HSeparator" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2"]
 visibility_layer = 0
@@ -239,6 +284,7 @@ size_flags_horizontal = 3
 
 [node name="TextureRect" type="TextureRect" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/BadMeepleScore"]
 layout_mode = 2
+texture = SubResource("AtlasTexture_8lvxu")
 
 [node name="HSeparator" type="HSeparator" parent="LevelSummary/MarginContainer2/VBoxContainer"]
 visibility_layer = 0
@@ -253,6 +299,7 @@ custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "XXXXX"
+icon = SubResource("AtlasTexture_6p06c")
 
 [node name="Bip" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_d80sy")
