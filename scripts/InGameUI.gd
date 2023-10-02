@@ -11,6 +11,7 @@ var currentArrivedMeeple
 var currentArrivedMeepleMax
 var currentGoneMeeple
 var currentGoneMeepleMax
+var gameOver : bool
 
 
 # Called when the node enters the scene tree for the first time.
@@ -19,7 +20,7 @@ func _ready() -> void:
 	_Global.connect("level_complet",_on_level_complet)
 	_Global.connect("game_over",_on_game_over)
 	_Global.call_update_ui()
-	#_Global.connect("update_ui",Callable(self, "_on_update_ui"))
+	gameOver = false
 	pass
 
 
@@ -39,6 +40,7 @@ func _on_game_over() -> void:
 	summaryTitle.text = "GAME OVER"
 	summaryButton.text = "Retry"
 	levelSummary.visible = true
+	gameOver = true
 	pass
 
 func _on_level_complet() -> void:
@@ -51,3 +53,9 @@ func _on_level_complet() -> void:
 func _on_continue_pressed() -> void:
 	bip_sound.play()
 	levelSummary.visible = false
+	if gameOver:
+		gameOver = false
+		_Global.reload_level()
+	else:
+		_Global.goto_next_level()
+	

@@ -59,6 +59,10 @@ func goto_level(index):
 	_goto_scene(load(levels[index]))
 
 
+func reload_level():
+	goto_level(ProjectSettings.get_setting("specific/level/current"))
+	
+	
 func _goto_scene(scene: Resource) -> void:
 	# Defer the load to a later time, when
 	# we can be sure that no code from the current scene is running
