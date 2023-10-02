@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ck5q72058p7hv" path="res://_scenes/trains/train_part.tscn" id="1_qfwqs"]
 [ext_resource type="ArrayMesh" uid="uid://dgnrr2q2iddg" path="res://models/trains/TGV.obj" id="2_hk6qo"]
-[ext_resource type="PackedScene" uid="uid://b6t7p547cbiln" path="res://_scenes/trains/driver_meeple.tscn" id="3_3vyef"]
+[ext_resource type="PackedScene" uid="uid://b6t7p547cbilm" path="res://_scenes/trains/driver_meeple.tscn" id="3_3vyef"]
 
 [node name="Tgv" instance=ExtResource("1_qfwqs")]
 
