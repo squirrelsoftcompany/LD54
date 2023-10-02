@@ -98,9 +98,9 @@ func get_size() -> Vector2:
 	return Vector2(meepleByRow, maxMeeple/meepleByRow) * ps_meeple_offset
 
 
-func dragged_out(meeple_collider:Node3D):
-	takeMeeple(meeple_collider.get_parent())
+func dragged_out(meeple:Node3D):
+	takeMeeple(meeple)
 
 
-func dropped_in(meeple_collider:Node3D):
-	pushMeeple(meeple_collider.get_parent())
+func dropped_in(meeple:Node3D):
+	pushMeeple(meeple)

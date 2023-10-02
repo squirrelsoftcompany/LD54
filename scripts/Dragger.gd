@@ -64,6 +64,7 @@ func update_under_mouse():
 		var query = PhysicsRayQueryParameters3D.create(_from, _to, ps_draggable_flags)
 		var result = space_state.intersect_ray(query)
 		_draggable_under_mouse = result.get("collider", null)
+		if _draggable_under_mouse: _draggable_under_mouse = _draggable_under_mouse.get_parent()
 		# drop
 		_droppable_under_mouse = null
 	else:
@@ -71,8 +72,11 @@ func update_under_mouse():
 		var query_drop = PhysicsRayQueryParameters3D.create(_from, _to, ps_droppable_flags)
 		var result_drop = space_state.intersect_ray(query_drop)
 		var droppable = result_drop.get("collider", null)
-		if droppable and can_drop(_dragged_object, droppable): _droppable_under_mouse = droppable
-		else: _droppable_under_mouse = null
+		if droppable:
+			if can_drop(_dragged_object, droppable):
+				_droppable_under_mouse = droppable.get_parent()
+		else:
+			_droppable_under_mouse = null
 		# ground
 		var distance = (ps_offset_dragged_object.y - _from.y)/_dir.y
 		_dragging_3d_position = _from + _dir * distance + Vector3(ps_offset_dragged_object.x, 0, ps_offset_dragged_object.z)

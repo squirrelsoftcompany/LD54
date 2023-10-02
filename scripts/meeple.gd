@@ -81,9 +81,10 @@ func drag_begin():
 	return ghost
 
 
-func drag_finished(_droppable):
+func drag_finished(droppable):
 	if ghost: ghost.queue_free()
 	ghost = null
+	_current_drop_slot = droppable
 
 
 func can_drop(droppable) -> bool:
@@ -97,13 +98,9 @@ func drag_cancelled(_droppable):
 	ghost = null
 
 
+@onready var _current_drop_slot := get_parent()
 func current_drop_slot():
-	var _parent = get_parent()
-	if _parent.has_method("takeMeeple"): # spwaner
-		return _parent
-	elif _parent.get_parent().has_method("takeMeeple"): # wagon
-		return _parent
-	return null
+	return _current_drop_slot
 
 
 func update_speech(state):
