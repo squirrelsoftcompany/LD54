@@ -9,20 +9,17 @@ var greenyellowMat = preload("res://resources/CountryMaterial/greenyellow.tres")
 var orangeMat = preload("res://resources/CountryMaterial/orange.tres")
 var rebeccapurpleMat = preload("res://resources/CountryMaterial/rebeccapurple.tres")
 var redMat = preload("res://resources/CountryMaterial/red.tres")
-<<<<<<< Updated upstream
 
-
-@export var country: Color
-
-=======
 var annoyed_time : float = ProjectSettings.get_setting("specific/meeple/annoyed_time", 1)
 var anger_time : float = ProjectSettings.get_setting("specific/meeple/anger_time", 1)
+
 @export var country: Color
+
 var wait = 0.0
 var invalid_placement = false
 var is_in_train = false
 var bubble = AnimatedSprite3D
->>>>>>> Stashed changes
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
