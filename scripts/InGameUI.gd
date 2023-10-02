@@ -2,6 +2,8 @@ extends Control
 
 @export var arrivedMeepleScore : Label
 @export var goneMeepleScore : Label
+@export var summaryArrivedMeepleScore : Label
+@export var summaryGoneMeepleScore : Label
 @export var summaryTitle : Label
 @export var summaryButton : Button
 @export var levelSummary : Panel
@@ -45,9 +47,12 @@ func _on_update_ui() -> void:
 	currentGoneMeepleMax = ProjectSettings.get_setting("specific/level/meeple_gone_max")
 	arrivedMeepleScore.text = str(currentArrivedMeeple) + "/" + str(currentArrivedMeepleMax)
 	goneMeepleScore.text = str(currentGoneMeeple) + "/" + str(currentGoneMeepleMax)
+	summaryArrivedMeepleScore.text = str(currentArrivedMeeple) + "/" + str(currentArrivedMeepleMax)
+	summaryGoneMeepleScore.text = str(currentGoneMeeple) + "/" + str(currentGoneMeepleMax)
 
 
 func _on_game_over() -> void:
+	_on_update_ui()
 	summaryTitle.text = "GAME OVER"
 	summaryButton.text = "Retry"
 	levelSummary.visible = true
@@ -55,6 +60,7 @@ func _on_game_over() -> void:
 	
 
 func _on_level_complet() -> void:
+	_on_update_ui()
 	summaryTitle.text = "Well Played"
 	summaryButton.text = "Next"
 	levelSummary.visible = true

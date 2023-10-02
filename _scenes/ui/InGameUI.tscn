@@ -40,7 +40,7 @@ region = Rect2(0, 32, 32, 32)
 atlas = ExtResource("3_fq77u")
 region = Rect2(64, 32, 32, 32)
 
-[node name="InGameUI" type="Control" node_paths=PackedStringArray("arrivedMeepleScore", "goneMeepleScore", "summaryTitle", "summaryButton", "levelSummary", "tutoPanel", "bip_sound")]
+[node name="InGameUI" type="Control" node_paths=PackedStringArray("arrivedMeepleScore", "goneMeepleScore", "summaryArrivedMeepleScore", "summaryGoneMeepleScore", "summaryTitle", "summaryButton", "levelSummary", "tutoPanel", "bip_sound")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -52,6 +52,8 @@ mouse_filter = 1
 script = ExtResource("1_u7f4a")
 arrivedMeepleScore = NodePath("MarginContainer/VBoxContainer/ArrivedMeepleScore/Label")
 goneMeepleScore = NodePath("MarginContainer/VBoxContainer/GoneMeepleScore/Label")
+summaryArrivedMeepleScore = NodePath("LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/ArrivedMeepleScore/Label")
+summaryGoneMeepleScore = NodePath("LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/GoneMeepleScore/Label")
 summaryTitle = NodePath("LevelSummary/MarginContainer2/VBoxContainer/Label")
 summaryButton = NodePath("LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer/Continue")
 levelSummary = NodePath("LevelSummary")
@@ -258,20 +260,20 @@ custom_minimum_size = Vector2(100, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="GoodMeepleScore" type="HBoxContainer" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2"]
+[node name="ArrivedMeepleScore" type="HBoxContainer" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/GoodMeepleScore"]
+[node name="Label" type="Label" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/ArrivedMeepleScore"]
 layout_mode = 2
 text = "X/X"
 
-[node name="VSeparator" type="VSeparator" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/GoodMeepleScore"]
+[node name="VSeparator" type="VSeparator" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/ArrivedMeepleScore"]
 visibility_layer = 0
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/GoodMeepleScore"]
+[node name="TextureRect" type="TextureRect" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/ArrivedMeepleScore"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_cmkyc")
 
@@ -280,20 +282,20 @@ visibility_layer = 0
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="BadMeepleScore" type="HBoxContainer" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2"]
+[node name="GoneMeepleScore" type="HBoxContainer" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/BadMeepleScore"]
+[node name="Label" type="Label" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/GoneMeepleScore"]
 layout_mode = 2
 text = "X/X"
 
-[node name="VSeparator" type="VSeparator" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/BadMeepleScore"]
+[node name="VSeparator" type="VSeparator" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/GoneMeepleScore"]
 visibility_layer = 0
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/BadMeepleScore"]
+[node name="TextureRect" type="TextureRect" parent="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer2/GoneMeepleScore"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_8lvxu")
 
