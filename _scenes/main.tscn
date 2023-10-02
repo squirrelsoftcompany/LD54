@@ -1,27 +1,22 @@
-[gd_scene load_steps=12 format=3 uid="uid://u031l22bdaes"]
+[gd_scene load_steps=11 format=3 uid="uid://u031l22bdaes"]
 
 [ext_resource type="PackedScene" uid="uid://bo70n755f56k8" path="res://_scenes/nodes/train_followpath.tscn" id="1_4b0xy"]
 [ext_resource type="PackedScene" uid="uid://fmcwxwu4ql6q" path="res://_scenes/nodes/main_camera.tscn" id="1_71qib"]
+[ext_resource type="Script" path="res://scripts/WorldEnvironment.gd" id="1_akhlc"]
 [ext_resource type="PackedScene" uid="uid://x60lnba3ki7c" path="res://_scenes/nodes/map_borders.tscn" id="3_10svt"]
 [ext_resource type="PackedScene" uid="uid://dxou0nnb8bbd0" path="res://_scenes/nodes/spawner.tscn" id="5_r03u6"]
 [ext_resource type="PackedScene" uid="uid://bjlt2nukdye2a" path="res://_scenes/railways/railway.tscn" id="6_4sskq"]
 [ext_resource type="PackedScene" uid="uid://d2kf23u1bayud" path="res://_scenes/ui/InGameUI.tscn" id="6_vkr6r"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_odkk1"]
-sky_top_color = Color(1, 1, 1, 1)
-sky_horizon_color = Color(1, 1, 1, 1)
-ground_bottom_color = Color(1, 1, 1, 1)
-ground_horizon_color = Color(1, 1, 1, 1)
-
-[sub_resource type="Sky" id="Sky_c5wym"]
-sky_material = SubResource("ProceduralSkyMaterial_odkk1")
-
 [sub_resource type="Environment" id="Environment_fspfq"]
-background_mode = 2
-sky = SubResource("Sky_c5wym")
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.5
 sdfgi_enabled = true
 
-[sub_resource type="Curve3D" id="Curve3D_ycemk"]
+[sub_resource type="Curve3D" id="Curve3D_jusdc"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector3Array(-46.8836, 0, 13.4744, 46.8836, 0, -13.4744, -124.228, 0, -44.128, -13.3897, 0, -37.3961, 13.3897, 0, 37.3961, -19.1038, 0, 12.2609, 34.5609, 0, -22.7438, -34.5609, 0, 22.7438, -57.9419, 0, 108.143, 16.4455, 0, 42.0606, -16.4455, 0, -42.0606, -148.306, 0, 45.2838, -38.6278, 0, 11.3097, 38.6278, 0, -11.3097, -124.759, 0, -44.1913),
@@ -29,7 +24,7 @@ _data = {
 }
 point_count = 5
 
-[sub_resource type="Curve3D" id="Curve3D_jj6c0"]
+[sub_resource type="Curve3D" id="Curve3D_l7i8s"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector3Array(-12.63, 0, 2.88178, 12.63, 0, -2.88178, -161.757, 0, -72.525, -39.3706, 0, -1.68193, 39.3706, 0, 1.68193, -14.813, 0, -92.1289, -19.7191, 0, -28.0504, 19.7191, 0, 28.0504, 109.034, 0, -53.8048, 21.3904, 0, -29.125, -21.3904, 0, 29.125, 87.4573, 0, 56.1522, 8.28725, 0, -3.06255, -8.28725, 0, 3.06255, -27.9504, 0, 117.819),
@@ -44,8 +39,9 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 visible = false
 directional_shadow_max_distance = 300.0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." groups=["environement"]]
 environment = SubResource("Environment_fspfq")
+script = ExtResource("1_akhlc")
 
 [node name="MainCamera" parent="." instance=ExtResource("1_71qib")]
 transform = Transform3D(1, 0, 0, 0, 0.371389, 0.928477, 0, -0.928477, 0.371389, 0, 185.695, 124.278)
@@ -58,7 +54,7 @@ distance = 200.0
 transform = Transform3D(570, 0, 0, 0, 1, 0, 0, 0, 300, 0, 0, 0)
 
 [node name="railway" parent="." instance=ExtResource("6_4sskq")]
-curve = SubResource("Curve3D_ycemk")
+curve = SubResource("Curve3D_jusdc")
 
 [node name="Train" parent="railway" instance=ExtResource("1_4b0xy")]
 transform = Transform3D(0.27622, 0, -0.961095, 0, 1, 0, 0.961095, 0, 0.27622, -124.228, 0, -44.128)
@@ -75,7 +71,7 @@ transform = Transform3D(0.900439, 0, 0.434981, 0, 1, 0, -0.434981, 0, 0.900439, 
 progress = 356.017
 
 [node name="railway2" parent="." instance=ExtResource("6_4sskq")]
-curve = SubResource("Curve3D_jj6c0")
+curve = SubResource("Curve3D_l7i8s")
 
 [node name="Train4" parent="railway2" instance=ExtResource("1_4b0xy")]
 transform = Transform3D(-0.809634, 0, 0.586935, 0, 1, 0, -0.586935, 0, -0.809634, 87.933, 0, 55.5003)

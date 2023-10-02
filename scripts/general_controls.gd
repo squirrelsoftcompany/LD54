@@ -13,7 +13,6 @@ func _process(_delta):
 
 
 func _on_night_day_pressed():
-	print("plop")
 	get_tree().call_group("environement","day_night")
 
 

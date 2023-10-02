@@ -1,13 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkdoprjo5e7pl"]
+[gd_scene load_steps=6 format=3 uid="uid://dkdoprjo5e7pl"]
 
 [ext_resource type="PackedScene" uid="uid://ck5q72058p7hv" path="res://_scenes/trains/train_part.tscn" id="1_den1q"]
 [ext_resource type="ArrayMesh" uid="uid://vaif0mtrp0ke" path="res://models/trains/wagon.obj" id="2_y7ptt"]
 [ext_resource type="PackedScene" uid="uid://cp754d65pl8um" path="res://_scenes/trains/roof.tscn" id="3_fibof"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgxaj"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_4jcwd"]
+size = Vector2(4, 6)
+orientation = 1
+
 [node name="Wagon" instance=ExtResource("1_den1q")]
 
 [node name="Mesh" parent="." index="0"]
 mesh = ExtResource("2_y7ptt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40124, 0)
+material_override = SubResource("StandardMaterial3D_tgxaj")
+mesh = SubResource("QuadMesh_4jcwd")
 
 [node name="Roof" parent="." index="1" instance=ExtResource("3_fibof")]
 visible = false
