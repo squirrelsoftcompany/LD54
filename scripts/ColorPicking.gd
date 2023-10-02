@@ -21,6 +21,7 @@ static var viewport_rect : Rect2i
 func _ready() -> void:
 	mainCamera = get_tree().root.get_camera_3d()
 	mainCamera.get_viewport().connect("size_changed", on_main_viewport_size_changed)
+	on_main_viewport_size_changed()
 
 
 func _process(_delta: float) -> void:
