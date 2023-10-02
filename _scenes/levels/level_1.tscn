@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bglp27v86xfve"]
+
+[ext_resource type="PackedScene" uid="uid://nmyypul3wbvp" path="res://_scenes/commons.tscn" id="1_7cunj"]
+[ext_resource type="PackedScene" uid="uid://bjlt2nukdye2a" path="res://_scenes/railways/railway.tscn" id="2_34j1b"]
+[ext_resource type="PackedScene" uid="uid://bo70n755f56k8" path="res://_scenes/nodes/train_followpath.tscn" id="3_sdial"]
+[ext_resource type="PackedScene" uid="uid://dxou0nnb8bbd0" path="res://_scenes/nodes/spawner.tscn" id="4_782y5"]
+
+[sub_resource type="Curve3D" id="Curve3D_kf4dk"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector3Array(-19.6266, 0, 11.3409, 19.6266, 0, -11.3409, -153.982, 0, -50.3629, -31.7462, 0, -20.4972, 31.7462, 0, 20.4972, -58.0134, 0, -35.6987, 33.1622, 0, -14.4555, -33.1622, 0, 14.4555, -60.2745, 0, 29.0563, 22.7064, 0, 16.2198, -22.7064, 0, -16.2198, -165.392, 0, 17.4687, -33.601, 0, 20.7704, 33.601, 0, -20.7704, -153.982, 0, -50.3629),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="Level1" instance=ExtResource("1_7cunj")]
+
+[node name="MainCamera" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.410367, 0.911921, 0, -0.911921, 0.410367, -108.53, 92.5464, 43.6559)
+direction = Vector3(0, 7, 3.15)
+hotspot = Vector3(-108.53, 0, 2.01)
+distance = 101.485
+
+[node name="railway" parent="." index="4" instance=ExtResource("2_34j1b")]
+curve = SubResource("Curve3D_kf4dk")
+
+[node name="Train" parent="railway" index="4" instance=ExtResource("3_sdial")]
+transform = Transform3D(0.500312, 0, -0.865845, 0, 1, 0, 0.865845, 0, 0.500312, -153.982, 0, -50.3629)
+backward = true
+pause_at_end = 0.0
+
+[node name="SpawnerCyan" parent="." index="5" instance=ExtResource("4_782y5")]
+transform = Transform3D(0.64395, 0, 0.765068, 0, 1, 0, -0.765068, 0, 0.64395, -217.291, 0, 20.2253)
+
+[node name="SpawnerRebeccapurple" parent="." index="6" instance=ExtResource("4_782y5")]
+transform = Transform3D(0.798457, 0, 0.602052, 0, 1, 0, -0.602052, 0, 0.798457, -197.53, 0, -75.6479)
+
+[node name="SpawnerRed" parent="." index="7" instance=ExtResource("4_782y5")]
+transform = Transform3D(-0.112717, 0, -0.993627, 0, 1, 0, 0.993627, 0, -0.112717, -8.81591, 1.91854, -1.58975)
