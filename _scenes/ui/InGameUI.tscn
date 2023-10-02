@@ -1,17 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2kf23u1bayud"]
+[gd_scene load_steps=6 format=3 uid="uid://d2kf23u1bayud"]
 
+[ext_resource type="Script" path="res://scripts/InGameUI.gd" id="1_u7f4a"]
 [ext_resource type="Script" path="res://scripts/TutoPanel.gd" id="1_yvkub"]
 [ext_resource type="Script" path="res://scripts/LevelSummary.gd" id="2_nq8yg"]
 [ext_resource type="AudioStream" uid="uid://cqks73xmvndr6" path="res://resources/SoundEffects/bip.mp3" id="3_d80sy"]
 [ext_resource type="AudioStream" uid="uid://be2wftvlet4op" path="res://resources/SoundEffects/click.mp3" id="4_6uoe2"]
 
-[node name="InGameUI" type="Control"]
+[node name="InGameUI" type="Control" node_paths=PackedStringArray("arrivedMeepleScore", "goneMeepleScore")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_u7f4a")
+arrivedMeepleScore = NodePath("MarginContainer/VBoxContainer/ArrivedMeepleScore/Label")
+goneMeepleScore = NodePath("MarginContainer/VBoxContainer/GoneMeepleScore/Label")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -28,20 +34,21 @@ theme_override_constants/margin_bottom = 0
 custom_minimum_size = Vector2(100, 60)
 layout_mode = 2
 
-[node name="GoodMeepleScore" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ArrivedMeepleScore" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GoodMeepleScore"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ArrivedMeepleScore"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 text = "X/X"
 
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/GoodMeepleScore"]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/ArrivedMeepleScore"]
 visibility_layer = 0
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/GoodMeepleScore"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/ArrivedMeepleScore"]
 layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
@@ -49,20 +56,21 @@ visibility_layer = 0
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="BadMeepleScore" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="GoneMeepleScore" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/BadMeepleScore"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GoneMeepleScore"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 text = "X/X"
 
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/BadMeepleScore"]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/GoneMeepleScore"]
 visibility_layer = 0
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/BadMeepleScore"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/GoneMeepleScore"]
 layout_mode = 2
 
 [node name="TutoPanel" type="Panel" parent="." node_paths=PackedStringArray("previousButton", "nextButton", "quitButton", "tutoPage_0", "tutoPage_1", "tutoPage_2", "clickSound")]
