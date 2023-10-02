@@ -22,11 +22,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		# begin drag
 		if _dragging and not event.pressed:
 			_dragging = false
-			if (_droppable_under_mouse):
+			if (_droppable_under_mouse and _dragged_object):
 				dragged_out(current_drop_slot(_dragged_object), _dragged_object)
 				drag_finished(_dragged_object, _droppable_under_mouse)
 				dropped_in(_droppable_under_mouse, _dragged_object)
-			else: drag_cancelled(_dragged_object)
+			elif _dragged_object: drag_cancelled(_dragged_object)
 			_dragged_object = null
 			_dragged_object_ghost = null
 		# end drag
@@ -65,7 +65,11 @@ func update_under_mouse():
 		var query = PhysicsRayQueryParameters3D.create(_from, _to, ps_draggable_flags)
 		var result = space_state.intersect_ray(query)
 		_draggable_under_mouse = result.get("collider", null)
-		if _draggable_under_mouse: _draggable_under_mouse = _draggable_under_mouse.get_parent()
+		if _draggable_under_mouse:
+			if can_drag(_draggable_under_mouse):
+				_draggable_under_mouse = _draggable_under_mouse.get_parent()
+		else:
+			_draggable_under_mouse = null
 		# drop
 		_droppable_under_mouse = null
 	else:
@@ -93,6 +97,8 @@ func move_dragged_object():
 #utils
 func current_drop_slot(draggable : Node3D) -> Node3D:
 	return _generic_drop("current_drop_slot", draggable, [], null)
+func can_drag(draggable : Node3D) -> bool:
+	return _generic_drop("can_drag", draggable, [], true)
 func can_drop(draggable : Node3D, droppable : Node3D) -> bool:
 	return _generic_drop("can_drop", draggable, [droppable], true) and _generic_drop("can_drop", droppable, [draggable], true)
 func dropped_in(droppable : Node3D, draggable : Node3D) -> void:

@@ -34,7 +34,7 @@ albedo_color = Color(0.0509804, 0.0509804, 0.0509804, 1)
 material = SubResource("StandardMaterial3D_xefuh")
 orientation = 1
 
-[node name="Spawner" type="Node3D"]
+[node name="Spawner" type="Node3D" groups=["Spawner"]]
 script = ExtResource("1_eh46l")
 
 [node name="SpawnTimer" type="Timer" parent="."]
