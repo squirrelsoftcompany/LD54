@@ -46,15 +46,20 @@ ping_pong = true
 
 [node name="SpawnerCyan" parent="." index="6" instance=ExtResource("4_uh10h")]
 transform = Transform3D(0.64395, 0, 0.765068, 0, 1, 0, -0.765068, 0, 0.64395, -217.291, 0, 20.2253)
+country_id = 1
 
 [node name="SpawnerRebeccapurple" parent="." index="7" instance=ExtResource("4_uh10h")]
 transform = Transform3D(0.798457, 0, 0.602052, 0, 1, 0, -0.602052, 0, 0.798457, -197.53, 0, -75.6479)
+country_id = 6
 
 [node name="SpawnerRed" parent="." index="8" instance=ExtResource("4_uh10h")]
 transform = Transform3D(0.832777, 0, -0.553609, 0, 1, 0, 0.553609, 0, 0.832777, -21.4613, 1.91854, -14.1406)
+country_id = 7
 
 [node name="SpawnerBlue" parent="." index="9" instance=ExtResource("4_uh10h")]
 transform = Transform3D(0.649806, 0, -0.7601, 0, 1, 0, 0.7601, 0, 0.649806, 72.6813, -1.52588e-05, -3.39259)
+country_id = 0
 
 [node name="SpawnerGreenyellow" parent="." index="10" instance=ExtResource("4_uh10h")]
 transform = Transform3D(0.97501, 0, -0.222161, 0, 1, 0, 0.222161, 0, 0.97501, -41.9268, 0, -114.773)
+country_id = 4

@@ -64,24 +64,32 @@ pause_at_end = 0.0
 
 [node name="CYAN" parent="." index="7" instance=ExtResource("4_7og50")]
 transform = Transform3D(0.181086, 0, -0.983467, 0, 1, 0, 0.983467, 0, 0.181086, -213.312, 2.28882e-05, 44.2933)
+country_id = 1
 
 [node name="GOLD" parent="." index="8" instance=ExtResource("4_7og50")]
 transform = Transform3D(0.732044, 0, 0.681258, 0, 1, 0, -0.681258, 0, 0.732044, -16.1734, 0, 114.928)
+country_id = 3
 
 [node name="PURPULE" parent="." index="9" instance=ExtResource("4_7og50")]
 transform = Transform3D(0.95097, 0, 0.309283, 0, 1, 0, -0.309283, 0, 0.95097, -181.92, 0, -84.2973)
+country_id = 6
 
 [node name="RED" parent="." index="10" instance=ExtResource("4_7og50")]
 transform = Transform3D(0.879632, 0, -0.475655, 0, 1, 0, 0.475655, 0, 0.879632, -36.5965, 0, -33.7767)
+country_id = 7
 
 [node name="PINK" parent="." index="11" instance=ExtResource("4_7og50")]
 transform = Transform3D(0.906941, 0, -0.421257, 0, 1, 0, 0.421257, 0, 0.906941, 199.017, 0, 46.6147)
+country_id = 2
 
 [node name="GREEN" parent="." index="12" instance=ExtResource("4_7og50")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.2576, 0, -117.854)
+country_id = 4
 
 [node name="BLUE" parent="." index="13" instance=ExtResource("4_7og50")]
 transform = Transform3D(0.965944, 0, -0.258752, 0, 1, 0, 0.258752, 0, 0.965944, 50.4791, 0, 54.3672)
+country_id = 0
 
 [node name="ORANGE" parent="." index="14" instance=ExtResource("4_7og50")]
 transform = Transform3D(0.812145, 0, -0.583456, 0, 1, 0, 0.583456, 0, 0.812145, 102.342, 1.52588e-05, -82.8058)
+country_id = 5
