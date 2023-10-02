@@ -31,6 +31,7 @@ func _ready() -> void:
 		_Global.pause()
 	else:
 		tutoPanel.visible = false
+		_Global.resume()
 	gameOver = false
 #	pass
 
@@ -53,6 +54,7 @@ func _on_update_ui() -> void:
 
 func _on_game_over() -> void:
 	_on_update_ui()
+	_Global.pause()
 	summaryTitle.text = "GAME OVER"
 	summaryButton.text = "Retry"
 	levelSummary.visible = true
@@ -61,6 +63,7 @@ func _on_game_over() -> void:
 
 func _on_level_complete() -> void:
 	_on_update_ui()
+	_Global.pause()
 	summaryTitle.text = "Well Played"
 	summaryButton.text = "Next"
 	levelSummary.visible = true

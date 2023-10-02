@@ -34,6 +34,7 @@ func resume() -> void:
 
 
 func add_meeple_gone():
+	call_update_ui()
 	var meepleCount = ProjectSettings.get_setting("specific/level/meeple_gone")
 	ProjectSettings.set_setting("specific/level/meeple_gone", meepleCount+1)
 	if (meepleCount >= ProjectSettings.get_setting("specific/level/meeple_gone_max")):
@@ -41,6 +42,7 @@ func add_meeple_gone():
 
 
 func add_meeple_arrived():
+	call_update_ui()
 	var meepleCount = ProjectSettings.get_setting("specific/level/meeple_arrived")
 	ProjectSettings.set_setting("specific/level/meeple_arrived", meepleCount+1)
 	if (meepleCount >= ProjectSettings.get_setting("specific/level/meeple_arrived_max")):
@@ -68,6 +70,8 @@ func goto_level(index):
 	if index < 0 or index >= levels.size():
 		return
 	ProjectSettings.set_setting("specific/level/current", index)
+	ProjectSettings.set_setting("specific/level/meeple_gone", 0)
+	ProjectSettings.set_setting("specific/level/meeple_arrived", 0)
 	_goto_scene(load(levels[index]))
 
 
