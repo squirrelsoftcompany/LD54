@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://nmyypul3wbvp"]
+[gd_scene load_steps=5 format=3 uid="uid://nmyypul3wbvp"]
 
 [ext_resource type="PackedScene" uid="uid://ccvn1x3mkvmgr" path="res://_scenes/nodes/world_environment.tscn" id="1_1j1x1"]
 [ext_resource type="PackedScene" uid="uid://fmcwxwu4ql6q" path="res://_scenes/nodes/main_camera.tscn" id="2_7t0sc"]
 [ext_resource type="PackedScene" uid="uid://x60lnba3ki7c" path="res://_scenes/nodes/map_borders.tscn" id="3_k21bn"]
+[ext_resource type="PackedScene" uid="uid://d2kf23u1bayud" path="res://_scenes/ui/InGameUI.tscn" id="4_w001r"]
 
 [node name="Commons" type="Node3D"]
 
@@ -12,3 +13,5 @@
 transform = Transform3D(1, 0, 0, 0, 0.274721, 0.961524, 0, -0.961524, 0.274721, 0, 9.61524, 2.74721)
 
 [node name="Map_borders" parent="." instance=ExtResource("3_k21bn")]
+
+[node name="InGameUI" parent="." instance=ExtResource("4_w001r")]

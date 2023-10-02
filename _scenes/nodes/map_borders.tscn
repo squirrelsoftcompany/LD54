@@ -14,6 +14,6 @@ shader_parameter/map = ExtResource("2_mjufe")
 orientation = 1
 
 [node name="Map_borders" type="MeshInstance3D" groups=["MainMap"]]
-transform = Transform3D(380, 0, 0, 0, 1, 0, 0, 0, 200, 0, 0, 0)
+transform = Transform3D(570, 0, 0, 0, 1, 0, 0, 0, 300, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_30i4w")
 mesh = SubResource("QuadMesh_dqw76")
