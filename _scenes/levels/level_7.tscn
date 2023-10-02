@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://3y8n6jn4srkw"]
 
-[ext_resource type="PackedScene" uid="uid://nmyypul3wbvp" path="res://_scenes/commons.tscn" id="1_inru3"]
-[ext_resource type="PackedScene" uid="uid://bjlt2nukdye2a" path="res://_scenes/railways/railway.tscn" id="2_5dtk1"]
-[ext_resource type="PackedScene" uid="uid://bo70n755f56k8" path="res://_scenes/nodes/train_followpath.tscn" id="3_xaltn"]
-[ext_resource type="PackedScene" uid="uid://dxou0nnb8bbd0" path="res://_scenes/nodes/spawner.tscn" id="4_hgl5q"]
+[ext_resource type="PackedScene" uid="uid://nmyypul3wbvp" path="res://_scenes/commons.tscn" id="1_mo8dm"]
+[ext_resource type="PackedScene" uid="uid://bjlt2nukdye2a" path="res://_scenes/railways/railway.tscn" id="2_hg05m"]
+[ext_resource type="PackedScene" uid="uid://bo70n755f56k8" path="res://_scenes/nodes/train_followpath.tscn" id="3_0j511"]
+[ext_resource type="PackedScene" uid="uid://dxou0nnb8bbd0" path="res://_scenes/nodes/spawner.tscn" id="4_dilu1"]
 
-[sub_resource type="Curve3D" id="Curve3D_kuryv"]
+[sub_resource type="Curve3D" id="Curve3D_s4qmv"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector3Array(-13.6017, 0, -4.83633, 13.6017, 0, 4.83633, -124.925, 0, -52.0978, -28.8633, 0, -21.2554, 28.8633, 0, 21.2554, -23.5839, 0, 6.51486, -26.7075, 0, -10.6914, 26.7075, 0, 10.6914, 100.158, 0, 50.5158, 0.961319, 0, -25.1394, -0.961319, 0, 25.1394, 151.647, 0, 112.14),
@@ -13,7 +13,7 @@ _data = {
 }
 point_count = 4
 
-[sub_resource type="Curve3D" id="Curve3D_w6u8y"]
+[sub_resource type="Curve3D" id="Curve3D_0tsjp"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector3Array(-25.8781, 0, -3.23795, 25.8781, 0, 3.23795, -96.3044, 0, -82.2046, -19.7744, 0, -1.84535, 19.7744, 0, 1.84535, 1.37153, 0, -89.5242, -29.9229, 0, -23.6136, 29.9229, 0, 23.6136, 102.417, 0, -58.0172),
@@ -21,7 +21,7 @@ _data = {
 }
 point_count = 3
 
-[sub_resource type="Curve3D" id="Curve3D_7v8n5"]
+[sub_resource type="Curve3D" id="Curve3D_gjn0m"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector3Array(-8.03116, 0, -24.222, 8.03116, 0, 24.222, -162.52, 0, -47.4885, -24.3146, 0, -23.3814, 24.3146, 0, 23.3814, -134.17, 0, 41.9361, 0, 0, 0, 0, 0, 0, -32.4509, 0, 110.936),
@@ -29,7 +29,7 @@ _data = {
 }
 point_count = 3
 
-[node name="level_7" instance=ExtResource("1_inru3")]
+[node name="level_7" instance=ExtResource("1_mo8dm")]
 
 [node name="MainCamera" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 0.371389, 0.928477, 0, -0.928477, 0.371389, 0, 185.695, 124.278)
@@ -37,56 +37,56 @@ direction = Vector3(0, 1, 0.4)
 hotspot = Vector3(0, 0, 50)
 distance = 200.0
 
-[node name="railway" parent="." index="3" instance=ExtResource("2_5dtk1")]
-curve = SubResource("Curve3D_kuryv")
+[node name="railway" parent="." index="3" instance=ExtResource("2_hg05m")]
+curve = SubResource("Curve3D_s4qmv")
 
-[node name="Train" parent="railway" index="4" instance=ExtResource("3_xaltn")]
+[node name="Train" parent="railway" index="4" instance=ExtResource("3_0j511")]
 transform = Transform3D(-0.33502, 0, -0.94221, 0, 1, 0, 0.94221, 0, -0.33502, -124.925, 0, -52.0978)
 is_tgv = true
 wagon_count = 4
 ping_pong = true
 pause_at_end = 0.0
 
-[node name="railway2" parent="." index="4" instance=ExtResource("2_5dtk1")]
-curve = SubResource("Curve3D_w6u8y")
+[node name="railway2" parent="." index="4" instance=ExtResource("2_hg05m")]
+curve = SubResource("Curve3D_0tsjp")
 
-[node name="Train" parent="railway2" index="4" instance=ExtResource("3_xaltn")]
+[node name="Train" parent="railway2" index="4" instance=ExtResource("3_0j511")]
 transform = Transform3D(-0.124155, 0, -0.992262, 0, 1, 0, 0.992262, 0, -0.124155, -96.3044, 0, -82.2046)
 wagon_count = 2
 ping_pong = true
 backward = true
 pause_at_end = 0.0
 
-[node name="railway3" parent="." index="5" instance=ExtResource("2_5dtk1")]
-curve = SubResource("Curve3D_7v8n5")
+[node name="railway3" parent="." index="5" instance=ExtResource("2_hg05m")]
+curve = SubResource("Curve3D_gjn0m")
 
-[node name="Train" parent="railway3" index="4" instance=ExtResource("3_xaltn")]
+[node name="Train" parent="railway3" index="4" instance=ExtResource("3_0j511")]
 transform = Transform3D(-0.949186, 0, -0.314716, 0, 1, 0, 0.314716, 0, -0.949186, -162.52, 0, -47.4885)
 wagon_count = 2
 ping_pong = true
 backward = true
 pause_at_end = 0.0
 
-[node name="CYAN" parent="." index="6" instance=ExtResource("4_hgl5q")]
+[node name="CYAN" parent="." index="6" instance=ExtResource("4_dilu1")]
 transform = Transform3D(0.611016, 0, -0.791618, 0, 1, 0, 0.791618, 0, 0.611016, -173.545, 0, 22.0884)
 
-[node name="GOLD" parent="." index="7" instance=ExtResource("4_hgl5q")]
+[node name="GOLD" parent="." index="7" instance=ExtResource("4_dilu1")]
 transform = Transform3D(0.818421, 0, -0.57462, 0, 1, 0, 0.57462, 0, 0.818421, -96.5123, 0, 91.8771)
 
-[node name="PURPULE" parent="." index="8" instance=ExtResource("4_hgl5q")]
+[node name="PURPULE" parent="." index="8" instance=ExtResource("4_dilu1")]
 transform = Transform3D(0.95097, 0, 0.309283, 0, 1, 0, -0.309283, 0, 0.95097, -181.92, 0, -84.2973)
 
-[node name="RED" parent="." index="9" instance=ExtResource("4_hgl5q")]
+[node name="RED" parent="." index="9" instance=ExtResource("4_dilu1")]
 transform = Transform3D(0.879632, 0, -0.475655, 0, 1, 0, 0.475655, 0, 0.879632, -30.8896, 0, 28.3801)
 
-[node name="PINK" parent="." index="10" instance=ExtResource("4_hgl5q")]
+[node name="PINK" parent="." index="10" instance=ExtResource("4_dilu1")]
 transform = Transform3D(0.906941, 0, -0.421257, 0, 1, 0, 0.421257, 0, 0.906941, 189.739, 0, 40.6087)
 
-[node name="GREEN" parent="." index="11" instance=ExtResource("4_hgl5q")]
+[node name="GREEN" parent="." index="11" instance=ExtResource("4_dilu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.2576, 0, -117.854)
 
-[node name="BLUE" parent="." index="12" instance=ExtResource("4_hgl5q")]
+[node name="BLUE" parent="." index="12" instance=ExtResource("4_dilu1")]
 transform = Transform3D(0.965944, 0, -0.258752, 0, 1, 0, 0.258752, 0, 0.965944, 49.2312, 0, -0.382977)
 
-[node name="ORANGE" parent="." index="13" instance=ExtResource("4_hgl5q")]
+[node name="ORANGE" parent="." index="13" instance=ExtResource("4_dilu1")]
 transform = Transform3D(0.812145, 0, -0.583456, 0, 1, 0, 0.583456, 0, 0.812145, 115.378, 0, -42.4443)

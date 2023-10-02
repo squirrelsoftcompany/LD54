@@ -78,5 +78,5 @@ level/meeple_gone=0
 level/meeple_gone_max=3
 level/meeple_arrived_max=20
 meeple/vanish_time=90.0
-level/list=["res://_scenes/main.tscn"]
+level/list=["res://_scenes/levels/level_1.tscn", "res://_scenes/levels/level_2.tscn", "res://_scenes/levels/level_3.tscn", "res://_scenes/levels/level_4.tscn", "res://_scenes/levels/level_5.tscn", "res://_scenes/levels/level_6.tscn", "res://_scenes/levels/level_7.tscn"]
 level/current=0
