@@ -64,3 +64,4 @@ dragger/dragged/droppable_flags=2
 rail/visual_elements_interval=60.0
 meeple/anger_time=60.0
 meeple/annoyed_time=30.0
+meeple/vanish_time=90.0

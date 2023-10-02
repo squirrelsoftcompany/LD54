@@ -12,6 +12,7 @@ var redMat = preload("res://resources/CountryMaterial/red.tres")
 
 var annoyed_time : float = ProjectSettings.get_setting("specific/meeple/annoyed_time", 1)
 var anger_time : float = ProjectSettings.get_setting("specific/meeple/anger_time", 1)
+var vanish_time : float = ProjectSettings.get_setting("specific/meeple/vanish_time", 1)
 
 @export var country: Color
 
@@ -41,6 +42,9 @@ func _process(delta: float) -> void:
 		else :
 			state = 2
 	update_speech(state)
+	if wait > vanish_time:
+		self.visible = false
+		# TO DO : loss condition
 
 func getCountry() -> Color:
 	return country
