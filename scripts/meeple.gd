@@ -9,19 +9,41 @@ var greenyellowMat = preload("res://resources/CountryMaterial/greenyellow.tres")
 var orangeMat = preload("res://resources/CountryMaterial/orange.tres")
 var rebeccapurpleMat = preload("res://resources/CountryMaterial/rebeccapurple.tres")
 var redMat = preload("res://resources/CountryMaterial/red.tres")
+<<<<<<< Updated upstream
 
 
 @export var country: Color
 
+=======
+var annoyed_time : float = ProjectSettings.get_setting("specific/meeple/annoyed_time", 1)
+var anger_time : float = ProjectSettings.get_setting("specific/meeple/anger_time", 1)
+@export var country: Color
+var wait = 0.0
+var invalid_placement = false
+var is_in_train = false
+var bubble = AnimatedSprite3D
+>>>>>>> Stashed changes
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	bubble = $SpeechBubble
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+	var state = 0
+	
+	if is_in_train:
+		wait =floor(wait-delta/1000)
+	else:
+		wait += delta
+		if wait <= annoyed_time :
+			state = 0
+		elif wait > annoyed_time and wait < anger_time:
+			state = 1
+		else :
+			state = 2
+	update_speech(state)
 
 func getCountry() -> Color:
 	return country
@@ -77,3 +99,20 @@ func can_drop(droppable) -> bool:
 func drag_cancelled(_droppable):
 	if ghost: ghost.queue_free()
 	ghost = null
+
+func update_speech(state):
+	if is_in_train:
+		if state == 2 :
+			bubble.visible = true
+			bubble.frame = 0
+	elif invalid_placement:
+		bubble.visible = true
+		bubble.frame = 3
+	elif state == 1 :
+		bubble.visible = true
+		bubble.frame = 1
+	elif state == 2 :
+		bubble.visible = true
+		bubble.frame = 2
+	else :
+		bubble.visible = false
