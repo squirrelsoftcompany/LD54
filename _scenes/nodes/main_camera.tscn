@@ -97,6 +97,7 @@ render_target_update_mode = 4
 script = ExtResource("1_qkx12")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(570, 0, 0, 0, 1, 0, 0, 0, 300, 0, 0, 0)
 layers = 32
 material_override = SubResource("StandardMaterial3D_mr05t")
 mesh = SubResource("QuadMesh_weh1u")
@@ -123,6 +124,7 @@ volume_db = -30.0
 bus = &"Music"
 
 [node name="AudioMix" type="AnimationPlayer" parent="."]
+process_mode = 3
 autoplay = "MusicMix"
 libraries = {
 "": SubResource("AnimationLibrary_ca5gi")

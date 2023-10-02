@@ -44,7 +44,10 @@ func _process(delta: float) -> void:
 	update_speech(state)
 	if wait > vanish_time:
 		self.visible = false
-		# TO DO : loss condition
+		var currentGoneMeeple = ProjectSettings.get_setting("specific/level/meeple_gone")
+		ProjectSettings.set_setting("specific/level/meeple_gone", currentGoneMeeple+1)
+		if (currentGoneMeeple+1 == ProjectSettings.get_setting("specific/level/meeple_gone_max")):
+			_Global.game_over()
 
 func getCountry() -> Color:
 	return country

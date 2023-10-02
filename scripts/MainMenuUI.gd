@@ -18,7 +18,8 @@ func _process(delta: float) -> void:
 
 func _on_start_button_pressed() -> void:
 	bipSound.play()
-	# Change scene
+	_Global.goto_level(0)
+	
 
 
 func _on_quit_button_pressed() -> void:

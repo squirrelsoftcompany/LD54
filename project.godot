@@ -15,13 +15,18 @@ countryArray=PackedColorArray(0, 0, 1, 1, 0, 1, 1, 1, 1, 0.0784314, 0.576471, 1,
 [application]
 
 config/name="LD54"
-run/main_scene="res://_scenes/main.tscn"
+run/main_scene="res://_scenes/menu.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
+_Global="*res://scripts/Global.gd"
 _Dragger="*res://scripts/Dragger.gd"
+
+[editor]
+
+export/convert_text_resources_to_binary=false
 
 [layer_names]
 
@@ -73,3 +78,5 @@ level/meeple_gone=0
 level/meeple_gone_max=3
 level/meeple_arrived_max=20
 meeple/vanish_time=90.0
+level/list=["res://_scenes/main.tscn"]
+level/current=0

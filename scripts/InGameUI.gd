@@ -12,6 +12,7 @@ var currentGoneMeepleMax
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_Global.connect("update_ui",_on_update_ui)
+	_Global.call_update_ui()
 	#_Global.connect("update_ui",Callable(self, "_on_update_ui"))
 	pass
 
@@ -25,7 +26,7 @@ func _on_update_ui() -> void:
 	currentArrivedMeepleMax = ProjectSettings.get_setting("specific/level/meeple_arrived_max")
 	currentGoneMeeple = ProjectSettings.get_setting("specific/level/meeple_gone")
 	currentGoneMeepleMax = ProjectSettings.get_setting("specific/level/meeple_gone_max")
-	arrivedMeepleScore.text = str(currentArrivedMeeple + "/" + currentArrivedMeepleMax)
-	goneMeepleScore.text = str(currentGoneMeeple + "/" + currentGoneMeepleMax)
+	arrivedMeepleScore.text = str(currentArrivedMeeple) + "/" + str(currentArrivedMeepleMax)
+	goneMeepleScore.text = str(currentGoneMeeple) + "/" + str(currentGoneMeepleMax)
 	
 
