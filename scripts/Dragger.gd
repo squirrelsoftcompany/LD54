@@ -17,6 +17,7 @@ var _to := Vector3.INF
 var _dragged_object : Node3D = null
 var _dragged_object_ghost : Node3D = null
 func _unhandled_input(event: InputEvent) -> void:
+	mainCamera = get_viewport().get_camera_3d()
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		# begin drag
 		if _dragging and not event.pressed:
