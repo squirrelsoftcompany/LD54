@@ -21,6 +21,7 @@ orientation = 1
 [sub_resource type="Animation" id="Animation_ovwdv"]
 resource_name = "MusicMix"
 length = 294.03
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -113,7 +114,7 @@ current = true
 
 [node name="Music1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_jg86j")
-volume_db = -4.60785
+volume_db = -30.0
 bus = &"Music"
 
 [node name="Music2" type="AudioStreamPlayer" parent="."]
