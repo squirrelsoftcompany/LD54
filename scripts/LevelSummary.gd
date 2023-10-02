@@ -11,7 +11,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func 
 
-
-func _on_continue_pressed() -> void:
-	bip_sound.play()
+#func _on_continue_pressed() -> void:
+#	bip_sound.play()
+	

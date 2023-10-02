@@ -1,6 +1,8 @@
 extends Node
 
 signal update_ui
+signal level_complet
+signal game_over
 
 var _current_scene = null
 var _current_scene_res = null
@@ -31,8 +33,12 @@ func resume() -> void:
 	pass
 	
 	
-func game_over() -> void:
-	#Gameover behaviour
+func trigger_game_over() -> void:
+	emit_signal("game_over")
+	pass
+	
+func trigger_level_complet() -> void:
+	emit_signal("level_complet")
 	pass
 
 
@@ -40,8 +46,10 @@ func show_menu() -> void:
 	_goto_scene(_main_menu)
 	pass
 	
+	
 func goto_next_level():
 	goto_level(ProjectSettings.get_setting("specific/level/current") + 1)
+
 
 func goto_level(index):
 	var levels : Array = ProjectSettings.get_setting("specific/level/list")
@@ -73,6 +81,7 @@ func _deferred_goto_scene(scene: Resource) -> void:
 	
 	# Reinit global data
 	reinit()
+
 
 func reinit():
 	pass

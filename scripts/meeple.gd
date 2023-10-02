@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 		var currentGoneMeeple = ProjectSettings.get_setting("specific/level/meeple_gone")
 		ProjectSettings.set_setting("specific/level/meeple_gone", currentGoneMeeple+1)
 		if (currentGoneMeeple+1 == ProjectSettings.get_setting("specific/level/meeple_gone_max")):
-			_Global.game_over()
+			_Global.trigger_game_over()
 
 func getCountry() -> Color:
 	return country

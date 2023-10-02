@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dvqxlryjq8y1g" path="res://models/ui_icons.png" id="3_fq77u"]
 [ext_resource type="AudioStream" uid="uid://be2wftvlet4op" path="res://resources/SoundEffects/click.mp3" id="4_6uoe2"]
 
+[node name="InGameUI" type="Control" node_paths=PackedStringArray("arrivedMeepleScore", "goneMeepleScore", "summaryTitle", "summaryButton", "levelSummary", "bip_sound")]
 [sub_resource type="AtlasTexture" id="AtlasTexture_f00s4"]
 atlas = ExtResource("3_fq77u")
 region = Rect2(0, 0, 32, 32)
@@ -52,6 +53,10 @@ mouse_filter = 1
 script = ExtResource("1_u7f4a")
 arrivedMeepleScore = NodePath("MarginContainer/VBoxContainer/ArrivedMeepleScore/Label")
 goneMeepleScore = NodePath("MarginContainer/VBoxContainer/GoneMeepleScore/Label")
+summaryTitle = NodePath("LevelSummary/MarginContainer2/VBoxContainer/Label")
+summaryButton = NodePath("LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer/Continue")
+levelSummary = NodePath("LevelSummary")
+bip_sound = NodePath("Bip")
 
 [node name="GeneralControls" parent="." instance=ExtResource("2_kmyoa")]
 layout_mode = 0
@@ -314,4 +319,5 @@ bus = &"UI FX"
 [connection signal="pressed" from="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer/Previous" to="TutoPanel" method="_on_previous_pressed"]
 [connection signal="pressed" from="TutoPanel/MarginContainer2/VBoxContainer/HBoxContainer/Next" to="TutoPanel" method="_on_next_pressed"]
 [connection signal="pressed" from="TutoPanel/MarginContainer2/ExitTuto" to="TutoPanel" method="_on_exit_tuto_pressed"]
+[connection signal="pressed" from="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="LevelSummary/MarginContainer2/VBoxContainer/VBoxContainer/Continue" to="LevelSummary" method="_on_continue_pressed"]
