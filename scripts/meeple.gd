@@ -74,7 +74,7 @@ func setCountry(pCountry : Color) -> void:
 
 
 var ghost : Node3D = null
-func drag_begin(_droppable):
+func drag_begin():
 	if not ghost:
 		ghost = self.duplicate(0)
 		get_tree().root.add_child(ghost)
@@ -84,11 +84,6 @@ func drag_begin(_droppable):
 func drag_finished(_droppable):
 	if ghost: ghost.queue_free()
 	ghost = null
-	
-	# when inside wagon, there isn't any takeMeeple function
-	var _spawner := get_parent()
-	if (_spawner.has_method("takeMeeple")):
-		_spawner.takeMeeple(self)
 
 
 func can_drop(droppable) -> bool:
@@ -100,6 +95,16 @@ func can_drop(droppable) -> bool:
 func drag_cancelled(_droppable):
 	if ghost: ghost.queue_free()
 	ghost = null
+
+
+func current_drop_slot():
+	var _parent = get_parent()
+	if _parent.has_method("takeMeeple"): # spwaner
+		return _parent
+	elif _parent.get_parent().has_method("takeMeeple"): # wagon
+		return _parent
+	return null
+
 
 func update_speech(state):
 	if is_in_train:

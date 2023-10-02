@@ -28,8 +28,14 @@ func _process(_delta: float) -> void:
 
 
 var _passenger : Node3D = null
-func drag_finished(draggable : Node3D):
-	_passenger = draggable.get_parent()
+func dragged_out(meeple_collider:Node3D):
+	if meeple_collider.get_parent() != _passenger: return
+	_passenger = meeple_collider.get_parent()
+
+
+func dropped_in(meeple_collider:Node3D):
+	if _passenger != null: return
+	_passenger = meeple_collider.get_parent()
 	_passenger.reparent(meeple_hotspot)
 	_passenger.position = Vector3.ZERO
 	_passenger.quaternion = Quaternion.IDENTITY

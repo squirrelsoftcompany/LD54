@@ -55,20 +55,27 @@ func spawnMeeple() -> void :
 		spawnTimer.stop()
 
 
-func takeMeeple(pMeeple:Node3D) -> Node3D :
-	var searchedMeepleIndex
-	for i in range(0, meepleArray.size()):
-		if pMeeple.get_instance_id() == meepleArray[i].get_instance_id():
-			searchedMeepleIndex = i
-	meepleArray.remove_at(searchedMeepleIndex)
-	updateMeeplePosition()
-	return 
+func takeMeeple(pMeeple:Node3D) -> void :
+	var searchedMeepleIndex := find_meeple(pMeeple)
+	if searchedMeepleIndex != -1:
+		meepleArray.remove_at(searchedMeepleIndex)
+		updateMeeplePosition() 
 
 
 func pushMeeple(pMeeple:Node3D) -> void:
-	add_child(pMeeple, true, Node.INTERNAL_MODE_BACK)
+	if find_meeple(pMeeple) != -1: return
+	if not pMeeple.get_parent(): add_child(pMeeple, true, Node.INTERNAL_MODE_BACK)
+	else: pMeeple.reparent(self)
 	meepleArray.push_back(pMeeple)
 	updateMeeplePosition()
+
+
+func find_meeple(pMeeple:Node3D) -> int:
+	var searchedMeepleIndex := -1
+	for i in range(0, meepleArray.size()):
+		if pMeeple.get_instance_id() == meepleArray[i].get_instance_id():
+			searchedMeepleIndex = i
+	return searchedMeepleIndex
 
 
 func updateMeeplePosition() -> void :
@@ -77,6 +84,8 @@ func updateMeeplePosition() -> void :
 		meepleArray[i].position.x = (i%meepleByRow) * ps_meeple_offset
 		@warning_ignore("integer_division")
 		meepleArray[i].position.z = (i/meepleByRow) * ps_meeple_offset
+		# reset rotation
+		meepleArray[i].rotation.y = 0
 
 
 func _on_spawn_timer_timeout() -> void:
@@ -87,3 +96,11 @@ func _on_spawn_timer_timeout() -> void:
 func get_size() -> Vector2:
 	@warning_ignore("integer_division")
 	return Vector2(meepleByRow, maxMeeple/meepleByRow) * ps_meeple_offset
+
+
+func dragged_out(meeple_collider:Node3D):
+	takeMeeple(meeple_collider.get_parent())
+
+
+func dropped_in(meeple_collider:Node3D):
+	pushMeeple(meeple_collider.get_parent())
