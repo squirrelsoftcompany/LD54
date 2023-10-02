@@ -82,3 +82,6 @@ static func color_to_country(color : Color) -> int:
 		if dist_sq < 0.01:
 			return i
 	return -1
+static func country_to_color(country : int):
+	assert(country != -1)
+	return countryArray[country]

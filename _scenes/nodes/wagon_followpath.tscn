@@ -41,7 +41,7 @@ func dropped_in(meeple:Node3D):
 	_passenger.quaternion = Quaternion.IDENTITY
 
 
-func can_drop(_draggable : Node3D):
+func can_drop(_draggable : Node3D, _picked_position : Vector3):
 	return _passenger == null
 "
 

@@ -1,21 +1,24 @@
 extends MeshInstance3D
 
 
-var blueMat = preload("res://resources/CountryMaterial/blue.tres")
-var cyanMat = preload("res://resources/CountryMaterial/cyan.tres")
-var deeppinkMat = preload("res://resources/CountryMaterial/deeppink.tres")
-var goldMat = preload("res://resources/CountryMaterial/gold.tres")
-var greenyellowMat = preload("res://resources/CountryMaterial/greenyellow.tres")
-var orangeMat = preload("res://resources/CountryMaterial/orange.tres")
-var rebeccapurpleMat = preload("res://resources/CountryMaterial/rebeccapurple.tres")
-var redMat = preload("res://resources/CountryMaterial/red.tres")
+var materials := {
+	Color.BLUE			 : preload("res://resources/CountryMaterial/blue.tres"),
+	Color.CYAN			 : preload("res://resources/CountryMaterial/cyan.tres"),
+	Color.DEEP_PINK		 : preload("res://resources/CountryMaterial/deeppink.tres"),
+	Color.GOLD			 : preload("res://resources/CountryMaterial/gold.tres"),
+	Color.GREEN_YELLOW	 : preload("res://resources/CountryMaterial/greenyellow.tres"),
+	Color.ORANGE 		 : preload("res://resources/CountryMaterial/orange.tres"),
+	Color.REBECCA_PURPLE : preload("res://resources/CountryMaterial/rebeccapurple.tres"),
+	Color.RED			 : preload("res://resources/CountryMaterial/red.tres")
+}
 
 var annoyed_time : float = ProjectSettings.get_setting("specific/meeple/annoyed_time", 1)
 var anger_time : float = ProjectSettings.get_setting("specific/meeple/anger_time", 1)
 var vanish_time : float = ProjectSettings.get_setting("specific/meeple/vanish_time", 1)
 var happy_time : float = ProjectSettings.get_setting("specific/meeple/happy_time", 5)
 
-@export var country: Color
+@export var country_color: Color = Color.BLACK
+@export var country_id: int = -1
 
 var wait = 0.0
 var happy = 0.0
@@ -43,46 +46,63 @@ var _previous_state : State = State.WAITING
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	_previous_state = _state
+	var _country_under_meeple := CountryPicker.country_under_unprojected_3d_position(global_position)
 	
 	match _state:
 		State.ONBOARD:
 			wait = max(0,floor(wait-delta/1000))
 			if not is_in_train:
 				_state = State.WAITING
+			elif _country_under_meeple == country_id:
+				assert(_current_drop_slot.is_in_group("Wagon"))
+				_current_drop_slot.dragged_out(self)
+				Spawner._country_spawner[_country_under_meeple].pushMeeple(self)
+				is_in_train = false
 		State.HAPPY_TO_BE_ONBOARD:
 			wait = max(0,floor(wait-delta/1000))
 			happy += delta
 			if not is_in_train:
 				_state = State.WAITING
+			elif _country_under_meeple == country_id:
+				_state = State.ARRIVED
 			elif happy >= happy_time:
 				_state = State.ONBOARD
 		State.WAITING:
 			wait += delta
 			if is_in_train:
 				_state = State.ONBOARD
+			elif _country_under_meeple == country_id:
+				_state = State.ARRIVED
 			elif wait >= annoyed_time :
 				_state = State.ANNOYED
 		State.ANNOYED:
 			wait += delta
 			if is_in_train:
 				_state = State.ONBOARD
+			elif _country_under_meeple == country_id:
+				_state = State.ARRIVED
 			elif wait >= anger_time :
 				_state = State.ANGERED
 		State.ANGERED:
 			wait += delta
 			if is_in_train:
 				_state = State.HAPPY_TO_BE_ONBOARD
+			elif _country_under_meeple == country_id:
+				_state = State.ARRIVED
 			elif wait >= vanish_time :
 				happy = 0.0
 				_state = State.VANISHING
-		State.VANISHING:
-			if scale.length() > delta:
+		State.VANISHING, State.ARRIVED:
+			if is_in_train and _state == State.VANISHING:
+				scale = Vector3.ONE
+				_state = State.HAPPY_TO_BE_ONBOARD
+			elif scale.length() > delta:
 				scale -= Vector3.ONE * delta
 				bubble.scale = scale.inverse()
 			else:
 				if (_current_drop_slot.is_in_group("Spawner")
 				and _current_drop_slot.has_method("takeMeeple")):
-					get_parent().takeMeeple(self)
+					_current_drop_slot.takeMeeple(self)
 				visible = false
 				if _Dragger._dragged_object == self:
 					_Dragger._dragged_object_ghost = null
@@ -92,36 +112,20 @@ func _process(delta: float) -> void:
 				ProjectSettings.set_setting("specific/level/meeple_gone", currentGoneMeeple+1)
 				if (currentGoneMeeple+1 == ProjectSettings.get_setting("specific/level/meeple_gone_max")):
 					_Global.trigger_game_over()
-				queue_free()
+				queue_free.call_deferred()
 
 	update_speech()
 
 
-func getCountry() -> Color:
-	return country
+func setCountry(_country_id : int) -> void:
+	country_id = _country_id
+	country_color = CountryPicker.country_to_color(country_id)
+	var material = materials[Color.RED]
+	for key in materials.keys():
+		if key.is_equal_approx(country_color):
+			material = materials[key]
+			break
 
-
-func setCountry(pCountry : Color) -> void:
-	var material
-	if pCountry.is_equal_approx(Color.BLUE):
-		material = blueMat.duplicate()
-	elif pCountry.is_equal_approx(Color.CYAN):
-		material = cyanMat.duplicate()
-	elif pCountry.is_equal_approx(Color.DEEP_PINK):
-		material = deeppinkMat.duplicate()
-	elif pCountry.is_equal_approx(Color.GOLD):
-		material = goldMat.duplicate()
-	elif pCountry.is_equal_approx(Color.GREEN_YELLOW):
-		material = greenyellowMat.duplicate()
-	elif pCountry.is_equal_approx(Color.ORANGE):
-		material = orangeMat.duplicate()
-	elif pCountry.is_equal_approx(Color.REBECCA_PURPLE):
-		material = rebeccapurpleMat.duplicate()
-	elif pCountry.is_equal_approx(Color.RED):
-		material = redMat.duplicate()
-	else:
-		material = redMat.duplicate()
-	
 	set_material_override(material)
 
 
@@ -130,6 +134,7 @@ func drag_begin():
 	if not ghost:
 		ghost = self.duplicate(0)
 		get_tree().root.add_child(ghost)
+		ghost.get_node("StaticBody3D").queue_free() # remove bounding box
 	return ghost
 
 
@@ -140,14 +145,27 @@ func drag_finished(droppable):
 	is_in_train = _current_drop_slot and _current_drop_slot.is_in_group("Wagon")
 
 
+func drag_finished_in_void(picked_position : Vector3):
+	var country_under_mouse := CountryPicker.country_under_unprojected_3d_position(picked_position)
+	assert(country_under_mouse != -1)
+	_current_drop_slot.dragged_out(self)
+	drag_finished(Spawner._country_spawner[country_under_mouse])
+	_current_drop_slot.dropped_in(self)
+
+
 func can_drag():
-	return _state != State.VANISHING
+	return _state != State.VANISHING && _state != State.ARRIVED
 
 
-func can_drop(droppable) -> bool:
-	var country_droppable := CountryPicker.country_under_unprojected_3d_position(droppable.global_position)
-	var country_draggable := CountryPicker.country_under_unprojected_3d_position(self.global_position)
-	invalid_placement = not (country_draggable == country_droppable and country_droppable != -1)
+func can_drop(droppable, picked_position : Vector3) -> bool:
+	var country_under_me := CountryPicker.country_under_unprojected_3d_position(global_position)
+	var country_droppable : int
+	if droppable:
+		country_droppable = CountryPicker.country_under_unprojected_3d_position(droppable.global_position)
+	else:
+		assert(picked_position.is_finite())
+		country_droppable = CountryPicker.country_under_unprojected_3d_position(picked_position)
+	invalid_placement = country_under_me != country_droppable or country_droppable == -1
 	return not invalid_placement
 
 
@@ -168,14 +186,21 @@ func update_speech():
 		ghost_bubble.visible = invalid_placement
 	
 	match _state:
-		State.HAPPY_TO_BE_ONBOARD:
+		State.HAPPY_TO_BE_ONBOARD, State.ARRIVED:
 			bubble.visible = true
 			bubble.frame = 0
+			bubble.modulate = Color.WHITE
 		State.ANNOYED :
 			bubble.visible = true
 			bubble.frame = 1
-		State.ANGERED, State.VANISHING :
+			bubble.modulate = Color.WHITE
+		State.ANGERED :
 			bubble.visible = true
 			bubble.frame = 2
+			bubble.modulate = Color.WHITE
+		State.VANISHING :
+			bubble.visible = true
+			bubble.frame = 2
+			bubble.modulate = Color.RED
 		_:
 			bubble.visible = false

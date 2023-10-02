@@ -1,4 +1,5 @@
 extends Node3D
+class_name Spawner
 
 
 @onready var ps_meeple_offset : float = ProjectSettings.get_setting("specific/meeple/offset", 1) # m
@@ -7,6 +8,10 @@ extends Node3D
 
 @export var maxMeeple : int = 10
 @export var meepleByRow = 5
+@export_enum(
+	"INVALID:-1","BLUE:0","CYAN:1","DEEP_PINK:2","GOLD:3",
+	"GREEN_YELLOW:4","ORANGE:5","REBECCA_PURPLE:6","RED:7"
+	) var country_id := -1
 
 
 @onready var spawnTimer : Timer = get_node("SpawnTimer")
@@ -14,38 +19,28 @@ extends Node3D
 
 var meepleClass = preload("res://_scenes/nodes/meeple.tscn")
 var meepleArray : Array[Node3D] = []
-#Debug var ------------------
-var triggerable = true
-#----------------------------
+var country_color : Color
+static var _country_spawner : Dictionary = {}
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spawnTimer.wait_time = ps_meeple_spawn_time
-	pass # Replace with function body.
+	register_spawner()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	#Debug : Test the takeMeeple() function -----------
-	@warning_ignore("integer_division")
-	var modul_time = Time.get_ticks_msec()/1000
-	if modul_time == 0:
-		triggerable = true
-	elif modul_time == 5 and triggerable:
-		if meepleArray.size() > 2:
-			takeMeeple(meepleArray[2])
-		triggerable = false
-	# -----------------------------------------------
 	pass
 
 
 func spawnMeeple() -> void :
 	if meepleArray.size() < maxMeeple:
 		var meeple = meepleClass.instantiate()
-		var countryArray = ProjectSettings.get_setting("Game/countryArray")
 		#Spawner currently use every colors, we should create a smarter function to randomly choose a color available for the current level
-		meeple.setCountry(countryArray[randi()%7+1])
+		var countriesAvailable : Array = Spawner._country_spawner.keys()
+		countriesAvailable.erase(country_id)
+		meeple.setCountry(countriesAvailable[randi_range(0, countriesAvailable.size()-1)])
 		meeple.transform.origin = transform.origin
 
 		pushMeeple(meeple)
@@ -59,10 +54,11 @@ func takeMeeple(pMeeple:Node3D) -> void :
 	var searchedMeepleIndex := find_meeple(pMeeple)
 	if searchedMeepleIndex != -1:
 		meepleArray.remove_at(searchedMeepleIndex)
-		updateMeeplePosition() 
+		updateMeeplePosition()
 
 
 func pushMeeple(pMeeple:Node3D) -> void:
+	assert(pMeeple)
 	if find_meeple(pMeeple) != -1: return
 	if not pMeeple.get_parent(): add_child(pMeeple, true, Node.INTERNAL_MODE_BACK)
 	else: pMeeple.reparent(self)
@@ -73,13 +69,15 @@ func pushMeeple(pMeeple:Node3D) -> void:
 func find_meeple(pMeeple:Node3D) -> int:
 	var searchedMeepleIndex := -1
 	for i in range(0, meepleArray.size()):
-		if pMeeple.get_instance_id() == meepleArray[i].get_instance_id():
+		if pMeeple == meepleArray[i]:
 			searchedMeepleIndex = i
 	return searchedMeepleIndex
 
 
 func updateMeeplePosition() -> void :
 	for i in range(0, meepleArray.size()):
+		if not meepleArray[i]:
+			continue
 		@warning_ignore("integer_division")
 		meepleArray[i].position.x = (i%meepleByRow) * ps_meeple_offset
 		@warning_ignore("integer_division")
@@ -104,3 +102,9 @@ func dragged_out(meeple:Node3D):
 
 func dropped_in(meeple:Node3D):
 	pushMeeple(meeple)
+
+
+func register_spawner():
+	assert(country_id != -1)
+	country_color = CountryPicker.country_to_color(country_id)
+	_country_spawner[country_id] = self

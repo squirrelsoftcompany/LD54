@@ -73,27 +73,35 @@ pause_at_end = 0.0
 
 [node name="Spawner" parent="." instance=ExtResource("5_r03u6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -207.76, 0, 58.0784)
+country_id = 1
 
 [node name="Spawner2" parent="." instance=ExtResource("5_r03u6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -182.003, 0, -92.9093)
+country_id = 6
 
 [node name="Spawner3" parent="." instance=ExtResource("5_r03u6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.902, 0, -122.588)
+country_id = 4
 
 [node name="Spawner4" parent="." instance=ExtResource("5_r03u6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 125.927, -1.52588e-05, -69.6212)
+country_id = 5
 
 [node name="Spawner5" parent="." instance=ExtResource("5_r03u6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 203.553, 0, 65.6021)
+country_id = 2
 
 [node name="Spawner6" parent="." instance=ExtResource("5_r03u6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -86.1227, 0, 76.4743)
+country_id = 3
 
 [node name="Spawner7" parent="." instance=ExtResource("5_r03u6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.2302, 4.57764e-05, -7.89676)
 meepleByRow = 2
+country_id = 7
 
 [node name="Spawner8" parent="." instance=ExtResource("5_r03u6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.0249, 6.10352e-05, 4.41247)
+country_id = 0
 
 [node name="InGameUI" parent="." instance=ExtResource("6_vkr6r")]
