@@ -73,6 +73,7 @@ func find_meeple(pMeeple:Node3D) -> int:
 
 
 func updateMeeplePosition() -> void :
+	meepleArray = meepleArray.filter( func (x): return x and is_instance_valid(x) )
 	for i in range(0, meepleArray.size()):
 		if not meepleArray[i]:
 			continue
