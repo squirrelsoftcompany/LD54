@@ -62,7 +62,10 @@ func show_menu() -> void:
 
 
 func goto_next_level():
-	goto_level(ProjectSettings.get_setting("specific/level/current") + 1)
+	if (ProjectSettings.get_setting("specific/level/current")) >= 6 :
+		_goto_scene(_main_menu)
+	else:
+		goto_level(ProjectSettings.get_setting("specific/level/current") + 1)
 
 
 func goto_level(index):

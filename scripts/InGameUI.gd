@@ -64,8 +64,13 @@ func _on_game_over() -> void:
 func _on_level_complete() -> void:
 	_on_update_ui()
 	_Global.pause()
-	summaryTitle.text = "Well Played"
-	summaryButton.text = "Next"
+	var levels : Array = ProjectSettings.get_setting("specific/level/list")
+	if (ProjectSettings.get_setting("specific/level/current")) >= 6 :
+		summaryTitle.text = "You've completed the game. Congratulations"
+		summaryButton.text = "Menu"
+	else:
+		summaryTitle.text = "Well Played"
+		summaryButton.text = "Next"
 	levelSummary.visible = true
 	
 
