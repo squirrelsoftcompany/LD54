@@ -80,6 +80,8 @@ func updateMeeplePosition() -> void :
 		meepleArray[i].position.x = (i%meepleByRow) * ps_meeple_offset
 		@warning_ignore("integer_division")
 		meepleArray[i].position.z = (i/meepleByRow) * ps_meeple_offset
+		# reset position
+		meepleArray[i].position.y = 0
 		# reset rotation
 		meepleArray[i].rotation.y = 0
 
