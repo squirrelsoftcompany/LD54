@@ -42,6 +42,7 @@ curve = SubResource("Curve3D_dsqh2")
 
 [node name="Train" parent="railway" index="4" instance=ExtResource("3_thhca")]
 transform = Transform3D(0.500312, 0, -0.865845, 0, 1, 0, 0.865845, 0, 0.500312, -153.982, 0, -50.3629)
+wagon_count = 4
 
 [node name="railway3" parent="." index="5" instance=ExtResource("2_3y3yh")]
 curve = SubResource("Curve3D_nodmp")
