@@ -5,6 +5,7 @@ var ps_offset_dragged_object : Vector3 = ProjectSettings.get_setting("specific/d
 var ps_draggable_flags : int = ProjectSettings.get_setting("specific/dragger/dragged/draggable_flags", 1)
 var ps_droppable_flags : int = ProjectSettings.get_setting("specific/dragger/dragged/droppable_flags", 2)
 const RAY_LENGTH := 2000
+const CLICK_THRESHOLD := 200
 
 
 @onready var mainCamera : Camera3D = get_viewport().get_camera_3d()
@@ -21,11 +22,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	mainCamera = get_viewport().get_camera_3d()
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		# begin drag
-		if _dragging and not event.pressed and  Time.get_ticks_msec() - _dragging_since < 500 and _dragged_object:
+		if _dragging and not event.pressed and _dragged_object and Time.get_ticks_msec() - _dragging_since <= CLICK_THRESHOLD:
 			_dragging = false
 			on_click(_dragged_object)
 			_dragged_object = null
 			_dragged_object_ghost = null
+			_droppable_under_mouse = null
 		elif _dragging and not event.pressed:
 			_dragging = false
 			if (_droppable_under_mouse and _dragged_object):
@@ -38,13 +40,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			elif _dragged_object: drag_cancelled(_dragged_object)
 			_dragged_object = null
 			_dragged_object_ghost = null
+			_droppable_under_mouse = null
 		# end drag
-		if not _dragging and event.pressed:
+		elif not _dragging and event.pressed:
 			_dragging = true
 			_dragging_since = Time.get_ticks_msec()
 			_dragged_object = _draggable_under_mouse
 			_dragged_object_ghost = drag_begin(_dragged_object)
-	elif event is InputEventMouseMotion:
+	elif event is InputEventMouse:
 		var mouse_position : Vector2 = event.global_position
 		_from = mainCamera.project_ray_origin(mouse_position)
 		_dir = mainCamera.project_ray_normal(mouse_position)
@@ -106,8 +109,10 @@ func update_under_mouse():
 
 
 func move_dragged_object():
-	if _dragged_object_ghost and _dragging_3d_position.is_finite():
-		_dragged_object_ghost.global_position = _dragging_3d_position
+	if _dragged_object_ghost:
+		if _dragging_3d_position.is_finite():
+			_dragged_object_ghost.global_position = _dragging_3d_position
+		_dragged_object_ghost.visible = Time.get_ticks_msec() - _dragging_since >= CLICK_THRESHOLD
 
 
 #utils
