@@ -84,3 +84,4 @@ country_id = 0
 
 [node name="ORANGE" parent="." index="13" instance=ExtResource("4_43r4d")]
 transform = Transform3D(0.812145, 0, -0.583456, 0, 1, 0, 0.583456, 0, 0.812145, 110.354, 1.52588e-05, -86.3358)
+country_id = 5
