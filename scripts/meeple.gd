@@ -92,6 +92,7 @@ func _process(delta: float) -> void:
 		State.VANISHING, State.ARRIVED:
 			if is_in_train and _state == State.VANISHING:
 				scale = Vector3.ONE
+				bubble.scale = Vector3.ONE
 				_state = State.HAPPY_TO_BE_ONBOARD
 			elif scale.length() > delta:
 				scale -= Vector3.ONE * delta
