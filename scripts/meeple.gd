@@ -54,10 +54,7 @@ func _process(delta: float) -> void:
 			if not is_in_train:
 				_state = State.WAITING
 			elif _country_under_meeple == country_id:
-				assert(_current_drop_slot.is_in_group("Wagon"))
-				_current_drop_slot.dragged_out(self)
-				_SpawnerManager._country_spawner[_country_under_meeple].pushMeeple(self)
-				is_in_train = false
+				drop_off_train()
 		State.HAPPY_TO_BE_ONBOARD:
 			wait = max(0,floor(wait-delta))
 			happy += delta
@@ -127,6 +124,14 @@ func setCountry(_country_id : int) -> void:
 	set_material_override(material)
 
 
+func drop_off_train():
+	var _country_under_meeple := CountryPicker.country_under_unprojected_3d_position(global_position)
+	assert(_current_drop_slot.is_in_group("Wagon"))
+	_current_drop_slot.dragged_out(self)
+	_SpawnerManager._country_spawner[_country_under_meeple].dropped_in(self)
+	is_in_train = false
+
+
 var ghost : Node3D = null
 func drag_begin():
 	RenderingServer.global_shader_parameter_set("destination_color", country_color)
@@ -141,7 +146,7 @@ func drag_begin():
 func drag_finished(droppable):
 	_current_drop_slot = droppable
 	is_in_train = _current_drop_slot and _current_drop_slot.is_in_group("Wagon")
-	drag_cancelled(droppable)
+	reset_drag()
 
 
 func drag_finished_in_void(picked_position : Vector3):
@@ -150,6 +155,7 @@ func drag_finished_in_void(picked_position : Vector3):
 	_current_drop_slot.dragged_out(self)
 	drag_finished(_SpawnerManager._country_spawner[country_under_mouse])
 	_current_drop_slot.dropped_in(self)
+	reset_drag()
 
 
 func can_drag():
@@ -171,6 +177,16 @@ func can_drop(droppable, picked_position : Vector3) -> bool:
 
 
 func drag_cancelled(_droppable):
+	reset_drag()
+
+
+func on_click(_droppable):
+	reset_drag()
+	if is_in_train:
+		drop_off_train()
+
+
+func reset_drag():
 	if ghost: ghost.queue_free()
 	ghost = null
 	RenderingServer.global_shader_parameter_set("destination_color", Color.BLACK)

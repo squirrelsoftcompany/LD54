@@ -11,6 +11,7 @@ const RAY_LENGTH := 2000
 
 
 var _dragging := false
+var _dragging_since := 0
 var _from := Vector3.INF
 var _dir := Vector3.INF
 var _to := Vector3.INF
@@ -20,7 +21,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	mainCamera = get_viewport().get_camera_3d()
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		# begin drag
-		if _dragging and not event.pressed:
+		if _dragging and not event.pressed and  Time.get_ticks_msec() - _dragging_since < 500 and _dragged_object:
+			_dragging = false
+			on_click(_dragged_object)
+			_dragged_object = null
+			_dragged_object_ghost = null
+		elif _dragging and not event.pressed:
 			_dragging = false
 			if (_droppable_under_mouse and _dragged_object):
 				dragged_out(current_drop_slot(_dragged_object), _dragged_object)
@@ -35,6 +41,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		# end drag
 		if not _dragging and event.pressed:
 			_dragging = true
+			_dragging_since = Time.get_ticks_msec()
 			_dragged_object = _draggable_under_mouse
 			_dragged_object_ghost = drag_begin(_dragged_object)
 	elif event is InputEventMouseMotion:
@@ -122,6 +129,8 @@ func drag_begin(draggable : Node3D) -> Node3D:
 	return _generic_drop("drag_begin", draggable, [], draggable)
 func drag_cancelled(draggable : Node3D) -> void:
 	_generic_drop("drag_cancelled", draggable, [null], null)
+func on_click(draggable : Node3D) -> void:
+	_generic_drop("on_click", draggable, [null], null)
 func _generic_drop(method_name : String, caller : Node3D, args : Array, default_value):
 	if caller and caller.has_method(method_name):
 		#prints(method_name, "on", caller.name)
