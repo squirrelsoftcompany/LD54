@@ -45,7 +45,6 @@ transform = Transform3D(-0.33502, 0, -0.94221, 0, 1, 0, 0.94221, 0, -0.33502, -1
 is_tgv = true
 wagon_count = 4
 ping_pong = true
-pause_at_end = 0.0
 
 [node name="railway2" parent="." index="4" instance=ExtResource("2_5ungt")]
 curve = SubResource("Curve3D_x1j05")

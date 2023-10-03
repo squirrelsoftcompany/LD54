@@ -50,7 +50,7 @@ func _process(delta: float) -> void:
 	
 	match _state:
 		State.ONBOARD:
-			wait = max(0,floor(wait-delta/1000))
+			wait = max(0,floor(wait-delta))
 			if not is_in_train:
 				_state = State.WAITING
 			elif _country_under_meeple == country_id:
@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 				_SpawnerManager._country_spawner[_country_under_meeple].pushMeeple(self)
 				is_in_train = false
 		State.HAPPY_TO_BE_ONBOARD:
-			wait = max(0,floor(wait-delta/1000))
+			wait = max(0,floor(wait-delta))
 			happy += delta
 			if not is_in_train:
 				_state = State.WAITING
