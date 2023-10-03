@@ -46,7 +46,7 @@ func can_drop(_draggable : Node3D, _picked_position : Vector3):
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t3jr5"]
-size = Vector3(8, 8, 8)
+size = Vector3(8, 4, 8)
 
 [node name="Wagon" type="PathFollow3D" groups=["Wagon"]]
 rotation_mode = 1
@@ -62,5 +62,5 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("BoxShape3D_t3jr5")
