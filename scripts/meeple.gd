@@ -137,6 +137,7 @@ var ghost : Node3D = null
 func drag_begin():
 	RenderingServer.global_shader_parameter_set("destination_color", country_color)
 	RenderingServer.global_shader_parameter_set("highlighted_color", CountryPicker.color_under_unprojected_3d_position(global_position))
+	get_node("Outline").visible = true
 	if not ghost:
 		ghost = self.duplicate(0)
 		get_tree().root.add_child(ghost)
@@ -192,6 +193,7 @@ func reset_drag():
 	ghost = null
 	RenderingServer.global_shader_parameter_set("destination_color", Color.BLACK)
 	RenderingServer.global_shader_parameter_set("highlighted_color", Color.BLACK)
+	get_node("Outline").visible = false
 
 
 @onready var _current_drop_slot := get_parent()

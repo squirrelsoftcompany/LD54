@@ -27,6 +27,17 @@ func _process(_delta: float) -> void:
 	visible = train.visible
 	if _passenger and is_instance_valid(_passenger):
 		_passenger.position = Vector3.ZERO
+	
+	# outlines
+	if _Dragger._dragging and _Dragger._dragged_object:
+		var country_under_me := CountryPicker.country_under_unprojected_3d_position(global_position)
+		var country_draggable : int = CountryPicker.country_under_unprojected_3d_position(_Dragger._dragged_object.global_position)
+		if country_under_me == country_draggable and can_drop(_Dragger._dragged_object, Vector3.INF):
+			get_node('./Wagon/Outline').visible = true
+		else:
+			get_node('./Wagon/Outline').visible = false
+	else:
+		get_node('./Wagon/Outline').visible = false
 
 
 var _passenger : Node3D = null
