@@ -84,15 +84,16 @@ func update_under_mouse():
 		# droppable
 		var query_drop = PhysicsRayQueryParameters3D.create(_from, _to, ps_droppable_flags)
 		var result_drop = space_state.intersect_ray(query_drop)
-		_droppable_under_mouse = result_drop.get("collider", null)
-		if _droppable_under_mouse:
-			if can_drop(_dragged_object, _droppable_under_mouse, _dragging_3d_position):
-				_droppable_under_mouse = _droppable_under_mouse.get_parent()
+		var candidate_droppable = result_drop.get("collider", null)
+		if candidate_droppable:
+			candidate_droppable = candidate_droppable.get_parent()
+			if can_drop(_dragged_object, candidate_droppable, _dragging_3d_position):
+				_droppable_under_mouse = candidate_droppable
 			else: _droppable_under_mouse = null
 			_drop_in_void_allowed = false
 		else:
 			_droppable_under_mouse = null
-			_drop_in_void_allowed = can_drop(_dragged_object, _droppable_under_mouse, _dragging_3d_position)
+			_drop_in_void_allowed = can_drop(_dragged_object, null, _dragging_3d_position)
 		# drag
 		_draggable_under_mouse = null
 

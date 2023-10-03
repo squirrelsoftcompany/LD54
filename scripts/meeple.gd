@@ -164,7 +164,9 @@ func can_drop(droppable, picked_position : Vector3) -> bool:
 		assert(picked_position.is_finite())
 		country_droppable = CountryPicker.country_under_unprojected_3d_position(picked_position)
 	invalid_placement = country_under_me != country_droppable or country_droppable == -1
-	return not invalid_placement
+	if droppable && droppable.has_method("can_drop"):
+		invalid_placement = invalid_placement || not droppable.can_drop(self, picked_position)
+	return country_under_me == country_droppable and country_droppable != -1
 
 
 func drag_cancelled(_droppable):
