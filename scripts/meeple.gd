@@ -129,6 +129,8 @@ func setCountry(_country_id : int) -> void:
 
 var ghost : Node3D = null
 func drag_begin():
+	RenderingServer.global_shader_parameter_set("destination_color", country_color)
+	RenderingServer.global_shader_parameter_set("highlighted_color", CountryPicker.color_under_unprojected_3d_position(global_position))
 	if not ghost:
 		ghost = self.duplicate(0)
 		get_tree().root.add_child(ghost)
@@ -137,10 +139,9 @@ func drag_begin():
 
 
 func drag_finished(droppable):
-	if ghost: ghost.queue_free()
-	ghost = null
 	_current_drop_slot = droppable
 	is_in_train = _current_drop_slot and _current_drop_slot.is_in_group("Wagon")
+	drag_cancelled(droppable)
 
 
 func drag_finished_in_void(picked_position : Vector3):
@@ -172,6 +173,8 @@ func can_drop(droppable, picked_position : Vector3) -> bool:
 func drag_cancelled(_droppable):
 	if ghost: ghost.queue_free()
 	ghost = null
+	RenderingServer.global_shader_parameter_set("destination_color", Color.BLACK)
+	RenderingServer.global_shader_parameter_set("highlighted_color", Color.BLACK)
 
 
 @onready var _current_drop_slot := get_parent()
