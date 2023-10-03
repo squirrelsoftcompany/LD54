@@ -19,6 +19,8 @@ var _to := Vector3.INF
 var _dragged_object : Node3D = null
 var _dragged_object_ghost : Node3D = null
 func _unhandled_input(event: InputEvent) -> void:
+	if Engine.get_time_scale() != 1: return
+	
 	mainCamera = get_viewport().get_camera_3d()
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		# begin drag
@@ -49,16 +51,22 @@ func _unhandled_input(event: InputEvent) -> void:
 			_dragged_object_ghost = drag_begin(_dragged_object)
 	elif event is InputEventMouse:
 		var mouse_position : Vector2 = event.global_position
-		_from = mainCamera.project_ray_origin(mouse_position)
-		_dir = mainCamera.project_ray_normal(mouse_position)
-		_to = _from + _dir * RAY_LENGTH
+		if mainCamera and is_instance_valid(mainCamera):
+			_from = mainCamera.project_ray_origin(mouse_position)
+			_dir = mainCamera.project_ray_normal(mouse_position)
+			_to = _from + _dir * RAY_LENGTH
+		else:
+			_from = Vector3.INF
+			_to = Vector3.INF
 
 
 func _process(_delta: float) -> void:
+	if Engine.get_time_scale() != 1: return
 	move_dragged_object()
 
 
 func _physics_process(_delta: float) -> void:
+	if Engine.get_time_scale() != 1: return
 	update_under_mouse()
 
 

@@ -39,8 +39,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
-	
-	
+
+
 func _on_update_ui() -> void:
 	currentArrivedMeeple = ProjectSettings.get_setting("specific/level/meeple_arrived")
 	currentArrivedMeepleMax = ProjectSettings.get_setting("specific/level/meeple_arrived_max")
@@ -59,7 +59,7 @@ func _on_game_over() -> void:
 	summaryButton.text = "Retry"
 	levelSummary.visible = true
 	gameOver = true
-	
+
 
 func _on_level_complete() -> void:
 	_on_update_ui()
