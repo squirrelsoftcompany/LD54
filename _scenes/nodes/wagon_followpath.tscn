@@ -44,7 +44,7 @@ func dropped_in(meeple:Node3D):
 
 
 func can_drop(_draggable : Node3D, _picked_position : Vector3):
-	return not _passenger or is_instance_valid(_passenger)
+	return not _passenger or not is_instance_valid(_passenger)
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t3jr5"]
