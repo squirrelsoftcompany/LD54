@@ -37,7 +37,7 @@ func add_meeple_gone():
 	call_update_ui()
 	var meepleCount = ProjectSettings.get_setting("specific/level/meeple_gone")
 	ProjectSettings.set_setting("specific/level/meeple_gone", meepleCount+1)
-	if (meepleCount >= ProjectSettings.get_setting("specific/level/meeple_gone_max")):
+	if (meepleCount+1 >= ProjectSettings.get_setting("specific/level/meeple_gone_max")):
 		_Global.trigger_game_over()
 
 
@@ -45,7 +45,7 @@ func add_meeple_arrived():
 	call_update_ui()
 	var meepleCount = ProjectSettings.get_setting("specific/level/meeple_arrived")
 	ProjectSettings.set_setting("specific/level/meeple_arrived", meepleCount+1)
-	if (meepleCount >= ProjectSettings.get_setting("specific/level/meeple_arrived_max")):
+	if (meepleCount+1 >= ProjectSettings.get_setting("specific/level/meeple_arrived_max")):
 		_Global.trigger_level_complete()
 
 
