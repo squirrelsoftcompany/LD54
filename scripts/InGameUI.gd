@@ -66,7 +66,7 @@ func _on_level_complete() -> void:
 	_Global.pause()
 	var levels : Array = ProjectSettings.get_setting("specific/level/list")
 	if (ProjectSettings.get_setting("specific/level/current")) >= 6 :
-		summaryTitle.text = "You've completed the game. Congratulations"
+		summaryTitle.text = "Game complete. Congratulations"
 		summaryButton.text = "Menu"
 	else:
 		summaryTitle.text = "Well Played"
