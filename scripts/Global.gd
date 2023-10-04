@@ -33,6 +33,10 @@ func resume() -> void:
 	Engine.set_time_scale(1)
 
 
+func is_paused() -> bool:
+	return Engine.get_time_scale() == 0
+
+
 func add_meeple_gone():
 	call_update_ui()
 	var meepleCount = ProjectSettings.get_setting("specific/level/meeple_gone")
@@ -101,11 +105,11 @@ func _deferred_goto_scene(scene: Resource) -> void:
 
 	# Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(_current_scene)
-	
+
 	# Reinit global data
 	reinit()
 
 
 func reinit():
-	pass
+	_Dragger.reset_dragger()
 	#ProjectSettings.set_setting("Specific/Level/InProgress", false)

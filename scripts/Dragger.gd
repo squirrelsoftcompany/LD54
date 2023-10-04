@@ -19,7 +19,7 @@ var _to := Vector3.INF
 var _dragged_object : Node3D = null
 var _dragged_object_ghost : Node3D = null
 func _unhandled_input(event: InputEvent) -> void:
-	if Engine.get_time_scale() != 1: return
+	if _Global.is_paused(): return
 	
 	mainCamera = get_viewport().get_camera_3d()
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -27,9 +27,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if _dragging and not event.pressed and _dragged_object and Time.get_ticks_msec() - _dragging_since <= CLICK_THRESHOLD:
 			_dragging = false
 			on_click(_dragged_object)
-			_dragged_object = null
-			_dragged_object_ghost = null
-			_droppable_under_mouse = null
+			reset_dragger()
 		elif _dragging and not event.pressed:
 			_dragging = false
 			if (_droppable_under_mouse and _dragged_object):
@@ -40,9 +38,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				dragged_out(current_drop_slot(_dragged_object), _dragged_object)
 				drag_finished_in_void(_dragged_object, _dragging_3d_position)
 			elif _dragged_object: drag_cancelled(_dragged_object)
-			_dragged_object = null
-			_dragged_object_ghost = null
-			_droppable_under_mouse = null
+			reset_dragger()
 		# end drag
 		elif not _dragging and event.pressed:
 			_dragging = true
@@ -61,12 +57,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(_delta: float) -> void:
-	if Engine.get_time_scale() != 1: return
+	if _Global.is_paused(): return
 	move_dragged_object()
 
 
 func _physics_process(_delta: float) -> void:
-	if Engine.get_time_scale() != 1: return
+	if _Global.is_paused(): return
 	update_under_mouse()
 
 
@@ -121,6 +117,12 @@ func move_dragged_object():
 		if _dragging_3d_position.is_finite():
 			_dragged_object_ghost.global_position = _dragging_3d_position
 		_dragged_object_ghost.visible = Time.get_ticks_msec() - _dragging_since >= CLICK_THRESHOLD
+
+
+func reset_dragger():
+	_dragged_object = null
+	_dragged_object_ghost = null
+	_droppable_under_mouse = null
 
 
 #utils

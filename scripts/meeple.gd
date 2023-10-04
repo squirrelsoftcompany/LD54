@@ -140,7 +140,7 @@ func drag_begin():
 	get_node("Outline").visible = true
 	if not ghost:
 		ghost = self.duplicate(0)
-		get_tree().root.add_child(ghost)
+		_Global._current_scene.add_child(ghost)
 		ghost.get_node("StaticBody3D").queue_free() # remove bounding box
 	return ghost
 
