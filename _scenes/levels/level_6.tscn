@@ -5,15 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://bo70n755f56k8" path="res://_scenes/nodes/train_followpath.tscn" id="3_rsw6o"]
 [ext_resource type="PackedScene" uid="uid://dxou0nnb8bbd0" path="res://_scenes/nodes/spawner.tscn" id="4_7og50"]
 
-[sub_resource type="Curve3D" id="Curve3D_st1bi"]
+[sub_resource type="Curve3D" id="Curve3D_vheei"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector3Array(-13.6017, 0, -4.83633, 13.6017, 0, 4.83633, -124.925, 0, -52.0978, -28.8633, 0, -21.2554, 28.8633, 0, 21.2554, -23.5839, 0, 6.51486, -26.7075, 0, -10.6914, 26.7075, 0, 10.6914, 100.158, 0, 50.5158, 0.961319, 0, -25.1394, -0.961319, 0, 25.1394, 151.647, 0, 112.14),
+"points": PackedVector3Array(-13.6017, 0, -4.83633, 13.6017, 0, 4.83633, -124.925, 0, -52.0978, -28.8633, 0, -21.2554, 28.8633, 0, 21.2554, -24.6529, 0, 7.50868, -13.9988, 0, -28.2389, 13.9988, 0, 28.2389, 100.271, 0, 57.778, -60.0678, 0, 8.46396, 60.0678, 0, -8.46396, 187.785, 0, 91.4883),
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
 
-[sub_resource type="Curve3D" id="Curve3D_x1j05"]
+[sub_resource type="Curve3D" id="Curve3D_0h53p"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector3Array(28.7623, 0, 17.1925, -28.7623, 0, -17.1925, 66.7138, 0, 12.7408, -11.9563, 0, 25.7651, 11.9563, 0, -25.7651, 6.28133, 0, -78.2839, -16.4125, 0, -9.36599, 16.4125, 0, 9.36599, 63.15, 0, -55.6142, 3.79826, 0, -33.8159, -3.79826, 0, 33.8159, 136.703, 0, -17.9412, 65.0634, 0, 34.7518, -65.0634, 0, -34.7518, 66.7402, 0, 12.7352),
@@ -21,7 +21,7 @@ _data = {
 }
 point_count = 5
 
-[sub_resource type="Curve3D" id="Curve3D_jcyay"]
+[sub_resource type="Curve3D" id="Curve3D_uoc5r"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector3Array(30.9528, 0, 46.0752, -30.9528, 0, -46.0752, -22.7661, 0, 48.4903, 16.3022, 0, -2.62218, -16.3022, 0, 2.62218, -102.808, 0, 50.9465, 9.56764, 0, -28.021, -9.56764, 0, 28.021, -174.387, 0, 32.9219, -23.1515, 0, -8.15931, 23.1515, 0, 8.15931, -96.0753, 0, 124.066, 40.7587, 0, 53.5142, -40.7587, 0, -53.5142, -21.1431, 0, 49.9913),
@@ -38,7 +38,7 @@ hotspot = Vector3(0, 0, 50)
 distance = 200.0
 
 [node name="railway" parent="." index="3" instance=ExtResource("2_5ungt")]
-curve = SubResource("Curve3D_st1bi")
+curve = SubResource("Curve3D_vheei")
 
 [node name="Train" parent="railway" index="4" instance=ExtResource("3_rsw6o")]
 transform = Transform3D(-0.33502, 0, -0.94221, 0, 1, 0, 0.94221, 0, -0.33502, -124.925, 0, -52.0978)
@@ -47,14 +47,14 @@ wagon_count = 4
 ping_pong = true
 
 [node name="railway2" parent="." index="4" instance=ExtResource("2_5ungt")]
-curve = SubResource("Curve3D_x1j05")
+curve = SubResource("Curve3D_0h53p")
 
 [node name="Train" parent="railway2" index="4" instance=ExtResource("3_rsw6o")]
 transform = Transform3D(0.513071, 0, 0.858345, 0, 1, 0, -0.858345, 0, 0.513071, 66.7138, 0, 12.7408)
 pause_at_end = 0.0
 
 [node name="railway3" parent="." index="5" instance=ExtResource("2_5ungt")]
-curve = SubResource("Curve3D_jcyay")
+curve = SubResource("Curve3D_uoc5r")
 
 [node name="Train" parent="railway3" index="4" instance=ExtResource("3_rsw6o")]
 transform = Transform3D(0.830083, 0, 0.557641, 0, 1, 0, -0.557641, 0, 0.830083, -22.7661, 0, 48.4903)
@@ -62,11 +62,11 @@ backward = true
 pause_at_end = 0.0
 
 [node name="CYAN" parent="." index="7" instance=ExtResource("4_7og50")]
-transform = Transform3D(0.181086, 0, -0.983467, 0, 1, 0, 0.983467, 0, 0.181086, -213.312, 2.28882e-05, 44.2933)
+transform = Transform3D(-0.656493, 0, -0.754332, 0, 1, 0, 0.754332, 0, -0.656493, -204.864, 2.28882e-05, 31.0801)
 country_id = 1
 
 [node name="GOLD" parent="." index="8" instance=ExtResource("4_7og50")]
-transform = Transform3D(0.732044, 0, 0.681258, 0, 1, 0, -0.681258, 0, 0.732044, -16.1734, 0, 114.928)
+transform = Transform3D(0.866584, 0, 0.499033, 0, 1, 0, -0.499033, 0, 0.866584, -75.3821, 0, 87.1263)
 country_id = 3
 
 [node name="PURPULE" parent="." index="9" instance=ExtResource("4_7og50")]

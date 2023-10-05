@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dxou0nnb8bbd0" path="res://_scenes/nodes/spawner.tscn" id="3_1kdl6"]
 [ext_resource type="PackedScene" uid="uid://bo70n755f56k8" path="res://_scenes/nodes/train_followpath.tscn" id="3_wxidi"]
 
-[sub_resource type="Curve3D" id="Curve3D_mw3lg"]
+[sub_resource type="Curve3D" id="Curve3D_2irob"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector3Array(-19.6266, 0, 11.3409, 19.6266, 0, -11.3409, -153.982, 0, -50.3629, -31.7462, 0, -20.4972, 31.7462, 0, 20.4972, -58.0134, 0, -35.6987, 33.1622, 0, -14.4555, -33.1622, 0, 14.4555, -60.2745, 0, 29.0563, 22.7064, 0, 16.2198, -22.7064, 0, -16.2198, -165.392, 0, 17.4687, -33.601, 0, 20.7704, 33.601, 0, -20.7704, -153.982, 0, -50.3629),
@@ -13,7 +13,7 @@ _data = {
 }
 point_count = 5
 
-[sub_resource type="Curve3D" id="Curve3D_bccen"]
+[sub_resource type="Curve3D" id="Curve3D_0u4gj"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector3Array(1.33922, 0, -17.993, -1.33922, 0, 17.993, -15.099, 0, -9.54066, 9.69619, 0, -9.1954, -9.69619, 0, 9.1954, -38.1613, 0, 53.2908, 10.3686, 0, -9.5324, -10.3686, 0, 9.5324, -71.6001, 0, 106.976),
@@ -30,7 +30,7 @@ hotspot = Vector3(-111.51, 0, 41.16)
 distance = 139.315
 
 [node name="railway" parent="." index="4" instance=ExtResource("2_mpeyy")]
-curve = SubResource("Curve3D_mw3lg")
+curve = SubResource("Curve3D_2irob")
 
 [node name="Train" parent="railway" index="4" instance=ExtResource("3_wxidi")]
 transform = Transform3D(0.500313, 0, -0.865844, 0, 1, 0, 0.865844, 0, 0.500313, -153.982, 0, -50.3629)
@@ -39,7 +39,7 @@ backward = true
 pause_at_end = 0.0
 
 [node name="railway2" parent="." index="5" instance=ExtResource("2_mpeyy")]
-curve = SubResource("Curve3D_bccen")
+curve = SubResource("Curve3D_0u4gj")
 
 [node name="Train" parent="railway2" index="4" instance=ExtResource("3_wxidi")]
 transform = Transform3D(-0.997242, 0, 0.0742248, 0, 1, 0, -0.0742248, 0, -0.997242, -15.099, 0, -9.54066)
@@ -60,5 +60,5 @@ transform = Transform3D(-0.0236988, 0, -0.999719, 0, 1, 0, 0.999719, 0, -0.02369
 country_id = 7
 
 [node name="SpawnerGold" parent="." index="9" instance=ExtResource("3_1kdl6")]
-transform = Transform3D(0.829398, 0, 0.558657, 0, 1, 0, -0.558657, 0, 0.829398, -91.4426, 0, 79.5793)
+transform = Transform3D(0.936635, 0, 0.350305, 0, 1, 0, -0.350305, 0, 0.936635, -94.6549, 3.8147e-06, 83.9386)
 country_id = 3
