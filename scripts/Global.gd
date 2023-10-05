@@ -66,6 +66,8 @@ func show_menu() -> void:
 
 
 func goto_next_level():
+	RenderingServer.global_shader_parameter_set("destination_color",Color.BLACK)
+	RenderingServer.global_shader_parameter_set("highlighted_color", Color.BLACK)
 	if (ProjectSettings.get_setting("specific/level/current")) >= 6 :
 		_goto_scene(_main_menu)
 	else:
@@ -74,6 +76,8 @@ func goto_next_level():
 
 func goto_level(index):
 	var levels : Array = ProjectSettings.get_setting("specific/level/list")
+	RenderingServer.global_shader_parameter_set("destination_color",Color.BLACK)
+	RenderingServer.global_shader_parameter_set("highlighted_color", Color.BLACK)
 	if index < 0 or index >= levels.size():
 		return
 	ProjectSettings.set_setting("specific/level/current", index)
