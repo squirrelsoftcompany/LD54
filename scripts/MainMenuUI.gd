@@ -2,6 +2,7 @@ extends Control
 
 @export var bipSound : AudioStreamPlayer
 @export var quitButton : Button
+var mute = ProjectSettings.get_setting("specific/sound/mute")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,7 +18,9 @@ func _process(_delta: float) -> void:
 
 
 func _on_start_button_pressed() -> void:
-	bipSound.play()
+	mute = ProjectSettings.get_setting("specific/sound/mute")
+	if not mute:
+		bipSound.play()
 	_Global.goto_level(0)
 	
 

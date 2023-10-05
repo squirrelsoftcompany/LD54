@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dftrdep2hkpte"]
+[gd_scene load_steps=5 format=3 uid="uid://dftrdep2hkpte"]
 
 [ext_resource type="Script" path="res://scripts/MainMenuUI.gd" id="1_d57s6"]
 [ext_resource type="AudioStream" uid="uid://cqks73xmvndr6" path="res://resources/SoundEffects/bip.mp3" id="2_1g5pk"]
 [ext_resource type="Texture2D" uid="uid://baqegwmhca0h1" path="res://models/Title.PNG" id="2_mag27"]
+[ext_resource type="PackedScene" uid="uid://0n3yllycqqc5" path="res://_scenes/ui/general_controls.tscn" id="4_j8bdp"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("bipSound", "quitButton")]
 process_mode = 3
@@ -94,6 +95,11 @@ vertical_alignment = 1
 stream = ExtResource("2_1g5pk")
 volume_db = -10.0
 bus = &"UI FX"
+
+[node name="GeneralControls" parent="." instance=ExtResource("4_j8bdp")]
+layout_mode = 0
+offset_left = 0.0
+offset_right = 110.0
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -39,8 +39,7 @@ visibility_layer = 0
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
-visible = false
+[node name="Sound" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = SubResource("AtlasTexture_ob0dr")
@@ -48,4 +47,4 @@ texture_pressed = SubResource("AtlasTexture_vu8yy")
 stretch_mode = 3
 
 [connection signal="pressed" from="VBoxContainer/NightDay" to="." method="_on_night_day_pressed"]
-[connection signal="toggled" from="VBoxContainer/TextureButton" to="." method="_on_texture_button_toggled"]
+[connection signal="toggled" from="VBoxContainer/Sound" to="." method="_on_sound_toggled"]

@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://sqn3liqmbahg"]
+[gd_scene load_steps=6 format=3 uid="uid://sqn3liqmbahg"]
 
 [ext_resource type="PackedScene" uid="uid://ck5q72058p7hv" path="res://_scenes/trains/train_part.tscn" id="1_cu03b"]
 [ext_resource type="ArrayMesh" uid="uid://b871s1phlwwuk" path="res://models/trains/locomotive.obj" id="2_62jcs"]
+[ext_resource type="Script" path="res://_scenes/trains/locomotive.gd" id="2_wyiql"]
 [ext_resource type="PackedScene" uid="uid://b6t7p547cbilm" path="res://_scenes/trains/driver_meeple.tscn" id="3_k3mpg"]
 [ext_resource type="AudioStream" uid="uid://dslomvp1wvfv8" path="res://resources/SoundEffects/train_steam_short.mp3" id="4_gt27d"]
 
 [node name="Locomotive" instance=ExtResource("1_cu03b")]
+script = ExtResource("2_wyiql")
 
 [node name="Mesh" parent="." index="0"]
 mesh = ExtResource("2_62jcs")
