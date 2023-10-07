@@ -22,6 +22,7 @@ func compute_transform():
 	position = hotspot + ndir * distance
 	transform = transform.looking_at(position - ndir)
 
+
 func sound():
 	mute = ProjectSettings.get_setting("specific/sound/mute")
 	$Music1.stream_paused = mute

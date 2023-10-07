@@ -33,12 +33,6 @@ func _ready() -> void:
 		tutoPanel.visible = false
 		_Global.resume()
 	gameOver = false
-#	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
 
 
 func _on_update_ui() -> void:
