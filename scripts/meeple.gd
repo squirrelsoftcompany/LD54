@@ -129,7 +129,9 @@ func drop_off_train():
 	var _country_under_meeple := CountryPicker.country_under_unprojected_3d_position(global_position)
 	assert(_current_drop_slot.is_in_group("Wagon"))
 	_current_drop_slot.dragged_out(self)
+	assert(_country_under_meeple != -1 and _SpawnerManager._country_spawner.has(_country_under_meeple))
 	_SpawnerManager._country_spawner[_country_under_meeple].dropped_in(self)
+	_current_drop_slot = _SpawnerManager._country_spawner[_country_under_meeple]
 	is_in_train = false
 
 
