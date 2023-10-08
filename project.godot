@@ -83,3 +83,4 @@ meeple/happy_time=5.0
 level/list=["res://_scenes/levels/level_1.tscn", "res://_scenes/levels/level_2.tscn", "res://_scenes/levels/level_3.tscn", "res://_scenes/levels/level_4.tscn", "res://_scenes/levels/level_5.tscn", "res://_scenes/levels/level_6.tscn", "res://_scenes/levels/level_7.tscn"]
 level/current=0
 sound/mute=false
+environment/day_night=false
