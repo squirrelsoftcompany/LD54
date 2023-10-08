@@ -1,9 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2kf23u1bayud"]
+[gd_scene load_steps=16 format=3 uid="uid://d2kf23u1bayud"]
 
 [ext_resource type="Script" path="res://scripts/InGameUI.gd" id="1_u7f4a"]
 [ext_resource type="Script" path="res://scripts/TutoPanel.gd" id="1_yvkub"]
 [ext_resource type="PackedScene" uid="uid://0n3yllycqqc5" path="res://_scenes/ui/general_controls.tscn" id="2_kmyoa"]
-[ext_resource type="Script" path="res://scripts/LevelSummary.gd" id="2_nq8yg"]
 [ext_resource type="AudioStream" uid="uid://cqks73xmvndr6" path="res://resources/SoundEffects/bip.mp3" id="3_d80sy"]
 [ext_resource type="Texture2D" uid="uid://dvqxlryjq8y1g" path="res://models/ui_icons.png" id="3_fq77u"]
 [ext_resource type="AudioStream" uid="uid://be2wftvlet4op" path="res://resources/SoundEffects/click.mp3" id="4_6uoe2"]
@@ -241,7 +240,6 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_nq8yg")
 
 [node name="MarginContainer2" type="MarginContainer" parent="LevelSummary"]
 layout_mode = 1
