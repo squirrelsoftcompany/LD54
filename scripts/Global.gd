@@ -116,4 +116,3 @@ func _deferred_goto_scene(scene: Resource) -> void:
 
 func reinit():
 	_Dragger.reset_dragger()
-	#ProjectSettings.set_setting("Specific/Level/InProgress", false)

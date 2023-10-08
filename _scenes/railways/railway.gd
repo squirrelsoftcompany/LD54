@@ -9,6 +9,7 @@ var visual_elements = MultiMesh
 var start_visual = Node3D
 var end_visual = Node3D
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visual_elements = $RailDecoration.multimesh
@@ -18,7 +19,7 @@ func _ready() -> void:
 	update_multimesh()
 	if Engine.is_editor_hint():
 		connect("curve_changed", on_curve_changed)
-	pass # Replace with function body.
+
 
 var wip := false
 func on_curve_changed():
@@ -38,8 +39,8 @@ func on_curve_changed():
 		if reset_tilt:
 			curve.set_point_tilt(i, 0)
 
-	#prints(curve.resource_path, "reset")
 	wip = false
+
 
 func update_multimesh ():
 	var path_length = curve.get_baked_length()

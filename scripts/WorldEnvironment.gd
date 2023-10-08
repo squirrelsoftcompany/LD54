@@ -1,14 +1,7 @@
 extends WorldEnvironment
 var mode = ProjectSettings.get_setting("shader_globals/day_night").value
 var looks = self.environment
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
 
 func day_night ():
 	if mode:

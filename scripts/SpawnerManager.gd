@@ -4,11 +4,6 @@ extends Node
 var _country_spawner : Dictionary = {}
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
 func register_spawner(_spawner:Node3D):
 	assert(_spawner.country_id != -1)
 	_spawner.country_color = CountryPicker.country_to_color(_spawner.country_id)

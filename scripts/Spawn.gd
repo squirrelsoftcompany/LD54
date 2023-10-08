@@ -89,7 +89,6 @@ func updateMeeplePosition() -> void :
 
 func _on_spawn_timer_timeout() -> void:
 	spawnMeeple()
-	pass # Replace with function body.
 
 
 func get_size() -> Vector2:
