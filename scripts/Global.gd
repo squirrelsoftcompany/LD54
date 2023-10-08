@@ -38,19 +38,19 @@ func is_paused() -> bool:
 
 
 func add_meeple_gone():
-	call_update_ui()
 	var meepleCount = ProjectSettings.get_setting("specific/level/meeple_gone")
 	ProjectSettings.set_setting("specific/level/meeple_gone", meepleCount+1)
 	if (meepleCount+1 >= ProjectSettings.get_setting("specific/level/meeple_gone_max")):
 		_Global.trigger_game_over()
+	call_update_ui()
 
 
 func add_meeple_arrived():
-	call_update_ui()
 	var meepleCount = ProjectSettings.get_setting("specific/level/meeple_arrived")
 	ProjectSettings.set_setting("specific/level/meeple_arrived", meepleCount+1)
 	if (meepleCount+1 >= ProjectSettings.get_setting("specific/level/meeple_arrived_max")):
 		_Global.trigger_level_complete()
+	call_update_ui()
 
 
 func trigger_game_over() -> void:
